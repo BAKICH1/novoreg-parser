@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>НовоРег Радар РФ — Парсер новых ИП и ООО с телефонами (24/7)</title>
+  <meta name="description" content="Постоянно работающий парсер 2-в-1 новых ИП и ООО по всей России с номерами телефонов, фильтрами по регионам и ОКВЭД, мини-CRM и выгрузкой в Excel/CSV." />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">НР</div>
+        <div>
+          <div class="brand-title">
+            НовоРег Радар РФ
+            <span class="badge-2in1">2-в-1 • ИП и ООО</span>
+          </div>
+          <div class="brand-sub">Постоянный мониторинг регистраций ЕГРЮЛ/ЕГРИП и деловых телефонов по всей России</div>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="pulse-pill" title="Фоновый парсер автоматически обновляет витрину">
+          <span class="pulse-dot"></span>
+          <span id="last-updated-label">Синхронизация базы…</span>
+        </div>
+        <button class="btn btn-sm" id="btn-refresh" type="button" title="Перезагрузить свежие данные с сервера">
+          ↻ Обновить
+        </button>
+        <button class="btn btn-sm" id="btn-theme" type="button" title="Переключить тему оформления">
+          ☀ Тема
+        </button>
+      </div>
+    </div>
+
+    <nav class="nav-tabs-bar" aria-label="Разделы">
+      <button class="nav-tab active" data-tab="tab-leads" type="button">
+        📋 База новорегов (<span id="nav-count-total">0</span>)
+      </button>
+      <button class="nav-tab" data-tab="tab-live" type="button">
+        ⚡ Живой поиск по API (ИП / ООО)
+      </button>
+      <button class="nav-tab" data-tab="tab-analytics" type="button">
+        📊 Аналитика и пульс воркера
+      </button>
+      <button class="nav-tab" data-tab="tab-setup" type="button">
+        🚀 Автопарсинг 24/7 (GitHub + Here.now)
+      </button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- TAB 1: БАЗА НОВОРЕГОВ -->
+    <section id="tab-leads" class="tab-panel active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Всего в базе (ИП + ООО)</div>
+          <div class="kpi-value" id="kpi-total">0</div>
+          <div class="kpi-sub" id="kpi-split">ООО: 0 • ИП: 0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">С номерами телефонов</div>
+          <div class="kpi-value" id="kpi-phones" style="color: var(--emerald)">0</div>
+          <div class="kpi-sub" id="kpi-phone-rate">Конверсия контактов: 0%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Мобильные (+7 9XX) / Email</div>
+          <div class="kpi-value" id="kpi-mobile">0</div>
+          <div class="kpi-sub" id="kpi-email-site">Email: 0 • Сайтов: 0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">География и режим сбора</div>
+          <div class="kpi-value" id="kpi-regions">0 рег.</div>
+          <div class="kpi-sub" id="kpi-runs">Конвейер 2-в-1 • Автообновление</div>
+        </div>
+      </div>
+
+      <div class="filter-panel">
+        <div class="filter-row-top">
+          <input
+            type="search"
+            id="f-search"
+            class="input-control"
+            placeholder="Поиск по названию, ИНН, ОГРН/ОГРНИП, ФИО директора/ИП, городу или телефону (+7…)"
+          />
+          <select id="f-region" class="select-control" aria-label="Регион РФ">
+            <option value="">Все регионы РФ</option>
+          </select>
+          <select id="f-category" class="select-control" aria-label="Отрасль ОКВЭД">
+            <option value="">Все отрасли ОКВЭД</option>
+          </select>
+          <select id="f-crm" class="select-control" aria-label="Статус обзвона CRM">
+            <option value="">Все CRM-статусы</option>
+            <option value="new">🆕 Новый (не звонили)</option>
+            <option value="work">⏳ В работе</option>
+            <option value="callback">📞 Перезвонить</option>
+            <option value="won">✅ Клиент / Лид</option>
+            <option value="lost">❌ Отказ / Нецелевой</option>
+          </select>
+        </div>
+
+        <div class="filter-row-bottom">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            <div class="segmented-group" id="seg-type" role="group" aria-label="Форма организации">
+              <button type="button" class="seg-btn active" data-val="">Все</button>
+              <button type="button" class="seg-btn" data-val="ООО">ООО</button>
+              <button type="button" class="seg-btn" data-val="ИП">ИП</button>
+            </div>
+
+            <div class="segmented-group" id="seg-contact" role="group" aria-label="Наличие контактов">
+              <button type="button" class="seg-btn active" data-val="">Все карточки</button>
+              <button type="button" class="seg-btn" data-val="phone">📞 С телефоном</button>
+              <button type="button" class="seg-btn" data-val="mobile">📱 Мобильный +7(9…)</button>
+              <button type="button" class="seg-btn" data-val="email">✉️ С Email</button>
+              <button type="button" class="seg-btn" data-val="site">🌐 С сайтом</button>
+            </div>
+
+            <select id="f-sort" class="select-control" style="width: auto;" aria-label="Сортировка">
+              <option value="smart">Сортировка: сначала с телефоном + свежие</option>
+              <option value="date_desc">Сначала самые новые по дате</option>
+              <option value="phones_desc">По количеству телефонов</option>
+              <option value="region_asc">По коду региона РФ</option>
+            </select>
+
+            <button type="button" class="btn btn-sm" id="btn-reset-filters">Сбросить</button>
+          </div>
+
+          <div class="export-bar">
+            <button type="button" class="btn btn-sm" id="btn-copy-phones" title="Скопировать все телефоны текущей выборки">
+              📋 Копировать телефоны
+            </button>
+            <button type="button" class="btn btn-sm" id="btn-export-csv">
+              📥 CSV (CRM)
+            </button>
+            <button type="button" class="btn btn-sm btn-emerald" id="btn-export-xls">
+              📊 Скачать Excel (.xls)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-meta">
+        <div id="results-summary">Показано 0 из 0 записей</div>
+        <div style="font-size: 12px;">Нажмите на любую строку, чтобы открыть полную карточку контрагента и заметки прозвона</div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="leads-table">
+          <thead>
+            <tr>
+              <th>Компания / ИП и реквизиты</th>
+              <th>Дата рег.</th>
+              <th>Регион и адрес</th>
+              <th>Отрасль / ОКВЭД</th>
+              <th>Руководитель / ИП</th>
+              <th>Телефоны и контакты</th>
+              <th>Источник (2-в-1)</th>
+              <th>CRM-статус</th>
+            </tr>
+          </thead>
+          <tbody id="leads-tbody">
+            <tr>
+              <td colspan="8" style="text-align: center; padding: 36px; color: var(--text-muted);">
+                Загрузка базы новорегов…
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination-bar">
+        <div id="page-info" style="color: var(--text-muted); font-size: 13px;">Страница 1</div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn btn-sm" id="btn-prev-page">← Назад</button>
+          <button type="button" class="btn btn-sm" id="btn-next-page">Вперёд →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: ЖИВОЙ ПОИСК ПО API ПРЯМО ИЗ БРАУЗЕРА -->
+    <section id="tab-live" class="tab-panel">
+      <div class="grid-2">
+        <div class="panel-card">
+          <h2>⚡ Мгновенный сбор свежих ИП и ООО прямо из браузера</h2>
+          <p class="desc">
+            Помимо фонового парсера 24/7 в GitHub Actions, вы можете в любой момент делать живые выборки новорегов по всей РФ прямо с этого сайта. Ключи сохраняются только локально в вашем браузере.
+          </p>
+
+          <div class="form-group">
+            <label for="live-dadata-key">API-ключ DaData.ru (бесплатно до 10 000 запросов в день)</label>
+            <input type="password" id="live-dadata-key" class="input-control" placeholder="Вставьте API-ключ с dadata.ru/profile" />
+          </div>
+
+          <div class="form-group">
+            <label for="live-twogis-key">Ключ 2ГИС Catalog API (опционально — авто-поиск телефонов по названию)</label>
+            <input type="password" id="live-twogis-key" class="input-control" placeholder="Ключ catalog.api.2gis.com (опционально)" />
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div class="form-group">
+              <label for="live-entity-type">Кого искать</label>
+              <select id="live-entity-type" class="select-control">
+                <option value="BOTH">ИП + ООО вместе</option>
+                <option value="INDIVIDUAL">Только новые ИП</option>
+                <option value="LEGAL">Только новые ООО</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="live-max-days">Возраст регистрации (новореги)</label>
+              <select id="live-max-days" class="select-control">
+                <option value="14">За последние 14 дней</option>
+                <option value="30" selected>За последние 30 дней</option>
+                <option value="90">За последние 90 дней</option>
+                <option value="365">За 2026 год (до 365 дней)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="live-query">Поисковый запрос / ниша / префикс ОГРН или регион</label>
+            <input
+              type="text"
+              id="live-query"
+              class="input-control"
+              value="Строй, Логистик, Тех, Маркет, ИП Иванов, ИП Смирнов, 12677, 32677"
+              placeholder="Через запятую: ключевые слова, фамилии ИП или префиксы ОГРН (12677, 32678…)"
+            />
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
+            <button type="button" class="btn btn-primary" id="btn-run-live">
+              🚀 Запустить живой поиск сейчас
+            </button>
+            <button type="button" class="btn" id="btn-save-keys">
+              💾 Сохранить ключи в браузере
+            </button>
+            <button type="button" class="btn" id="btn-clear-live">
+              🗑 Очистить локально добавленные
+            </button>
+          </div>
+
+          <div id="live-log" class="code-block" style="margin-top: 16px; min-height: 90px;">Готов к запуску. Введите бесплатный токен DaData (регистрация за 30 сек на dadata.ru) и нажмите «Запустить живой поиск сейчас».</div>
+        </div>
+
+        <div class="panel-card">
+          <h2>Как работает архитектура «2-в-1» для поиска телефонов?</h2>
+          <p class="desc">
+            В официальных бесплатных выписках ФНС личные мобильные телефоны скрыты законом, поэтому наш парсер комбинирует сразу два контура сбора:
+          </p>
+          <div class="step-list">
+            <div class="step-item">
+              <div class="step-num">1</div>
+              <div>
+                <strong>Контур 1 — Бесплатные открытые источники (работает сразу без ключей)</strong>
+                <div style="color: var(--text-muted); font-size: 12.5px; margin-top: 3px;">
+                  Поразрядный бинарный поиск свежего фронтира ОГРН 2026 года (<code>126&lt;Регион&gt;…</code>) по субъектам РФ + мониторинг лент новых компаний в открытых бизнес-каталогах РФ и обход корпоративных сайтов (подвал, контакты, политика оферты) для извлечения ИНН, ОГРН/ОГРНИП, рабочих телефонов <code>+7 (…)</code>, email, WhatsApp и Telegram.
+                </div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">2</div>
+              <div>
+                <strong>Контур 2 — Подключаемые API контрагентов и гео-справочников</strong>
+                <div style="color: var(--text-muted); font-size: 12.5px; margin-top: 3px;">
+                  При добавлении ключей <code>DADATA_API_KEY</code> (10 000 запр./сутки бесплатно), <code>CHECKO_API_KEY</code> (100 запр./сутки бесплатно), <code>APIFNS_KEY</code> (фильтр <code>only_phone</code>) и <code>TWOGIS_API_KEY</code> воркер автоматически вытягивает как свежие ИП (<code>326…</code>), так и ООО (<code>126…</code>) и обогащает их проверенными телефонами отделов продаж и руководителей.
+                </div>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">3</div>
+              <div>
+                <strong>Инкрементальная доставка на Here.now за 1 секунду</strong>
+                <div style="color: var(--text-muted); font-size: 12.5px; margin-top: 3px;">
+                  После каждого цикла SHA-256 паблишер отправляет на <code>here.now</code> только изменившиеся JSON-файлы и синхронизирует коллекцию встроенной облачной БД <code>Site Data</code>.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: АНАЛИТИКА И ПУЛЬС -->
+    <section id="tab-analytics" class="tab-panel">
+      <div class="grid-2">
+        <div class="panel-card">
+          <h2>📍 Топ регионов РФ в собранной базе</h2>
+          <p class="desc">Распределение карточек новорегов по субъектам Российской Федерации</p>
+          <div id="chart-regions" class="bar-chart-list"></div>
+        </div>
+
+        <div class="panel-card">
+          <h2>🏭 Отрасли ОКВЭД и источники контактов</h2>
+          <p class="desc">Популярные сферы деятельности новых ИП и ООО</p>
+          <div id="chart-categories" class="bar-chart-list"></div>
+          <h2 style="margin-top: 22px;">🔌 Вклад модулей конвейера 2-в-1</h2>
+          <div id="chart-sources" class="bar-chart-list" style="margin-top: 10px;"></div>
+        </div>
+      </div>
+
+      <div class="panel-card" style="margin-top: 16px;">
+        <h2>⏱ История последних циклов фонового парсера</h2>
+        <p class="desc">Журнал автоматических запусков сборщика (GitHub Actions / демон)</p>
+        <div id="runs-log-box" class="code-block">Загрузка журнала…</div>
+      </div>
+    </section>
+
+    <!-- TAB 4: ПОДКЛЮЧЕНИЕ АВТОПАРСИНГА 24/7 -->
+    <section id="tab-setup" class="tab-panel">
+      <div class="panel-card">
+        <h2>🚀 Постоянная работа 24/7 бесплатно через GitHub Actions + Here.now</h2>
+        <p class="desc">
+          Хостинг <strong>Here.now</strong> мгновенно раздаёт этот веб-интерфейс и встроенную облачную БД <code>Site Data</code> на глобальной сети Cloudflare, а фоновый Python-парсер запускается каждые 20 минут в бесплатном облаке <strong>GitHub Actions</strong> (без покупки VPS!) и автоматически пушит свежих новорегов на этот сайт.
+        </p>
+
+        <div class="step-list">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div style="flex: 1;">
+              <strong>Закрепите этот сайт на Here.now навсегда (бесплатно в 1 клик)</strong>
+              <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">
+                Перейдите по выданной вам ссылке <code>claimUrl</code> — сайт станет вечным (без 24-часового таймера) и активируется встроенная облачная БД <code>/.herenow/data/crm_notes</code> для командной работы менеджеров. В панели <a href="https://here.now/dashboard" target="_blank" rel="noopener">here.now/dashboard</a> скопируйте ваш <code>HERENOW_API_KEY</code>.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div style="flex: 1;">
+              <strong>Загрузите папку проекта <code>novoreg-parser</code> в ваш GitHub-репозиторий</strong>
+              <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">
+                В проекте уже готов файл <code>.github/workflows/parser-cron.yml</code> (не требует платных библиотек — работает на чистом стандартном Python за секунды).
+              </p>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div style="flex: 1;">
+              <strong>Добавьте секреты в GitHub → Settings → Secrets and variables → Actions</strong>
+              <div class="code-block" id="setup-secrets-block">HERENOW_SLUG        = ваш-slug-сайта (первая часть адреса &lt;slug&gt;.here.now)
+HERENOW_API_KEY     = hnk_ваш_ключ_из_here_now_dashboard
+
+# Опциональные бесплатные ключи для усиления контура "2-в-1" (ИП + ООО + телефоны):
+DADATA_API_KEY      = токен с dadata.ru (10 000 запросов/день бесплатно)
+CHECKO_API_KEY      = ключ с checko.ru (100 запросов/день бесплатно)
+TWOGIS_API_KEY      = ключ 2ГИС API для автопоиска телефонов
+APIFNS_KEY          = ключ api-fns.ru (по желанию)
+RU_PROXY_URL        = http://user:pass@ip:port (опционально для прямого доступа к egrul.nalog.ru)</div>
+            </div>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <div style="flex: 1;">
+              <strong>Готово! Парсер работает круглосуточно</strong>
+              <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">
+                Каждые 20 минут GitHub Actions будет находить новых ИП и ООО по регионам РФ, дообогащать телефоны, сохранять историю в репозитории и за 1 секунду обновлять ваш сайт на <code>here.now</code>. Также запустить сбор вне очереди можно одной кнопкой <strong>Run workflow</strong> во вкладке Actions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SLIDE-OVER КАРТОЧКА КОНТРАГЕНТА -->
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="drawer" id="lead-drawer" aria-label="Карточка контрагента">
+    <div class="drawer-header">
+      <div>
+        <div id="d-badges" style="margin-bottom: 6px;"></div>
+        <h2 id="d-title" style="font-size: 17px; line-height: 1.3;">Карточка контрагента</h2>
+        <div id="d-fullname" style="font-size: 12px; color: var(--text-muted); margin-top: 3px;"></div>
+      </div>
+      <button type="button" class="btn btn-sm" id="btn-close-drawer">✕ Закрыть</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </aside>
+
+  <div class="toast" id="toast">Скопировано в буфер обмена</div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

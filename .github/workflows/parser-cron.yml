@@ -1,0 +1,72 @@
+name: NovoReg 24/7 Parser & Here.now Publisher
+
+on:
+  schedule:
+    # Запуск каждые 20 минут круглосуточно (24/7)
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+    inputs:
+      regions_per_run:
+        description: "Количество регионов РФ за прогон"
+        required: false
+        default: "4"
+      only_phone:
+        description: "Сохранять только карточки с телефоном (true/false)"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: novoreg-parser-main
+  cancel-in-progress: false
+
+jobs:
+  parse-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python 3.12 (без внешних pip-зависимостей — мгновенный старт)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run 2-in-1 NovoReg Parser & Deploy to Here.now
+        env:
+          HERENOW_SLUG: ${{ secrets.HERENOW_SLUG || 'vivid-quill-yz5r' }}
+          HERENOW_API_KEY: ${{ secrets.HERENOW_API_KEY }}
+          HERENOW_CLAIM_TOKEN: ${{ secrets.HERENOW_CLAIM_TOKEN }}
+          HERENOW_AUTO_PUBLISH: "true"
+          DADATA_API_KEY: ${{ secrets.DADATA_API_KEY }}
+          CHECKO_API_KEY: ${{ secrets.CHECKO_API_KEY }}
+          TWOGIS_API_KEY: ${{ secrets.TWOGIS_API_KEY }}
+          APIFNS_KEY: ${{ secrets.APIFNS_KEY }}
+          RU_PROXY_URL: ${{ secrets.RU_PROXY_URL }}
+          ONLY_WITH_PHONE: ${{ inputs.only_phone || 'false' }}
+        run: |
+          python3 -m parser.main \
+            --regions-per-run "${{ inputs.regions_per_run || '3' }}" \
+            --cards-per-region 4 \
+            --dir-categories 2 \
+            --dir-items 6 \
+            --publish
+
+      - name: Persist updated leads & frontier cursors to repository
+        run: |
+          git config user.name "novoreg-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add site/data/leads.json site/data/stats.json .parser_state/state.json
+          if git diff --cached --quiet; then
+            echo "Новых изменений для коммита нет."
+          else
+            git commit -m "chore(data): auto-update novoreg leads [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}" || true
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

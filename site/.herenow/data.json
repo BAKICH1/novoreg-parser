@@ -1,0 +1,48 @@
+{
+  "collections": {
+    "leads": {
+      "fields": {
+        "lead_key": { "type": "string", "required": true, "maxLength": 64, "trim": true },
+        "entity_type": { "type": "string", "required": true, "maxLength": 16, "trim": true },
+        "name": { "type": "string", "required": true, "maxLength": 200, "trim": true },
+        "inn": { "type": "string", "maxLength": 16, "trim": true },
+        "ogrn": { "type": "string", "maxLength": 20, "trim": true },
+        "reg_date": { "type": "string", "maxLength": 20, "trim": true },
+        "region_code": { "type": "string", "maxLength": 8, "trim": true },
+        "region_name": { "type": "string", "maxLength": 120, "trim": true },
+        "okved_code": { "type": "string", "maxLength": 24, "trim": true },
+        "okved_category": { "type": "string", "maxLength": 100, "trim": true },
+        "person_name": { "type": "string", "maxLength": 160, "trim": true },
+        "phone_primary": { "type": "string", "maxLength": 48, "trim": true },
+        "phones_all": { "type": "string", "maxLength": 240, "trim": true },
+        "email_primary": { "type": "string", "maxLength": 140, "trim": true },
+        "website": { "type": "string", "maxLength": 200, "trim": true },
+        "address": { "type": "string", "maxLength": 260, "trim": true },
+        "source_tag": { "type": "string", "maxLength": 140, "trim": true },
+        "has_phone": { "type": "boolean", "default": false }
+      },
+      "access": {
+        "read": "public",
+        "insert": "owner",
+        "update": "owner",
+        "delete": "owner"
+      }
+    },
+    "crm_notes": {
+      "fields": {
+        "lead_key": { "type": "string", "required": true, "maxLength": 64, "trim": true },
+        "crm_stage": { "type": "string", "required": true, "maxLength": 32, "trim": true },
+        "note": { "type": "string", "maxLength": 600, "trim": true },
+        "updated_by": { "type": "string", "maxLength": 64, "trim": true }
+      },
+      "access": {
+        "read": "public",
+        "insert": "public",
+        "update": "public",
+        "delete": "owner"
+      },
+      "publicMutation": "open",
+      "rateLimit": "120/hour/ip"
+    }
+  }
+}

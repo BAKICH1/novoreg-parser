@@ -1,0 +1,86 @@
+{
+  "region_rotation_idx": 12,
+  "ogrn_frontiers": {
+    "77": "0035",
+    "78": "0000"
+  },
+  "orgpage_cursor": 1,
+  "runs_count": 4,
+  "run_history": [
+    {
+      "timestamp": "2026-11-01T08:36:49Z",
+      "fetched": 29,
+      "added_new": 22,
+      "updated": 7,
+      "duration_sec": 33.7,
+      "sources": [
+        "Открытые каталоги + Сайты (29)",
+        "Веб-обогащение (+1 тел.)"
+      ]
+    },
+    {
+      "timestamp": "2026-11-01T08:11:11Z",
+      "fetched": 34,
+      "added_new": 31,
+      "updated": 3,
+      "duration_sec": 36.1,
+      "sources": [
+        "Открытые каталоги + Сайты (34)"
+      ]
+    },
+    {
+      "timestamp": "2026-11-01T08:08:36Z",
+      "fetched": 34,
+      "added_new": 34,
+      "updated": 0,
+      "duration_sec": 56.2,
+      "sources": [
+        "Открытые каталоги + Сайты (34)"
+      ]
+    },
+    {
+      "timestamp": "2026-11-01T08:06:23Z",
+      "fetched": 58,
+      "added_new": 58,
+      "updated": 0,
+      "duration_sec": 93.5,
+      "sources": [
+        "ЕГРЮЛ Open (10)",
+        "Открытые каталоги + Сайты (48)"
+      ]
+    }
+  ],
+  "synced_herenow_ids": [
+    "orgpage-6207366",
+    "orgpage-6148981",
+    "orgpage-6207822",
+    "inn-4003032030",
+    "orgpage-6203049",
+    "inn-5904062539",
+    "inn-5904345745",
+    "orgpage-6148968",
+    "orgpage-6206471",
+    "inn-9718101080",
+    "inn-7203336930",
+    "orgpage-6207684",
+    "orgpage-6207194",
+    "orgpage-6148893",
+    "orgpage-6207516",
+    "inn-027810127307",
+    "orgpage-6207561",
+    "inn-130802899803",
+    "orgpage-6206974",
+    "orgpage-6207847",
+    "orgpage-6198204",
+    "orgpage-6207188",
+    "orgpage-6195389",
+    "orgpage-6207314",
+    "orgpage-6207317",
+    "orgpage-6206624",
+    "orgpage-6207661",
+    "orgpage-6207531",
+    "orgpage-6207017",
+    "orgpage-6207316"
+  ],
+  "orgpage_city_cursor": 1
+}

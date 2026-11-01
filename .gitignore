@@ -1,0 +1,6 @@
+# Секреты и локальные токены деплоя никогда не коммитятся в репозиторий
+.env
+.parser_state/herenow_deploy.json
+__pycache__/
+*.pyc
+.DS_Store
