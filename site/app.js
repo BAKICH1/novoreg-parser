@@ -1102,7 +1102,7 @@
         const extraContacts = [];
         if (l.emails && l.emails[0]) {
           extraContacts.push(
-            `<a href="mailto:${esc(l.emails[0])}" onclick="event.stopPropagation()" style="font-size:12px;">✉️ ${esc(l.emails[0])}</a>`
+            `<span onclick="event.stopPropagation()" style="font-size:12px; color:var(--text); user-select:text;">✉️ ${esc(l.emails[0])}</span>`
           );
         }
         if (l.websites && l.websites[0]) {
@@ -1209,7 +1209,7 @@
         ${
           lead.emails && lead.emails.length
             ? `<div style="margin-top:8px;"><strong>Email:</strong> ${lead.emails
-                .map((e) => `<a href="mailto:${esc(e)}">${esc(e)}</a>`)
+                .map((e) => `<span style="user-select:text;">${esc(e)}</span>`)
                 .join(", ")}</div>`
             : ""
         }
