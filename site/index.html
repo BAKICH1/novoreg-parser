@@ -22,11 +22,14 @@
       </div>
 
       <div class="topbar-right">
-        <div class="pulse-pill" title="Фоновый парсер автоматически обновляет витрину">
+        <div class="pulse-pill" title="Автономный Edge-парсер Cloudflare + облачная БД Site Data активны">
           <span class="pulse-dot"></span>
           <span id="last-updated-label">Синхронизация базы…</span>
         </div>
-        <button class="btn btn-sm" id="btn-refresh" type="button" title="Перезагрузить свежие данные с сервера">
+        <button class="btn btn-sm btn-emerald" id="btn-edge-harvest" type="button" title="Мгновенно собрать новую порцию свежих ИП и ООО с телефонами через серверный прокси Here.now и сохранить в облачную БД">
+          ⚡ Подтянуть свежие
+        </button>
+        <button class="btn btn-sm" id="btn-refresh" type="button" title="Перезагрузить свежие данные из облака">
           ↻ Обновить
         </button>
         <button class="btn btn-sm" id="btn-theme" type="button" title="Переключить тему оформления">
@@ -309,8 +312,16 @@
 
     <!-- TAB 4: ПОДКЛЮЧЕНИЕ АВТОПАРСИНГА 24/7 -->
     <section id="tab-setup" class="tab-panel">
+      <div class="panel-card" style="margin-bottom: 16px; border-color: var(--emerald);">
+        <h2>✅ Автономный облачный Edge-парсер на Here.now уже активен</h2>
+        <p class="desc">
+          На этом сайте включены серверные прокси-маршруты <code>.herenow/proxy.json</code> (на глобальной сети Cloudflare) и постоянная облачная база <code>/.herenow/data/leads</code> + <code>/.herenow/data/harvest_state</code>. При каждом открытии сайта, каждые 3 минуты в фоне и по кнопке <strong>«⚡ Подтянуть свежие»</strong> сайт самостоятельно обходит 43 города РФ и многостраничные рубрики, находит новые ИП и ООО с телефонами за текущую дату и навсегда сохраняет их в облачную БД Here.now — без зависимости от внешних серверов.
+        </p>
+        <div id="edge-harvest-status-box" class="code-block" style="margin-top: 10px;">Инициализация облачного курсора…</div>
+      </div>
+
       <div class="panel-card">
-        <h2>🚀 Постоянная работа 24/7 бесплатно через GitHub Actions + Here.now</h2>
+        <h2>🚀 Дополнительный фоновый крон 24/7 через GitHub Actions (по желанию)</h2>
         <p class="desc">
           Хостинг <strong>Here.now</strong> мгновенно раздаёт этот веб-интерфейс и встроенную облачную БД <code>Site Data</code> на глобальной сети Cloudflare, а фоновый Python-парсер запускается каждые 20 минут в бесплатном облаке <strong>GitHub Actions</strong> (без покупки VPS!) и автоматически пушит свежих новорегов на этот сайт.
         </p>

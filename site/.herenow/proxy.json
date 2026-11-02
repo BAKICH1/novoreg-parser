@@ -1,0 +1,25 @@
+{
+  "proxies": {
+    "/api/orgpage/*": {
+      "upstream": "https://www.orgpage.ru",
+      "headers": {
+        "Accept-Language": "ru-RU,ru;q=0.9,en;q=0.7"
+      },
+      "rateLimit": "600/hour/ip"
+    },
+    "/api/egrul/*": {
+      "upstream": "https://egrul.itsoft.ru",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "rateLimit": "180/hour/ip"
+    },
+    "/api/findorg/*": {
+      "upstream": "https://www.find-org.com",
+      "headers": {
+        "Accept-Language": "ru-RU,ru;q=0.9"
+      },
+      "rateLimit": "120/hour/ip"
+    }
+  }
+}

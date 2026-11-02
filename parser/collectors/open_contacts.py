@@ -35,6 +35,34 @@ ORGPAGE_CITY_FEEDS = [
     ("voronezh", "36", "Воронежская область"),
     ("perm", "59", "Пермский край"),
     ("tyumen", "72", "Тюменская область"),
+    ("volgograd", "34", "Волгоградская область"),
+    ("saratov", "64", "Саратовская область"),
+    ("tolyatti", "63", "Самарская область"),
+    ("izhevsk", "18", "Удмуртская Республика"),
+    ("barnaul", "22", "Алтайский край"),
+    ("ulyanovsk", "73", "Ульяновская область"),
+    ("irkutsk", "38", "Иркутская область"),
+    ("khabarovsk", "27", "Хабаровский край"),
+    ("yaroslavl", "76", "Ярославская область"),
+    ("vladivostok", "25", "Приморский край"),
+    ("tomsk", "70", "Томская область"),
+    ("orenburg", "56", "Оренбургская область"),
+    ("kemerovo", "42", "Кемеровская область — Кузбасс"),
+    ("ryazan", "62", "Рязанская область"),
+    ("astrakhan", "30", "Астраханская область"),
+    ("penza", "58", "Пензенская область"),
+    ("lipetsk", "48", "Липецкая область"),
+    ("kirov", "43", "Кировская область"),
+    ("cheboksary", "21", "Чувашская Республика"),
+    ("tula", "71", "Тульская область"),
+    ("kaliningrad", "39", "Калининградская область"),
+    ("kursk", "46", "Курская область"),
+    ("stavropol", "26", "Ставропольский край"),
+    ("sochi", "23", "Краснодарский край"),
+    ("tver", "69", "Тверская область"),
+    ("ivanovo", "37", "Ивановская область"),
+    ("bryansk", "32", "Брянская область"),
+    ("belgorod", "31", "Белгородская область"),
 ]
 
 ORGPAGE_CATEGORIES = [
@@ -146,14 +174,20 @@ class OpenContactsCollector:
         items_per_category: int = 10,
     ) -> list[Lead]:
         cursor = int(state.get("orgpage_cursor", 0))
+        cat_page = int(state.get("orgpage_cat_page", 1))
         chosen = [
             ORGPAGE_CATEGORIES[(cursor + i) % len(ORGPAGE_CATEGORIES)]
             for i in range(categories_per_run)
         ]
-        state["orgpage_cursor"] = (cursor + categories_per_run) % len(ORGPAGE_CATEGORIES)
+        next_cursor = cursor + categories_per_run
+        if next_cursor >= len(ORGPAGE_CATEGORIES):
+            cat_page = (cat_page % 40) + 1
+        state["orgpage_cursor"] = next_cursor % len(ORGPAGE_CATEGORIES)
+        state["orgpage_cat_page"] = cat_page
 
         raw_cards: list[dict[str, Any]] = []
-        for cat_url, okved_code, okved_name in chosen:
+        for base_cat_url, okved_code, okved_name in chosen:
+            cat_url = base_cat_url if cat_page <= 1 else f"{base_cat_url.rstrip('/')}/{cat_page}/"
             try:
                 _, html = http_get_text(cat_url, timeout=8.0)
             except Exception as exc:

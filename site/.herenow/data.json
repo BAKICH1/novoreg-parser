@@ -23,10 +23,11 @@
       },
       "access": {
         "read": "public",
-        "insert": "owner",
+        "insert": "public",
         "update": "owner",
         "delete": "owner"
-      }
+      },
+      "rateLimit": "300/hour/ip"
     },
     "crm_notes": {
       "fields": {
@@ -34,6 +35,23 @@
         "crm_stage": { "type": "string", "required": true, "maxLength": 32, "trim": true },
         "note": { "type": "string", "maxLength": 600, "trim": true },
         "updated_by": { "type": "string", "maxLength": 64, "trim": true }
+      },
+      "access": {
+        "read": "public",
+        "insert": "public",
+        "update": "public",
+        "delete": "owner"
+      },
+      "publicMutation": "open",
+      "rateLimit": "120/hour/ip"
+    },
+    "harvest_state": {
+      "fields": {
+        "state_key": { "type": "string", "required": true, "maxLength": 32, "trim": true },
+        "city_cursor": { "type": "integer", "default": 0, "minimum": 0 },
+        "cat_cursor": { "type": "integer", "default": 0, "minimum": 0 },
+        "cat_page": { "type": "integer", "default": 1, "minimum": 1 },
+        "last_harvest_iso": { "type": "string", "maxLength": 40, "trim": true }
       },
       "access": {
         "read": "public",

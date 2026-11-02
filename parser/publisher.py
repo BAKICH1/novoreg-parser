@@ -176,6 +176,7 @@ class HereNowPublisher:
             "uploadedCount": len(uploads),
             "skippedCount": len(skipped),
             "publishStatus": finalized.get("publishStatus"),
+            "warnings": finalized.get("warnings"),
         }
         if staged.get("claimUrl"):
             result["claimUrl"] = staged["claimUrl"]

@@ -27,7 +27,7 @@ BAD_EMAIL_DOMAINS = {
 }
 
 PHONE_RAW_RE = re.compile(
-    r"(?:(?:\+7|8)[\s\-()]*\d{3,4}[\s\-()]*\d{2,3}[\s\-]*\d{2}[\s\-]*\d{2})"
+    r"(?<!\d)(?:(?:\+7|8)[\s\-()]*\d{3,4}[\s\-()]*\d{2,3}[\s\-]*\d{2}[\s\-]*\d{2})(?!\d)"
 )
 EMAIL_RE = re.compile(r"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,10}")
 
@@ -67,10 +67,14 @@ def normalize_phone(raw: str) -> str | None:
     if not valid_area:
         return None
 
-    # Отсекаем заведомо мусорные последовательности
+    # Отсекаем заведомо мусорные последовательности и технические ID
     if len(set(body)) <= 2:
         return None
-    if body.startswith("000") or body in ("1234567890", "9999999999"):
+    if (
+        body.startswith("000")
+        or body.endswith("0000000")
+        or body in ("1234567890", "9999999999", "8664553252")
+    ):
         return None
 
     return f"+7 ({body[:3]}) {body[3:6]}-{body[6:8]}-{body[8:10]}"

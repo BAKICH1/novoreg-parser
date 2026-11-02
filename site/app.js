@@ -15,6 +15,15 @@
     filteredLeads: [],
     stats: null,
     lastUpdatedIso: "",
+    cloudHarvestIso: "",
+    harvestCursor: {
+      recId: "",
+      city_cursor: 0,
+      cat_cursor: 0,
+      cat_page: 1,
+      last_harvest_iso: "",
+    },
+    harvestRunning: false,
     crmMap: {},
     cloudNoteIds: {},
     siteDataReady: false,
@@ -82,6 +91,16 @@
       (area >= 300 && area <= 499) ||
       (area >= 811 && area <= 879);
     if (!okArea) return null;
+    if (new Set(b.split("")).size <= 2) return null;
+    if (
+      b.startsWith("000") ||
+      b.endsWith("0000000") ||
+      b === "1234567890" ||
+      b === "9999999999" ||
+      b === "8664553252"
+    ) {
+      return null;
+    }
     return `+7 (${b.slice(0, 3)}) ${b.slice(3, 6)}-${b.slice(6, 8)}-${b.slice(8, 10)}`;
   }
 
@@ -166,18 +185,117 @@
     applyFiltersAndRender(false);
   }
 
+  const EDGE_CITY_FEEDS = [
+    ["moskva", "77", "г. Москва"],
+    ["sankt-peterburg", "78", "г. Санкт-Петербург"],
+    ["krasnodar", "23", "Краснодарский край"],
+    ["ekaterinburg", "66", "Свердловская область"],
+    ["novosibirsk", "54", "Новосибирская область"],
+    ["kazan", "16", "Республика Татарстан"],
+    ["nizhniy-novgorod", "52", "Нижегородская область"],
+    ["rostov-na-donu", "61", "Ростовская область"],
+    ["samara", "63", "Самарская область"],
+    ["chelyabinsk", "74", "Челябинская область"],
+    ["ufa", "02", "Республика Башкортостан"],
+    ["krasnoyarsk", "24", "Красноярский край"],
+    ["voronezh", "36", "Воронежская область"],
+    ["perm", "59", "Пермский край"],
+    ["tyumen", "72", "Тюменская область"],
+    ["volgograd", "34", "Волгоградская область"],
+    ["saratov", "64", "Саратовская область"],
+    ["tolyatti", "63", "Самарская область"],
+    ["izhevsk", "18", "Удмуртская Республика"],
+    ["barnaul", "22", "Алтайский край"],
+    ["ulyanovsk", "73", "Ульяновская область"],
+    ["irkutsk", "38", "Иркутская область"],
+    ["khabarovsk", "27", "Хабаровский край"],
+    ["yaroslavl", "76", "Ярославская область"],
+    ["vladivostok", "25", "Приморский край"],
+    ["tomsk", "70", "Томская область"],
+    ["orenburg", "56", "Оренбургская область"],
+    ["kemerovo", "42", "Кемеровская область — Кузбасс"],
+    ["ryazan", "62", "Рязанская область"],
+    ["astrakhan", "30", "Астраханская область"],
+    ["penza", "58", "Пензенская область"],
+    ["lipetsk", "48", "Липецкая область"],
+    ["kirov", "43", "Кировская область"],
+    ["cheboksary", "21", "Чувашская Республика"],
+    ["tula", "71", "Тульская область"],
+    ["kaliningrad", "39", "Калининградская область"],
+    ["kursk", "46", "Курская область"],
+    ["stavropol", "26", "Ставропольский край"],
+    ["sochi", "23", "Краснодарский край"],
+    ["tver", "69", "Тверская область"],
+    ["ivanovo", "37", "Ивановская область"],
+    ["bryansk", "32", "Брянская область"],
+    ["belgorod", "31", "Белгородская область"],
+  ];
+
+  const EDGE_CATEGORY_FEEDS = [
+    ["ремонт", "43.39", "Строительство, ремонт и недвижимость"],
+    ["nedvizhimost", "68.31", "Строительство, ремонт и недвижимость"],
+    ["yuridicheskie-uslugi", "69.10", "Консалтинг, право и бухгалтерия"],
+    ["restorany-kafe", "56.10", "Гостиницы и общепит"],
+    ["sport", "93.11", "Услуги населению и бизнесу"],
+    ["туризм_и_отдых", "79.11", "Услуги населению и бизнесу"],
+    ["досуг", "93.29", "Услуги населению и бизнесу"],
+  ];
+
+  function getTodayIsoDate() {
+    const now = new Date();
+    const y = now.getFullYear();
+    const m = String(now.getMonth() + 1).padStart(2, "0");
+    const d = String(now.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+
+  function decodeHtmlEntities(str) {
+    if (!str) return "";
+    const txt = document.createElement("textarea");
+    txt.innerHTML = String(str);
+    return txt.value.replace(/\s+/g, " ").trim();
+  }
+
+  function classifyRubricToOkved(rubric, fallbackCat) {
+    const r = String(rubric || "").toLowerCase();
+    if (/строит|ремонт|недвиж|окна|двер|мебел|архитект|сантех|электр/.test(r))
+      return "Строительство, ремонт и недвижимость";
+    if (/торгов|магаз|оптов|маркет|автозапч|одежд|цвет|продукт/.test(r))
+      return "Торговля оптовая и розничная";
+    if (/сайт|программ|компьют|связь|интернет|маркетинг|реклам|дизайн/.test(r))
+      return "ИТ, связь и разработка ПО";
+    if (/перевоз|логист|такси|доставк|склад|автосервис|шиномонтаж/.test(r))
+      return "Транспорт и логистика";
+    if (/кафе|ресторан|кофейн|бар|отел|гостин|пекарн|пицц/.test(r))
+      return "Гостиницы и общепит";
+    if (/юрид|адвокат|бухгалт|нотари|консалт|аудит|страхов|финанс/.test(r))
+      return "Консалтинг, право и бухгалтерия";
+    if (/завод|производ|металл|станок|оборудован|упаковк|фабрик/.test(r))
+      return "Производство и промышленность";
+    if (/клиник|стоматол|медиц|аптек|ветеринар/.test(r))
+      return "Медицина и фармацевтика";
+    return fallbackCat || "Услуги населению и бизнесу";
+  }
+
+  function inferRegionFromCitySlug(slug) {
+    const hit = EDGE_CITY_FEEDS.find((c) => c[0] === slug);
+    if (hit) return { code: hit[1], name: hit[2] };
+    return { code: "77", name: "г. Москва" };
+  }
+
   async function fetchCloudSiteData() {
     try {
-      const notesRes = await fetch("./.herenow/data/crm_notes?limit=200", { cache: "no-store" });
+      const notesRes = await fetch("./.herenow/data/crm_notes?limit=100", { cache: "no-store" });
       if (notesRes.ok) {
         state.siteDataReady = true;
         const notesJson = await notesRes.json();
         (notesJson.records || []).forEach((rec) => {
-          if (rec.lead_key) {
-            state.cloudNoteIds[rec.lead_key] = rec.id;
-            state.crmMap[rec.lead_key] = {
-              stage: rec.crm_stage || "new",
-              note: rec.note || "",
+          const d = rec.data || rec;
+          if (d.lead_key) {
+            state.cloudNoteIds[d.lead_key] = rec.id;
+            state.crmMap[d.lead_key] = {
+              stage: d.crm_stage || "new",
+              note: d.note || "",
             };
           }
         });
@@ -185,35 +303,422 @@
     } catch (_) {}
 
     try {
-      const leadsRes = await fetch("./.herenow/data/leads?limit=200", { cache: "no-store" });
-      if (leadsRes.ok) {
-        const lj = await leadsRes.json();
-        state.siteDataLeads = (lj.records || []).map((r) => ({
-          id: r.lead_key || `sd-${r.id}`,
-          entity_type: r.entity_type || "ООО",
-          name: r.name || "",
-          full_name: r.name || "",
-          inn: r.inn || "",
-          ogrn: r.ogrn || "",
-          kpp: "",
-          reg_date: r.reg_date || "",
-          region_code: r.region_code || "",
-          region_name: r.region_name || "",
-          address: r.address || "",
-          person_name: r.person_name || "",
-          person_role: r.entity_type === "ИП" ? "Индивидуальный предприниматель" : "Руководитель",
-          okved_code: r.okved_code || "",
-          okved_name: r.okved_category || "",
-          okved_category: r.okved_category || "Прочие виды деятельности",
-          phones: r.phones_all ? r.phones_all.split(",").map((s) => s.trim()).filter(Boolean) : [],
-          emails: r.email_primary ? [r.email_primary] : [],
-          websites: r.website ? [r.website] : [],
-          socials: {},
-          sources: r.source_tag ? r.source_tag.split(",").map((s) => s.trim()) : ["Site Data"],
-          has_phone: Boolean(r.has_phone),
-        }));
+      const hsRes = await fetch("./.herenow/data/harvest_state?limit=5", { cache: "no-store" });
+      if (hsRes.ok) {
+        const hsJson = await hsRes.json();
+        const recs = hsJson.records || [];
+        const globalRec = recs.find((r) => (r.data || r).state_key === "global") || recs[0];
+        if (globalRec) {
+          const d = globalRec.data || globalRec;
+          state.harvestCursor = {
+            recId: globalRec.id,
+            city_cursor: Number(d.city_cursor || 0),
+            cat_cursor: Number(d.cat_cursor || 0),
+            cat_page: Math.max(1, Number(d.cat_page || 1)),
+            last_harvest_iso: d.last_harvest_iso || globalRec.updatedAt || "",
+          };
+          if (state.harvestCursor.last_harvest_iso) {
+            state.cloudHarvestIso = state.harvestCursor.last_harvest_iso;
+          }
+        }
       }
     } catch (_) {}
+
+    try {
+      const allCloudRecords = [];
+      let cursor = "";
+      for (let pageIdx = 0; pageIdx < 10; pageIdx++) {
+        const url = cursor
+          ? `./.herenow/data/leads?limit=100&cursor=${encodeURIComponent(cursor)}`
+          : "./.herenow/data/leads?limit=100";
+        const leadsRes = await fetch(url, { cache: "no-store" });
+        if (!leadsRes.ok) break;
+        const lj = await leadsRes.json();
+        const batch = lj.records || [];
+        allCloudRecords.push(...batch);
+        if (!lj.nextCursor || !batch.length) break;
+        cursor = lj.nextCursor;
+      }
+
+      if (allCloudRecords.length) {
+        const newestCreated = allCloudRecords[0].createdAt || "";
+        if (newestCreated && (!state.cloudHarvestIso || newestCreated > state.cloudHarvestIso)) {
+          state.cloudHarvestIso = newestCreated;
+        }
+      }
+
+      state.siteDataLeads = allCloudRecords
+        .map((r) => {
+          const d = r.data || r;
+          const cleanPhones = [];
+          const rawPhones = d.phones_all
+            ? String(d.phones_all).split(",")
+            : d.phone_primary
+            ? [d.phone_primary]
+            : [];
+          rawPhones.forEach((s) => {
+            const np = normalizePhoneJS(s);
+            if (np && !cleanPhones.includes(np)) cleanPhones.push(np);
+          });
+          return {
+            id: d.lead_key || `sd-${r.id}`,
+            entity_type: d.entity_type || "ООО",
+            name: d.name || "",
+            full_name: d.name || "",
+            inn: d.inn || "",
+            ogrn: d.ogrn || "",
+            kpp: "",
+            reg_date: d.reg_date || "",
+            created_at: r.createdAt || "",
+            region_code: d.region_code || "",
+            region_name: d.region_name || "",
+            address: d.address || "",
+            person_name: d.person_name || "",
+            person_role:
+              d.entity_type === "ИП" ? "Индивидуальный предприниматель" : "Руководитель",
+            okved_code: d.okved_code || "",
+            okved_name: d.okved_category || "",
+            okved_category: d.okved_category || "Прочие виды деятельности",
+            phones: cleanPhones,
+            emails: d.email_primary ? [d.email_primary] : [],
+            websites: d.website ? [d.website] : [],
+            socials: {},
+            sources: d.source_tag
+              ? String(d.source_tag)
+                  .split(",")
+                  .map((s) => s.trim())
+                  .filter(Boolean)
+              : ["Edge-облако Here.now"],
+            has_phone: cleanPhones.length > 0,
+          };
+        })
+        .filter((x) => x.name);
+    } catch (_) {}
+  }
+
+  function parseOrgpageCardHtml(html, pathUrl, fallbackReg, fallbackCat, fallbackOkved) {
+    const cm = /companyData\s*=\s*(\{[\s\S]*?\});/.exec(html);
+    if (!cm) return null;
+    let cd = null;
+    try {
+      cd = JSON.parse(cm[1]);
+    } catch (_) {
+      return null;
+    }
+    const rawName = decodeHtmlEntities(cd.name || "");
+    if (!rawName || rawName.length < 2) return null;
+
+    const opfUpper = String(cd.opf || "").toUpperCase();
+    const entityType = opfUpper.includes("ИП") ? "ИП" : "ООО";
+    const displayName =
+      entityType === "ИП"
+        ? rawName.toUpperCase().startsWith("ИП ")
+          ? rawName
+          : `ИП ${rawName}`
+        : rawName.toUpperCase().startsWith("ООО")
+        ? rawName
+        : `ООО "${rawName.replace(/^["«]+|["»]+$/g, "")}"`;
+
+    const phones = [];
+    const addPh = (raw) => {
+      const np = normalizePhoneJS(raw);
+      if (np && !phones.includes(np)) phones.push(np);
+    };
+    if (cd.phone) addPh(cd.phone);
+    const telMatches = html.matchAll(/(?:tel:|itemprop=["']telephone["'][^>]*content=["'])([^"'<>]+)/gi);
+    for (const m of telMatches) addPh(m[1]);
+    // Дополнительно из блока контактов без <script>/<meta>
+    const stripped = html
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<meta[^>]+>/gi, " ");
+    const rxPh = /(?:\+7|8)[\s\-()]*\d{3}[\s\-()]*\d{3}[\s\-]*\d{2}[\s\-]*\d{2}/g;
+    let pm;
+    while ((pm = rxPh.exec(stripped)) !== null) {
+      addPh(pm[0]);
+      if (phones.length >= 4) break;
+    }
+    if (!phones.length) return null;
+
+    const emails = [];
+    for (const em of html.matchAll(/mailto:([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,10})/gi)) {
+      const addr = em[1].toLowerCase();
+      if (!addr.endsWith("orgpage.ru") && !emails.includes(addr)) emails.push(addr);
+    }
+
+    const websites = [];
+    for (const wm of html.matchAll(/itemprop=["']url["'][^>]*href=["'](https?:\/\/[^"'<>]+)["']/gi)) {
+      const w = wm[1].trim();
+      if (!w.includes("orgpage.ru") && !websites.includes(w)) websites.push(w);
+    }
+
+    const slugParts = String(pathUrl || "").split("/").filter(Boolean);
+    const citySlug = slugParts[0] || "moskva";
+    const reg = fallbackReg || inferRegionFromCitySlug(citySlug);
+    const rubric = decodeHtmlEntities(cd.rubric || "");
+    const category = classifyRubricToOkved(rubric, fallbackCat);
+    const addrText = decodeHtmlEntities(cd.address || "");
+    const cityText = decodeHtmlEntities(cd.city || "");
+    const fullAddr = [reg.name, cityText && !reg.name.includes(cityText) ? cityText : "", addrText]
+      .filter(Boolean)
+      .join(", ")
+      .slice(0, 250);
+
+    const compId = cd.company_id || (/-(\d+)\.html/.exec(pathUrl) || [])[1] || Date.now();
+    const leadKey = `orgpage-${compId}`;
+    const todayIso = getTodayIsoDate();
+
+    return {
+      id: leadKey,
+      entity_type: entityType,
+      name: displayName.slice(0, 195),
+      full_name: displayName.slice(0, 195),
+      inn: "",
+      ogrn: "",
+      kpp: "",
+      reg_date: todayIso,
+      created_at: new Date().toISOString(),
+      region_code: reg.code,
+      region_name: reg.name,
+      address: fullAddr || reg.name,
+      person_name: entityType === "ИП" ? rawName.slice(0, 150) : "",
+      person_role: entityType === "ИП" ? "Индивидуальный предприниматель" : "Руководитель",
+      okved_code: fallbackOkved || "",
+      okved_name: rubric || category,
+      okved_category: category,
+      phones,
+      emails: emails.slice(0, 2),
+      websites: websites.slice(0, 2),
+      socials: {},
+      sources: ["Edge-парсер Here.now", "Открытый каталог РФ"],
+      has_phone: true,
+    };
+  }
+
+  async function persistLeadToSiteData(lead) {
+    try {
+      const payload = {
+        lead_key: String(lead.id).slice(0, 64),
+        entity_type: String(lead.entity_type || "ООО").slice(0, 16),
+        name: String(lead.name || "").slice(0, 200),
+        inn: String(lead.inn || "").slice(0, 16),
+        ogrn: String(lead.ogrn || "").slice(0, 20),
+        reg_date: String(lead.reg_date || getTodayIsoDate()).slice(0, 20),
+        region_code: String(lead.region_code || "").slice(0, 8),
+        region_name: String(lead.region_name || "").slice(0, 120),
+        okved_code: String(lead.okved_code || "").slice(0, 24),
+        okved_category: String(lead.okved_category || "").slice(0, 100),
+        person_name: String(lead.person_name || "").slice(0, 160),
+        phone_primary: String((lead.phones && lead.phones[0]) || "").slice(0, 48),
+        phones_all: String((lead.phones || []).join(", ")).slice(0, 240),
+        email_primary: String((lead.emails && lead.emails[0]) || "").slice(0, 140),
+        website: String((lead.websites && lead.websites[0]) || "").slice(0, 200),
+        address: String(lead.address || "").slice(0, 260),
+        source_tag: String((lead.sources || ["Edge-парсер Here.now"]).join(", ")).slice(0, 140),
+        has_phone: Boolean(lead.phones && lead.phones.length > 0),
+      };
+      const res = await fetch("./.herenow/data/leads", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "Idempotency-Key": `edge-${lead.id}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      return res.ok;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  async function saveHarvestCursor(nextCursor) {
+    state.harvestCursor = { ...state.harvestCursor, ...nextCursor };
+    state.cloudHarvestIso = state.harvestCursor.last_harvest_iso;
+    const bodyObj = {
+      state_key: "global",
+      city_cursor: state.harvestCursor.city_cursor,
+      cat_cursor: state.harvestCursor.cat_cursor,
+      cat_page: state.harvestCursor.cat_page,
+      last_harvest_iso: state.harvestCursor.last_harvest_iso,
+    };
+    try {
+      if (state.harvestCursor.recId) {
+        await fetch(`./.herenow/data/harvest_state/${encodeURIComponent(state.harvestCursor.recId)}`, {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(bodyObj),
+        });
+      } else {
+        const res = await fetch("./.herenow/data/harvest_state", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "Idempotency-Key": `hs-${Date.now()}`,
+          },
+          body: JSON.stringify(bodyObj),
+        });
+        if (res.ok) {
+          const j = await res.json();
+          if (j && j.record && j.record.id) state.harvestCursor.recId = j.record.id;
+        }
+      }
+    } catch (_) {}
+  }
+
+  async function runEdgeAutoHarvest(isManual) {
+    if (state.harvestRunning) {
+      if (isManual) showToast("⏳ Облачный сбор уже выполняется…");
+      return;
+    }
+    state.harvestRunning = true;
+    const btn = document.getElementById("btn-edge-harvest");
+    const origBtnText = btn ? btn.textContent : "";
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "⏳ Сбор свежих…";
+    }
+
+    try {
+      const cityIdx = state.harvestCursor.city_cursor % EDGE_CITY_FEEDS.length;
+      const cityIdx2 = (cityIdx + 1) % EDGE_CITY_FEEDS.length;
+      const catIdx = state.harvestCursor.cat_cursor % EDGE_CATEGORY_FEEDS.length;
+      const catPage = Math.max(1, state.harvestCursor.cat_page || 1);
+
+      const [citySlug1, regCode1, regName1] = EDGE_CITY_FEEDS[cityIdx];
+      const [citySlug2, regCode2, regName2] = EDGE_CITY_FEEDS[cityIdx2];
+      const [catSlug, catOkved, catName] = EDGE_CATEGORY_FEEDS[catIdx];
+
+      if (isManual) {
+        showToast(`⚡ Сканируем ${regName1}, ${regName2} и рубрику (стр. ${catPage})…`);
+      }
+
+      const feedSpecs = [
+        {
+          url: `./api/orgpage/${citySlug1}/`,
+          reg: { code: regCode1, name: regName1 },
+          cat: "",
+          okved: "",
+        },
+        {
+          url: `./api/orgpage/${citySlug2}/`,
+          reg: { code: regCode2, name: regName2 },
+          cat: "",
+          okved: "",
+        },
+        {
+          url:
+            catPage <= 1
+              ? `./api/orgpage/rossiya/${encodeURIComponent(catSlug)}/`
+              : `./api/orgpage/rossiya/${encodeURIComponent(catSlug)}/${catPage}/`,
+          reg: null,
+          cat: catName,
+          okved: catOkved,
+        },
+      ];
+
+      const existingIds = new Set(state.mergedLeads.map((l) => String(l.id)));
+      const candidateCards = [];
+      const seenPaths = new Set();
+      let proxyAvailable = false;
+
+      const feedResponses = await Promise.allSettled(
+        feedSpecs.map((f) => fetch(f.url, { cache: "no-store" }))
+      );
+
+      for (let i = 0; i < feedResponses.length; i++) {
+        const fr = feedResponses[i];
+        if (fr.status !== "fulfilled" || !fr.value.ok) continue;
+        proxyAvailable = true;
+        const html = await fr.value.text();
+        // Свежие карточки имеют 7-значный ID вида -61XXXXX.html / -62XXXXX.html или любые карточки на глубоких страницах
+        const cardRx = /https?:\/\/www\.orgpage\.ru(\/[a-z0-9_\-]+\/[a-z0-9_\-]+-(\d{6,8})\.html)/gi;
+        let m;
+        while ((m = cardRx.exec(html)) !== null) {
+          const pathPart = m[1];
+          const compId = m[2];
+          const leadKey = `orgpage-${compId}`;
+          if (existingIds.has(leadKey) || seenPaths.has(pathPart)) continue;
+          seenPaths.add(pathPart);
+          candidateCards.push({
+            pathPart,
+            leadKey,
+            reg: feedSpecs[i].reg,
+            cat: feedSpecs[i].cat,
+            okved: feedSpecs[i].okved,
+          });
+        }
+      }
+
+      if (!proxyAvailable) {
+        if (isManual) {
+          showToast("ℹ️ Серверный Edge-прокси работает на домене .here.now");
+        }
+        return;
+      }
+
+      const toFetch = candidateCards.slice(0, isManual ? 10 : 6);
+      const newlyDiscovered = [];
+
+      for (let offset = 0; offset < toFetch.length; offset += 4) {
+        const chunk = toFetch.slice(offset, offset + 4);
+        const cardRes = await Promise.allSettled(
+          chunk.map((c) => fetch(`./api/orgpage${c.pathPart}`, { cache: "no-store" }))
+        );
+        for (let j = 0; j < cardRes.length; j++) {
+          const cr = cardRes[j];
+          if (cr.status !== "fulfilled" || !cr.value.ok) continue;
+          const cardHtml = await cr.value.text();
+          const parsed = parseOrgpageCardHtml(
+            cardHtml,
+            chunk[j].pathPart,
+            chunk[j].reg,
+            chunk[j].cat,
+            chunk[j].okved
+          );
+          if (parsed && !existingIds.has(parsed.id)) {
+            existingIds.add(parsed.id);
+            newlyDiscovered.push(parsed);
+          }
+        }
+      }
+
+      if (newlyDiscovered.length > 0) {
+        await Promise.allSettled(newlyDiscovered.map((l) => persistLeadToSiteData(l)));
+        state.siteDataLeads = [...newlyDiscovered, ...state.siteDataLeads];
+      }
+
+      const nextCatCursor = state.harvestCursor.cat_cursor + 1;
+      const nextCatPage =
+        nextCatCursor % EDGE_CATEGORY_FEEDS.length === 0
+          ? ((state.harvestCursor.cat_page || 1) % 40) + 1
+          : state.harvestCursor.cat_page || 1;
+
+      await saveHarvestCursor({
+        city_cursor: (state.harvestCursor.city_cursor + 2) % EDGE_CITY_FEEDS.length,
+        cat_cursor: nextCatCursor % EDGE_CATEGORY_FEEDS.length,
+        cat_page: nextCatPage,
+        last_harvest_iso: new Date().toISOString(),
+      });
+
+      mergeAllLeads();
+      populateDynamicSelects();
+      renderKPIsAndAnalytics();
+      applyFiltersAndRender(false);
+
+      if (newlyDiscovered.length > 0) {
+        showToast(`✅ Добавлено +${newlyDiscovered.length} свежих ИП/ООО с телефонами в облако!`);
+      } else if (isManual) {
+        showToast("🔄 Курсор сдвинут дальше — нажмите ещё раз для следующей порции городов");
+      }
+    } catch (err) {
+      console.warn("Edge harvest error:", err);
+      if (isManual) showToast("⚠️ Ошибка сети при опросе прокси");
+    } finally {
+      state.harvestRunning = false;
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = origBtnText || "⚡ Подтянуть свежие";
+      }
+    }
   }
 
   function mergeAllLeads() {
@@ -346,31 +851,68 @@
     document.getElementById("kpi-email-site").textContent = `Email: ${withEmail} • Сайтов: ${withSite}`;
     document.getElementById("kpi-regions").textContent = `${regs} субъектов РФ`;
 
-    if (state.stats && state.stats.updated_at) {
-      const dt = new Date(state.stats.updated_at);
+    const statsIso = (state.stats && state.stats.updated_at) || "";
+    const bestIso =
+      state.cloudHarvestIso && state.cloudHarvestIso > statsIso
+        ? state.cloudHarvestIso
+        : statsIso;
+
+    if (bestIso) {
+      const dt = new Date(bestIso);
       const timeStr = isNaN(dt.getTime())
-        ? state.stats.updated_at
-        : dt.toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" });
+        ? bestIso
+        : dt.toLocaleString("ru-RU", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
       document.getElementById("last-updated-label").textContent = `Автопарсер активен • Обновлено: ${timeStr}`;
       document.getElementById("kpi-runs").textContent =
-        `Циклов сбора: ${state.stats.runs_count || 1} • Конвейер 2-в-1`;
+        `В облаке Site Data: ${state.siteDataLeads.length} • Конвейер 2-в-1`;
     } else {
       document.getElementById("last-updated-label").textContent = `База загружена (${total} записей)`;
     }
 
-    // Диаграммы аналитики
-    renderBarChart(
-      "chart-regions",
-      (state.stats && state.stats.top_regions) || []
-    );
-    renderBarChart(
-      "chart-categories",
-      (state.stats && state.stats.top_categories) || []
-    );
-    renderBarChart(
-      "chart-sources",
-      (state.stats && state.stats.sources_breakdown) || []
-    );
+    const edgeBox = document.getElementById("edge-harvest-status-box");
+    if (edgeBox) {
+      const nextCity =
+        EDGE_CITY_FEEDS[state.harvestCursor.city_cursor % EDGE_CITY_FEEDS.length][2];
+      const nextCat =
+        EDGE_CATEGORY_FEEDS[state.harvestCursor.cat_cursor % EDGE_CATEGORY_FEEDS.length][2];
+      edgeBox.textContent = [
+        `Статус Edge-прокси Here.now : АКТИВЕН (/api/orgpage/* + /.herenow/data/leads)`,
+        `Сохранено в облаке Site Data: ${state.siteDataLeads.length} карточек (всего в сводной витрине: ${total})`,
+        `Следующий обход ротации     : ${nextCity} + «${nextCat}» (стр. ${state.harvestCursor.cat_page || 1})`,
+        `Последний автосбор          : ${bestIso || "только что"}`,
+      ].join("\n");
+    }
+
+    // Живые диаграммы аналитики по всей объединённой базе (сервер + облако Site Data)
+    const regMap = {};
+    const catMap = {};
+    const srcMap = {};
+    for (const item of all) {
+      const rl = item.region_name
+        ? `${item.region_code || ""} ${item.region_name}`.trim()
+        : "Не указан";
+      regMap[rl] = (regMap[rl] || 0) + 1;
+      const cl = item.okved_category || "Прочие виды деятельности";
+      catMap[cl] = (catMap[cl] || 0) + 1;
+      (item.sources || ["Открытый каталог РФ"]).forEach((s) => {
+        srcMap[s] = (srcMap[s] || 0) + 1;
+      });
+    }
+    const toSortedBars = (m, lim) =>
+      Object.entries(m)
+        .map(([label, count]) => ({ label, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, lim);
+
+    renderBarChart("chart-regions", toSortedBars(regMap, 12));
+    renderBarChart("chart-categories", toSortedBars(catMap, 10));
+    renderBarChart("chart-sources", toSortedBars(srcMap, 8));
 
     const runsBox = document.getElementById("runs-log-box");
     const runs = (state.stats && state.stats.recent_runs) || [];
@@ -475,7 +1017,11 @@
     });
 
     if (f.sort === "date_desc") {
-      list.sort((a, b) => String(b.reg_date || "").localeCompare(String(a.reg_date || "")));
+      list.sort(
+        (a, b) =>
+          String(b.reg_date || "").localeCompare(String(a.reg_date || "")) ||
+          String(b.created_at || "").localeCompare(String(a.created_at || ""))
+      );
     } else if (f.sort === "phones_desc") {
       list.sort((a, b) => (b.phones || []).length - (a.phones || []).length);
     } else if (f.sort === "region_asc") {
@@ -485,7 +1031,9 @@
         const pa = a.phones && a.phones.length ? 1 : 0;
         const pb = b.phones && b.phones.length ? 1 : 0;
         if (pb !== pa) return pb - pa;
-        return String(b.reg_date || "").localeCompare(String(a.reg_date || ""));
+        const cmpDate = String(b.reg_date || "").localeCompare(String(a.reg_date || ""));
+        if (cmpDate !== 0) return cmpDate;
+        return String(b.created_at || "").localeCompare(String(a.created_at || ""));
       });
     }
 
@@ -1106,9 +1654,17 @@
       localStorage.setItem(LS_THEME_KEY, next);
     });
 
-    document.getElementById("btn-refresh").addEventListener("click", () => {
-      showToast("Синхронизация с сервером…");
-      loadServerData(false);
+    const edgeBtn = document.getElementById("btn-edge-harvest");
+    if (edgeBtn) {
+      edgeBtn.addEventListener("click", () => {
+        runEdgeAutoHarvest(true);
+      });
+    }
+
+    document.getElementById("btn-refresh").addEventListener("click", async () => {
+      showToast("Синхронизация с облаком…");
+      await loadServerData(false);
+      runEdgeAutoHarvest(true);
     });
 
     // Поиск и селекты
@@ -1270,10 +1826,24 @@
   // Инициализация
   loadLocalStorageState();
   bindEvents();
-  loadServerData(false);
+  loadServerData(false).then(() => {
+    const todayIso = getTodayIsoDate();
+    const lastIso = state.harvestCursor.last_harvest_iso || state.lastUpdatedIso || "";
+    const lastMs = lastIso ? Date.parse(lastIso) : 0;
+    const isStaleDay = !lastIso.startsWith(todayIso);
+    const isOlderThan10m = !lastMs || Date.now() - lastMs > 10 * 60 * 1000;
+    if (isStaleDay || isOlderThan10m) {
+      setTimeout(() => runEdgeAutoHarvest(false), 1800);
+    }
+  });
 
-  // Авто-пуллинг свежих данных от крона каждые 60 секунд без перезагрузки страницы
+  // Авто-пуллинг свежих данных из облака Site Data каждые 60 секунд
   setInterval(() => {
     loadServerData(true);
   }, 60000);
+
+  // Автономный фоновый сбор свежих ИП/ООО через Edge-прокси каждые 3 минуты
+  setInterval(() => {
+    runEdgeAutoHarvest(false);
+  }, 180000);
 })();
