@@ -103,6 +103,11 @@ class LeadStore:
         with_phone = sum(1 for x in sorted_leads if x.has_phone)
         with_email = sum(1 for x in sorted_leads if x.emails)
         with_site = sum(1 for x in sorted_leads if x.websites)
+        active_count = sum(1 for x in sorted_leads if x.is_active)
+        closed_count = total - active_count
+        with_work_hours = sum(1 for x in sorted_leads if x.work_hours)
+        with_telegram = sum(1 for x in sorted_leads if x.telegram)
+        with_telegram_phone = sum(1 for x in sorted_leads if x.telegram_phone)
         ip_count = sum(1 for x in sorted_leads if x.entity_type == "ИП")
         ooo_count = sum(1 for x in sorted_leads if x.entity_type == "ООО")
 
@@ -119,6 +124,11 @@ class LeadStore:
             "phone_rate_pct": round((with_phone / total * 100.0), 1) if total else 0.0,
             "with_email": with_email,
             "with_website": with_site,
+            "active_count": active_count,
+            "closed_count": closed_count,
+            "with_work_hours": with_work_hours,
+            "with_telegram": with_telegram,
+            "with_telegram_phone": with_telegram_phone,
             "ip_count": ip_count,
             "ooo_count": ooo_count,
             "regions_covered": len(by_region),

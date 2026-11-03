@@ -1,15 +1,20 @@
 {
-  "updated_at": "2026-11-02T09:25:49Z",
+  "updated_at": "2026-11-03T07:32:45Z",
   "mode": "2-в-1 (Открытые реестры и каталоги + API контрагентов)",
-  "total_leads": 264,
-  "with_phone": 254,
-  "phone_rate_pct": 96.2,
-  "with_email": 215,
-  "with_website": 231,
-  "ip_count": 27,
-  "ooo_count": 237,
-  "regions_covered": 32,
-  "runs_count": 7,
+  "total_leads": 277,
+  "with_phone": 267,
+  "phone_rate_pct": 96.4,
+  "with_email": 228,
+  "with_website": 244,
+  "active_count": 276,
+  "closed_count": 1,
+  "with_work_hours": 100,
+  "with_telegram": 49,
+  "with_telegram_phone": 146,
+  "ip_count": 29,
+  "ooo_count": 248,
+  "regions_covered": 34,
+  "runs_count": 8,
   "top_regions": [
     {
       "label": "77 — г. Москва",
@@ -44,15 +49,15 @@
       "count": 9
     },
     {
+      "label": "66 — Свердловская область",
+      "count": 9
+    },
+    {
       "label": "72 — Тюменская область",
       "count": 9
     },
     {
       "label": "74 — Челябинская область",
-      "count": 8
-    },
-    {
-      "label": "66 — Свердловская область",
       "count": 8
     },
     {
@@ -75,7 +80,7 @@
   "top_categories": [
     {
       "label": "Прочие виды деятельности",
-      "count": 122
+      "count": 135
     },
     {
       "label": "Образование, медицина, сервис",
@@ -117,11 +122,15 @@
   "sources_breakdown": [
     {
       "label": "Открытый каталог РФ",
-      "count": 254
+      "count": 267
     },
     {
       "label": "Сайт компании",
-      "count": 244
+      "count": 257
+    },
+    {
+      "label": "ФНС/Saby",
+      "count": 34
     },
     {
       "label": "ЕГРЮЛ Open (Фронтир 2026)",
@@ -130,8 +139,12 @@
   ],
   "daily_registrations": [
     {
+      "date": "2026-11-03",
+      "count": 11
+    },
+    {
       "date": "2026-11-02",
-      "count": 110
+      "count": 109
     },
     {
       "date": "2026-11-01",
@@ -155,7 +168,7 @@
     },
     {
       "date": "2023-06-15",
-      "count": 1
+      "count": 2
     },
     {
       "date": "2022-06-15",
@@ -163,14 +176,26 @@
     },
     {
       "date": "2021-06-15",
-      "count": 1
+      "count": 2
     },
     {
       "date": "2020-06-15",
-      "count": 1
+      "count": 2
     }
   ],
   "recent_runs": [
+    {
+      "timestamp": "2026-11-03T07:32:45Z",
+      "fetched": 80,
+      "added_new": 13,
+      "updated": 67,
+      "duration_sec": 107.9,
+      "sources": [
+        "Открытые каталоги + Сайты (80)",
+        "Веб-обогащение (+2 тел.)",
+        "ФНС/Saby статус (7)"
+      ]
+    },
     {
       "timestamp": "2026-11-02T09:25:35Z",
       "fetched": 42,

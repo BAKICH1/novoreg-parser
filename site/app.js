@@ -34,6 +34,7 @@
       contactMode: "",
       region: "",
       category: "",
+      orgStatus: "",
       crm: "",
       sort: "smart",
     },
@@ -283,6 +284,156 @@
     return { code: "77", name: "г. Москва" };
   }
 
+  const BAD_TG_SLUGS = new Set([
+    "share", "iv", "joinchat", "addstickers", "proxy", "socks", "login",
+    "orgpage", "tilda", "wordpress", "bitrix", "telegram", "botfather",
+    "contact", "dl", "setlanguage",
+  ]);
+
+  function normalizeTelegramJS(raw) {
+    if (!raw) return "";
+    const s = String(raw).trim();
+    const mUrl = /(?:https?:\/\/(?:t\.me|telegram\.me)\/(?:s\/)?|tg:\/\/resolve\?domain=|^@)([a-zA-Z][a-zA-Z0-9_]{3,31})\b/i.exec(s);
+    if (mUrl && !BAD_TG_SLUGS.has(mUrl[1].toLowerCase())) {
+      return `@${mUrl[1]}`;
+    }
+    if (/^[a-zA-Z][a-zA-Z0-9_]{3,31}$/.test(s) && !BAD_TG_SLUGS.has(s.toLowerCase())) {
+      return `@${s}`;
+    }
+    return "";
+  }
+
+  function extractTelegramJS(html) {
+    if (!html) return "";
+    const rx = /(?:https?:\/\/(?:t\.me|telegram\.me)\/(?:s\/)?|tg:\/\/resolve\?domain=)([a-zA-Z][a-zA-Z0-9_]{3,31})\b/gi;
+    let m;
+    while ((m = rx.exec(html)) !== null) {
+      if (!BAD_TG_SLUGS.has(m[1].toLowerCase())) return `@${m[1]}`;
+    }
+    return "";
+  }
+
+  function compactWorkHoursJS(raw) {
+    if (!raw) return "";
+    let s = decodeHtmlEntities(String(raw).replace(/<[^>]+>/g, " "));
+    const reps = [
+      [/\bПонедельник\s*[-–—]\s*пятница\b/gi, "Пн-Пт"],
+      [/\bПонедельник\s*[-–—]\s*четверг\b/gi, "Пн-Чт"],
+      [/\bПонедельник\s*[-–—]\s*суббота\b/gi, "Пн-Сб"],
+      [/\bПонедельник\s*[-–—]\s*воскресенье\b/gi, "Пн-Вс"],
+      [/\bСуббота\s*[,–—\-]\s*воскресенье\b/gi, "Сб-Вс"],
+      [/\bПятница\s*[-–—]\s*суббота\b/gi, "Пт-Сб"],
+      [/\bПонедельник\b/gi, "Пн"],
+      [/\bВторник\b/gi, "Вт"],
+      [/\bСреда\b/gi, "Ср"],
+      [/\bЧетверг\b/gi, "Чт"],
+      [/\bПятница\b/gi, "Пт"],
+      [/\bСуббота\b/gi, "Сб"],
+      [/\bВоскресенье\b/gi, "Вс"],
+      [/\s*[–—]\s*/g, ": "],
+      [/:\s*:/g, ":"],
+      [/\(перерыв:\s*с\s*/gi, "(пер. "],
+      [/\s+до\s+/gi, "-"],
+    ];
+    for (const [pat, rep] of reps) s = s.replace(pat, rep);
+    return s.replace(/\s+/g, " ").replace(/^[ ;,.]+|[ ;,.]+$/g, "").slice(0, 180);
+  }
+
+  function extractWorkHoursJS(html) {
+    if (!html) return "";
+    const lines = [];
+    for (const pm of html.matchAll(/<div[^>]*class=["']period["'][^>]*>([\s\S]*?)<\/div>/gi)) {
+      for (const p of pm[1].matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)) {
+        const cp = compactWorkHoursJS(p[1]);
+        if (cp && !lines.includes(cp)) lines.push(cp);
+      }
+    }
+    if (lines.length) return lines.join("; ").slice(0, 180);
+
+    const meta = /itemprop=["']openingHours["'][^>]*content=["']([^"']{3,120})["']/i.exec(html);
+    if (meta) return compactWorkHoursJS(meta[1]);
+    return "";
+  }
+
+  function detectOrgStatusJS(html, workHours) {
+    const wh = String(workHours || "").toLowerCase();
+    if (wh === "пн-вс: выходной" || wh === "выходной") {
+      return { isActive: false, status: "Временно не работает" };
+    }
+    if (html) {
+      const stripped = html
+        .replace(/<script[\s\S]*?<\/script>/gi, " ")
+        .replace(/<style[\s\S]*?<\/style>/gi, " ")
+        .replace(/<[^>]+>/g, " ");
+      if (
+        /(?:организация\s+(?:больше\s+не\s+работает|закрыта|ликвидирована)|компания\s+(?:закрыта|больше\s+не\s+работает)|деятельность\s+прекращена|временно\s+не\s+работает|закрыто\s+навсегда)/i.test(
+          stripped
+        )
+      ) {
+        return { isActive: false, status: "Закрыта / не работает" };
+      }
+    }
+    return { isActive: true, status: "Действующая" };
+  }
+
+  function computeTelegramFields(lead) {
+    const tg =
+      normalizeTelegramJS(lead.telegram) ||
+      normalizeTelegramJS(lead.socials && lead.socials.telegram);
+    let mobPhone = lead.telegram_phone || "";
+    if (!mobPhone && Array.isArray(lead.phones)) {
+      const hit = lead.phones.find(isMobilePhone);
+      if (hit) mobPhone = `+${digitsOnly(hit)}`;
+    }
+    return {
+      telegram: tg,
+      telegram_phone: mobPhone,
+      telegram_status: tg ? "verified" : mobPhone ? "by_phone" : "none",
+    };
+  }
+
+  async function checkSabyFnsOnline(inn) {
+    const cleanInn = String(inn || "").replace(/\D/g, "");
+    if (cleanInn.length !== 10 && cleanInn.length !== 12) return null;
+    try {
+      const res = await fetch(`./api/saby/contragents/${cleanInn}`, { cache: "no-store" });
+      if (!res.ok) return null;
+      const html = await res.text();
+      const liqDate = /"ДатаЛиквидации"\s*:\s*"([^"]+)"/.exec(html);
+      const inLiq = /"ВПроцессеЛиквидации"\s*:\s*true/i.test(html);
+      const stHtml = /<b>Статус:<\/b>\s*([^<]{3,90})/i.exec(html);
+      const dirHtml = /<b>(?:Генеральный директор|Директор|Руководитель|Предприниматель):<\/b>\s*([^<]{4,100})/i.exec(html);
+      const ogrnHtml = /ОГРН(?:ИП)?[\s:]*(\d{13}|\d{15})\b/.exec(html);
+
+      let isActive = true;
+      let status = "Действующая (ФНС)";
+      if (liqDate && liqDate[1] && liqDate[1] !== "null") {
+        isActive = false;
+        status = `Закрыта / ликвидирована (${liqDate[1].slice(0, 10)})`;
+      } else if (inLiq) {
+        isActive = false;
+        status = "В процессе ликвидации (ФНС)";
+      } else if (stHtml) {
+        const stTxt = decodeHtmlEntities(stHtml[1]).replace(/\.$/, "");
+        if (/ликвидир|прекращ|не действует|закрыт|банкрот/i.test(stTxt)) {
+          isActive = false;
+          status = `Закрыта (${stTxt})`;
+        } else {
+          isActive = true;
+          status = "Действующая (ФНС)";
+        }
+      }
+      return {
+        isActive,
+        status,
+        personName: dirHtml ? decodeHtmlEntities(dirHtml[1]).replace(/\.$/, "") : "",
+        ogrn: ogrnHtml ? ogrnHtml[1] : "",
+      };
+    } catch (_) {
+      return null;
+    }
+  }
+
   async function fetchCloudSiteData() {
     try {
       const notesRes = await fetch("./.herenow/data/crm_notes?limit=100", { cache: "no-store" });
@@ -382,7 +533,13 @@
             phones: cleanPhones,
             emails: d.email_primary ? [d.email_primary] : [],
             websites: d.website ? [d.website] : [],
-            socials: {},
+            socials: d.telegram ? { telegram: `https://t.me/${String(d.telegram).replace(/^@/, "")}` } : {},
+            status: d.org_status || "Действующая",
+            is_active: d.is_active !== false,
+            work_hours: d.work_hours || "",
+            telegram: d.telegram || "",
+            telegram_status: d.telegram_status || "",
+            telegram_phone: d.telegram_phone || "",
             sources: d.source_tag
               ? String(d.source_tag)
                   .split(",")
@@ -466,6 +623,11 @@
     const compId = cd.company_id || (/-(\d+)\.html/.exec(pathUrl) || [])[1] || Date.now();
     const leadKey = `orgpage-${compId}`;
     const todayIso = getTodayIsoDate();
+    const workHours = extractWorkHoursJS(html);
+    const orgSt = detectOrgStatusJS(html, workHours);
+    const tgHandle = extractTelegramJS(html);
+    const mobHit = phones.find(isMobilePhone);
+    const tgPhone = mobHit ? `+${digitsOnly(mobHit)}` : "";
 
     return {
       id: leadKey,
@@ -488,7 +650,13 @@
       phones,
       emails: emails.slice(0, 2),
       websites: websites.slice(0, 2),
-      socials: {},
+      socials: tgHandle ? { telegram: `https://t.me/${tgHandle.slice(1)}` } : {},
+      status: orgSt.status,
+      is_active: orgSt.isActive,
+      work_hours: workHours,
+      telegram: tgHandle,
+      telegram_status: tgHandle ? "verified" : tgPhone ? "by_phone" : "none",
+      telegram_phone: tgPhone,
       sources: ["Edge-парсер Here.now", "Открытый каталог РФ"],
       has_phone: true,
     };
@@ -496,6 +664,7 @@
 
   async function persistLeadToSiteData(lead) {
     try {
+      const tgInfo = computeTelegramFields(lead);
       const payload = {
         lead_key: String(lead.id).slice(0, 64),
         entity_type: String(lead.entity_type || "ООО").slice(0, 16),
@@ -513,6 +682,12 @@
         email_primary: String((lead.emails && lead.emails[0]) || "").slice(0, 140),
         website: String((lead.websites && lead.websites[0]) || "").slice(0, 200),
         address: String(lead.address || "").slice(0, 260),
+        org_status: String(lead.status || "Действующая").slice(0, 80),
+        is_active: lead.is_active !== false,
+        work_hours: String(lead.work_hours || "").slice(0, 200),
+        telegram: String(tgInfo.telegram || "").slice(0, 64),
+        telegram_status: String(tgInfo.telegram_status || "none").slice(0, 24),
+        telegram_phone: String(tgInfo.telegram_phone || "").slice(0, 24),
         source_tag: String((lead.sources || ["Edge-парсер Here.now"]).join(", ")).slice(0, 140),
         has_phone: Boolean(lead.phones && lead.phones.length > 0),
       };
@@ -752,14 +927,35 @@
         (item.sources || []).forEach((s) => {
           if (!cur.sources.includes(s)) cur.sources.push(s);
         });
+        if (!cur.work_hours && item.work_hours) cur.work_hours = item.work_hours;
+        if (!cur.telegram && item.telegram) cur.telegram = item.telegram;
+        if (item.is_active === false) {
+          cur.is_active = false;
+          cur.status = item.status || "Закрыта / не работает";
+        } else if (item.status && String(item.status).includes("ФНС")) {
+          cur.status = item.status;
+        }
         cur.has_phone = cur.phones.length > 0;
       }
     }
 
-    state.mergedLeads = Array.from(map.values()).map((x) => ({
-      ...x,
-      has_phone: (x.phones && x.phones.length > 0),
-    }));
+    state.mergedLeads = Array.from(map.values()).map((x) => {
+      const tgInfo = computeTelegramFields(x);
+      const stText = x.status && x.status !== "Действующее" ? x.status : "Действующая";
+      const isClosed =
+        x.is_active === false ||
+        /ликвидир|закрыт|прекращ|не работает|не действует|банкрот/i.test(stText);
+      return {
+        ...x,
+        status: stText,
+        is_active: !isClosed,
+        work_hours: x.work_hours || "",
+        telegram: tgInfo.telegram,
+        telegram_status: tgInfo.telegram_status,
+        telegram_phone: tgInfo.telegram_phone,
+        has_phone: Boolean(x.phones && x.phones.length > 0),
+      };
+    });
   }
 
   async function loadServerData(isSilentPoll) {
@@ -837,18 +1033,24 @@
     const oooCount = all.filter((x) => x.entity_type === "ООО").length;
     const withPhone = all.filter((x) => x.phones && x.phones.length > 0).length;
     const withMobile = all.filter((x) => (x.phones || []).some(isMobilePhone)).length;
-    const withEmail = all.filter((x) => x.emails && x.emails.length > 0).length;
-    const withSite = all.filter((x) => x.websites && x.websites.length > 0).length;
+    const withTelegramHandle = all.filter((x) => Boolean(x.telegram)).length;
+    const withTelegramAny = all.filter((x) => Boolean(x.telegram || x.telegram_phone)).length;
+    const withWorkHours = all.filter((x) => Boolean(x.work_hours)).length;
+    const activeOrgCount = all.filter((x) => x.is_active !== false).length;
+    const closedOrgCount = total - activeOrgCount;
     const regs = new Set(all.map((x) => x.region_code).filter(Boolean)).size;
     const pct = total ? ((withPhone / total) * 100).toFixed(1) : "0.0";
 
     document.getElementById("nav-count-total").textContent = String(total);
     document.getElementById("kpi-total").textContent = String(total);
-    document.getElementById("kpi-split").textContent = `ООО: ${oooCount} • ИП: ${ipCount}`;
+    document.getElementById("kpi-split").textContent =
+      `ООО: ${oooCount} • ИП: ${ipCount} • 🟢 Действ.: ${activeOrgCount}` +
+      (closedOrgCount ? ` • 🔴 Закр.: ${closedOrgCount}` : "");
     document.getElementById("kpi-phones").textContent = String(withPhone);
     document.getElementById("kpi-phone-rate").textContent = `Покрытие телефонами: ${pct}%`;
-    document.getElementById("kpi-mobile").textContent = String(withMobile);
-    document.getElementById("kpi-email-site").textContent = `Email: ${withEmail} • Сайтов: ${withSite}`;
+    document.getElementById("kpi-mobile").textContent = String(withTelegramAny);
+    document.getElementById("kpi-email-site").textContent =
+      `✈️ @Telegram: ${withTelegramHandle} • 📱 По номеру +79…: ${withMobile}`;
     document.getElementById("kpi-regions").textContent = `${regs} субъектов РФ`;
 
     const statsIso = (state.stats && state.stats.updated_at) || "";
@@ -870,7 +1072,7 @@
           });
       document.getElementById("last-updated-label").textContent = `Автопарсер активен • Обновлено: ${timeStr}`;
       document.getElementById("kpi-runs").textContent =
-        `В облаке Site Data: ${state.siteDataLeads.length} • Конвейер 2-в-1`;
+        `🕒 Часы работы: ${withWorkHours} • Облако: ${state.siteDataLeads.length}`;
     } else {
       document.getElementById("last-updated-label").textContent = `База загружена (${total} записей)`;
     }
@@ -977,9 +1179,13 @@
       if (f.entityType && l.entity_type !== f.entityType) return false;
       if (f.region && l.region_code !== f.region) return false;
       if (f.category && l.okved_category !== f.category) return false;
+      if (f.orgStatus === "active" && l.is_active === false) return false;
+      if (f.orgStatus === "closed" && l.is_active !== false) return false;
 
       if (f.contactMode === "phone" && !(l.phones && l.phones.length)) return false;
-      if (f.contactMode === "mobile" && !(l.phones || []).some(isMobilePhone)) return false;
+      if (f.contactMode === "telegram" && !l.telegram) return false;
+      if (f.contactMode === "mobile" && !(l.telegram || l.telegram_phone)) return false;
+      if (f.contactMode === "hours" && !l.work_hours) return false;
       if (f.contactMode === "email" && !(l.emails && l.emails.length)) return false;
       if (f.contactMode === "site" && !(l.websites && l.websites.length)) return false;
 
@@ -999,6 +1205,9 @@
           l.region_name,
           l.okved_code,
           l.okved_name,
+          l.status,
+          l.work_hours,
+          l.telegram,
           ...(l.phones || []),
           ...(l.emails || []),
           ...(l.websites || []),
@@ -1100,6 +1309,28 @@
             : `<span class="no-phone-tag">Нет публичного номера</span>`;
 
         const extraContacts = [];
+        if (l.telegram) {
+          const cleanSlug = l.telegram.replace(/^@/, "");
+          extraContacts.push(
+            `<div onclick="event.stopPropagation()" style="display:flex; align-items:center; gap:4px; margin-bottom:2px;">
+              <span class="tg-tag-verified" style="user-select:text;">✈️ ${esc(l.telegram)}</span>
+              <button type="button" class="mini-action js-copy" data-copy="${esc(l.telegram)}" title="Скопировать ник Telegram">📋</button>
+              <a href="https://t.me/${esc(cleanSlug)}" target="_blank" rel="noopener" class="mini-action" title="Открыть профиль/канал в Telegram">↗</a>
+            </div>`
+          );
+        } else if (l.telegram_phone) {
+          extraContacts.push(
+            `<div onclick="event.stopPropagation()" style="display:flex; align-items:center; gap:4px; margin-bottom:2px;">
+              <span class="tg-tag-phone" title="Прямой ник на сайте не указан, но есть мобильный номер владельца/ИП для поиска в Telegram">✈️ По номеру ${esc(l.telegram_phone)}</span>
+              <a href="https://t.me/${esc(l.telegram_phone)}" target="_blank" rel="noopener" class="mini-action" title="Открыть чат в Telegram по номеру телефона">TG↗</a>
+            </div>`
+          );
+        } else {
+          extraContacts.push(
+            `<span style="font-size:11px; color:var(--text-dim);">✈️ Telegram: не найден</span>`
+          );
+        }
+
         if (l.emails && l.emails[0]) {
           extraContacts.push(
             `<span onclick="event.stopPropagation()" style="font-size:12px; color:var(--text); user-select:text;">✉️ ${esc(l.emails[0])}</span>`
@@ -1112,12 +1343,22 @@
           );
         }
 
+        const statusBadgeHtml =
+          l.is_active === false
+            ? `<span class="status-pill-closed">✕ ${esc(l.status || "Закрыта / не работает")}</span>`
+            : `<span class="status-pill-active">● ${esc(l.status || "Действующая")}</span>`;
+
         const codesHtml = [
+          statusBadgeHtml,
           l.inn ? `<span class="code-chip" title="ИНН">ИНН ${esc(l.inn)}</span>` : "",
           l.ogrn ? `<span class="code-chip" title="ОГРН / ОГРНИП">ОГРН ${esc(l.ogrn)}</span>` : "",
         ]
           .filter(Boolean)
-          .join("");
+          .join(" ");
+
+        const hoursHtml = l.work_hours
+          ? `<div class="work-hours-line">🕒 ${esc(l.work_hours)}</div>`
+          : `<div style="font-size:11px; color:var(--text-dim); margin-top:4px;">🕒 График: не указан</div>`;
 
         return `
           <tr class="js-lead-row ${stageClass}" data-id="${esc(l.id)}">
@@ -1126,14 +1367,15 @@
                 <span class="type-badge ${isIp ? "type-ip" : "type-ooo"}">${esc(l.entity_type)}</span>
                 ${esc(l.name)}
               </div>
-              <div class="lead-codes">${codesHtml || '<span style="font-size:11px;color:var(--text-dim);">Каталог МСП</span>'}</div>
+              <div class="lead-codes" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; margin-top:5px;">${codesHtml}</div>
             </td>
             <td style="white-space: nowrap; font-weight: 600;">
               ${esc(formatDateRu(l.reg_date))}
             </td>
-            <td style="max-width: 230px;">
+            <td style="max-width: 250px;">
               <div style="font-weight: 600; font-size: 12.5px;">${esc(l.region_code)} — ${esc(l.region_name)}</div>
               <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">${esc((l.address || "").slice(0, 85))}</div>
+              ${hoursHtml}
             </td>
             <td style="max-width: 210px;">
               <div style="font-size: 12px; font-weight: 600;">
@@ -1174,8 +1416,14 @@
 
     const crm = getCrm(lead.id);
     const isIp = lead.entity_type === "ИП";
+    const drawerStatusPill =
+      lead.is_active === false
+        ? `<span class="status-pill-closed">✕ ${esc(lead.status || "Закрыта / не работает")}</span>`
+        : `<span class="status-pill-active">● ${esc(lead.status || "Действующая")}</span>`;
+
     document.getElementById("d-badges").innerHTML = `
       <span class="type-badge ${isIp ? "type-ip" : "type-ooo"}">${esc(lead.entity_type)}</span>
+      ${drawerStatusPill}
       ${(lead.sources || []).map((s) => `<span class="source-pill">${esc(s)}</span>`).join("")}
     `;
     document.getElementById("d-title").textContent = lead.name;
@@ -1207,6 +1455,13 @@
         <div style="font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;">Деловые телефоны и связь</div>
         ${phonesBlock}
         ${
+          lead.telegram
+            ? `<div style="margin-top:8px;"><strong>Telegram владельца / компании:</strong> <span style="user-select:text; font-weight:700; color:var(--accent);">${esc(lead.telegram)}</span> <button type="button" class="mini-action js-copy" data-copy="${esc(lead.telegram)}">📋</button> <a href="https://t.me/${esc(lead.telegram.replace(/^@/, ""))}" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left:6px;">Открыть Telegram ↗</a></div>`
+            : lead.telegram_phone
+            ? `<div style="margin-top:8px;"><strong>Telegram по моб. владельца:</strong> <span style="user-select:text;">${esc(lead.telegram_phone)}</span> <a href="https://t.me/${esc(lead.telegram_phone)}" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left:6px;">Найти в Telegram по номеру ↗</a></div>`
+            : `<div style="margin-top:8px; color:var(--text-muted);"><strong>Telegram:</strong> публичный аккаунт не найден (только городской телефон)</div>`
+        }
+        ${
           lead.emails && lead.emails.length
             ? `<div style="margin-top:8px;"><strong>Email:</strong> ${lead.emails
                 .map((e) => `<span style="user-select:text;">${esc(e)}</span>`)
@@ -1223,6 +1478,14 @@
       </div>
 
       <div class="detail-grid">
+        <div class="detail-box">
+          <div class="lbl">Статус организации</div>
+          <div class="val" id="drawer-status-val">${drawerStatusPill}</div>
+        </div>
+        <div class="detail-box">
+          <div class="lbl">Часы работы</div>
+          <div class="val">${esc(lead.work_hours || "Не указаны")}</div>
+        </div>
         <div class="detail-box">
           <div class="lbl">ИНН</div>
           <div class="val">${lead.inn ? `${esc(lead.inn)} <button class="mini-action js-copy" data-copy="${esc(lead.inn)}">📋</button>` : "Не указан"}</div>
@@ -1254,12 +1517,17 @@
       </div>
 
       <div class="detail-box">
-        <div class="lbl" style="margin-bottom:8px;">Быстрая проверка в реестрах и на картах</div>
+        <div class="lbl" style="margin-bottom:8px;">Онлайн-проверка закрытия организации и реестров</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          ${
+            lead.inn
+              ? `<button type="button" class="btn btn-sm btn-emerald" id="btn-live-fns-check" data-id="${esc(lead.id)}" data-inn="${esc(lead.inn)}">🔍 Проверить статус по ИНН онлайн (ФНС/Saby)</button>`
+              : ""
+          }
+          <a class="btn btn-sm" href="https://sbis.ru/contragents/${encodeURIComponent(lead.inn || "")}" target="_blank" rel="noopener">Saby (СБИС) ↗</a>
           <a class="btn btn-sm" href="https://checko.ru/search?query=${checkQuery}" target="_blank" rel="noopener">Checko.ru ↗</a>
           <a class="btn btn-sm" href="https://www.rusprofile.ru/search?query=${checkQuery}" target="_blank" rel="noopener">Rusprofile ↗</a>
           <a class="btn btn-sm" href="https://2gis.ru/search/${encodeURIComponent(lead.name + " " + (lead.region_name || ""))}" target="_blank" rel="noopener">Найти в 2ГИС ↗</a>
-          <a class="btn btn-sm" href="https://egrul.nalog.ru/" target="_blank" rel="noopener">ФНС Выписка ↗</a>
         </div>
       </div>
 
@@ -1304,6 +1572,9 @@
     const headers = [
       "Форма",
       "Наименование",
+      "Статус_организации",
+      "Часы_работы",
+      "Telegram",
       "ИНН",
       "ОГРН_ОГРНИП",
       "Дата_регистрации",
@@ -1325,10 +1596,14 @@
     const lines = [headers.join(";")];
     for (const l of rows) {
       const crm = getCrm(l.id);
+      const tgOut = l.telegram || (l.telegram_phone ? `По номеру ${l.telegram_phone}` : "");
       lines.push(
         [
           l.entity_type,
           l.name,
+          l.status || (l.is_active === false ? "Закрыта" : "Действующая"),
+          l.work_hours || "",
+          tgOut,
           l.inn ? `'${l.inn}` : "",
           l.ogrn ? `'${l.ogrn}` : "",
           formatDateRu(l.reg_date),
@@ -1365,7 +1640,10 @@
     }
     const cols = [
       ["Форма", 65],
-      ["Наименование ИП / ООО", 240],
+      ["Наименование ИП / ООО", 230],
+      ["Статус организации", 145],
+      ["Часы работы", 175],
+      ["Telegram", 150],
       ["ИНН", 105],
       ["ОГРН / ОГРНИП", 125],
       ["Дата рег.", 85],
@@ -1397,9 +1675,13 @@
     const dataRows = rows
       .map((l) => {
         const crm = getCrm(l.id);
+        const tgOut = l.telegram || (l.telegram_phone ? `По номеру ${l.telegram_phone}` : "");
         const vals = [
           l.entity_type,
           l.name,
+          l.status || (l.is_active === false ? "Закрыта" : "Действующая"),
+          l.work_hours || "",
+          tgOut,
           l.inn,
           l.ogrn,
           formatDateRu(l.reg_date),
@@ -1680,6 +1962,13 @@
       state.filters.category = e.target.value;
       applyFiltersAndRender(true);
     });
+    const orgStSel = document.getElementById("f-org-status");
+    if (orgStSel) {
+      orgStSel.addEventListener("change", (e) => {
+        state.filters.orgStatus = e.target.value;
+        applyFiltersAndRender(true);
+      });
+    }
     document.getElementById("f-crm").addEventListener("change", (e) => {
       state.filters.crm = e.target.value;
       applyFiltersAndRender(true);
@@ -1715,12 +2004,15 @@
         contactMode: "",
         region: "",
         category: "",
+        orgStatus: "",
         crm: "",
         sort: "smart",
       };
       document.getElementById("f-search").value = "";
       document.getElementById("f-region").value = "";
       document.getElementById("f-category").value = "";
+      const orgStEl = document.getElementById("f-org-status");
+      if (orgStEl) orgStEl.value = "";
       document.getElementById("f-crm").value = "";
       document.getElementById("f-sort").value = "smart";
       document.querySelectorAll("#seg-type .seg-btn").forEach((b, i) => b.classList.toggle("active", i === 0));
@@ -1748,6 +2040,34 @@
       if (copyBtn) {
         e.stopPropagation();
         copyText(copyBtn.dataset.copy);
+        return;
+      }
+
+      const liveFnsBtn = e.target.closest("#btn-live-fns-check");
+      if (liveFnsBtn) {
+        const lid = liveFnsBtn.dataset.id;
+        const inn = liveFnsBtn.dataset.inn;
+        liveFnsBtn.disabled = true;
+        liveFnsBtn.textContent = "⏳ Проверка в ФНС/Saby…";
+        checkSabyFnsOnline(inn).then((res) => {
+          liveFnsBtn.disabled = false;
+          liveFnsBtn.textContent = "🔍 Проверить статус по ИНН онлайн (ФНС/Saby)";
+          if (!res) {
+            showToast("⚠️ Не удалось получить ответ прокси Saby");
+            return;
+          }
+          const target = state.mergedLeads.find((x) => x.id === lid);
+          if (target) {
+            target.is_active = res.isActive;
+            target.status = res.status;
+            if (res.personName && !target.person_name) target.person_name = res.personName;
+            if (res.ogrn && !target.ogrn) target.ogrn = res.ogrn;
+            openLeadDrawer(lid);
+            renderKPIsAndAnalytics();
+            applyFiltersAndRender(false);
+          }
+          showToast(`✅ ФНС/Saby: ${res.status}`);
+        });
         return;
       }
 

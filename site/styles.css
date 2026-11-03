@@ -325,7 +325,7 @@ a:hover {
 
 .filter-row-top {
   display: grid;
-  grid-template-columns: minmax(240px, 2fr) repeat(3, minmax(160px, 1fr));
+  grid-template-columns: minmax(220px, 1.8fr) repeat(4, minmax(145px, 1fr));
   gap: 10px;
 }
 
@@ -820,3 +820,68 @@ a:hover {
   color: var(--text-muted);
   margin-bottom: 20px;
 }
+
+/* Статус организации (действующая / закрыта), часы работы и Telegram */
+.status-pill-active {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--emerald-soft);
+  color: var(--emerald);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
+.status-pill-closed {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--danger-soft);
+  color: var(--danger);
+  border: 1px solid rgba(239, 68, 68, 0.32);
+}
+
+.work-hours-line {
+  margin-top: 5px;
+  font-size: 11.5px;
+  color: var(--amber);
+  background: var(--amber-soft);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-radius: 6px;
+  padding: 3px 7px;
+  display: inline-block;
+  line-height: 1.35;
+}
+
+.tg-tag-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+
+.tg-tag-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+

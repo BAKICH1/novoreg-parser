@@ -7,7 +7,16 @@ import logging
 import re
 from typing import Any
 
-from ..models import Lead, clean_text, extract_emails, extract_phones, normalize_website
+from ..models import (
+    Lead,
+    clean_text,
+    detect_org_status_from_html,
+    extract_emails,
+    extract_phones,
+    extract_telegram,
+    extract_work_hours_from_html,
+    normalize_website,
+)
 from ..regions import resolve_region
 from .http_client import http_get_text, polite_sleep
 
@@ -79,26 +88,30 @@ ORGPAGE_CATEGORIES = [
 
 def _extract_socials(html: str) -> dict[str, str]:
     socials: dict[str, str] = {}
-    m_tg = re.search(r"https?://(?:t\.me|telegram\.me)/([a-zA-Z0-9_]{4,32})", html, re.I)
-    if m_tg and m_tg.group(1).lower() not in ("share", "joinchat", "s"):
-        socials["telegram"] = f"https://t.me/{m_tg.group(1)}"
+    tg = extract_telegram(html)
+    if tg:
+        socials["telegram"] = f"https://t.me/{tg.lstrip('@')}"
 
     m_wa = re.search(r"https?://(?:wa\.me|api\.whatsapp\.com/send\?phone=)(\d{10,15})", html, re.I)
     if m_wa:
         socials["whatsapp"] = f"https://wa.me/{m_wa.group(1)}"
 
     m_vk = re.search(r"https?://vk\.com/([a-zA-Z0-9_.\-]{3,40})", html, re.I)
-    if m_vk and m_vk.group(1).lower() not in ("share.php", "widget", "feed", "login"):
+    if m_vk and m_vk.group(1).lower() not in ("share.php", "widget", "feed", "login", "orgpage"):
         socials["vk"] = f"https://vk.com/{m_vk.group(1)}"
     return socials
 
 
 def _probe_company_site(url: str) -> dict[str, Any]:
-    """Быстрый и безопасный обход главной страницы корпоративного сайта для поиска реквизитов и телефонов."""
+    """Быстрый и безопасный обход главной страницы корпоративного сайта для поиска реквизитов, Telegram и часов работы."""
     out: dict[str, Any] = {
         "phones": [],
         "emails": [],
         "socials": {},
+        "telegram": "",
+        "work_hours": "",
+        "is_active": True,
+        "status": "Действующая",
         "inn": "",
         "ogrn": "",
         "entity_type": "",
@@ -113,12 +126,15 @@ def _probe_company_site(url: str) -> dict[str, Any]:
     out["phones"] = extract_phones(html)[:3]
     out["emails"] = extract_emails(html)[:3]
     out["socials"] = _extract_socials(html)
+    out["telegram"] = extract_telegram(html)
+    out["work_hours"] = extract_work_hours_from_html(html)
+    out["is_active"], out["status"] = detect_org_status_from_html(html, out["work_hours"])
 
     flat = clean_text(html)
-    # Если на главной странице не указаны ИНН/ИП/ООО, проверим страницу контактов/политики/оферты
-    if "ИНН" not in flat and "ОГРН" not in flat and "ИП " not in flat:
+    # Если не найдены ИНН или Telegram или часы работы — проверяем страницу контактов/реквизитов
+    if ("ИНН" not in flat and "ОГРН" not in flat) or not out["telegram"] or not out["work_hours"]:
         m_sub = re.search(
-            r'href=["\'](/(?:contacts?|rekvizit[a-z]*|privacy[a-z\-_]*|policy[a-z\-_]*|oferta[a-z\-_]*|legal|about)/?)["\']',
+            r'href=["\'](/(?:contacts?|kontakty|rekvizit[a-z]*|privacy[a-z\-_]*|policy[a-z\-_]*|oferta[a-z\-_]*|legal|about)/?)["\']',
             html,
             re.I,
         )
@@ -132,6 +148,14 @@ def _probe_company_site(url: str) -> dict[str, Any]:
                 for e in extract_emails(sub_html)[:2]:
                     if e not in out["emails"]:
                         out["emails"].append(e)
+                sub_soc = _extract_socials(sub_html)
+                for k, v in sub_soc.items():
+                    if k not in out["socials"]:
+                        out["socials"][k] = v
+                if not out["telegram"]:
+                    out["telegram"] = extract_telegram(sub_html)
+                if not out["work_hours"]:
+                    out["work_hours"] = extract_work_hours_from_html(sub_html)
             except Exception:
                 pass
 
@@ -294,6 +318,10 @@ class OpenContactsCollector:
         def enrich_one(item: dict[str, Any]) -> Lead | None:
             emails: list[str] = []
             socials: dict[str, str] = {}
+            telegram = ""
+            work_hours = ""
+            is_active = True
+            org_status = "Действующая"
             inn = ""
             ogrn = ""
             person_name = ""
@@ -305,12 +333,16 @@ class OpenContactsCollector:
             address = item["address"]
             okved_name = item["okved_name"]
 
-            # 1) Быстрая проверка карточки на Orgpage для телефонов, сайта, email и юрлица
+            # 1) Быстрая проверка карточки на Orgpage для телефонов, часов работы, статуса, сайта, email и юрлица
             try:
                 _, detail_html = http_get_text(item["card_url"], timeout=4.5, max_bytes=180_000)
                 if not phones:
                     phones.extend(extract_phones(detail_html)[:3])
                 emails.extend(extract_emails(detail_html)[:2])
+                socials.update(_extract_socials(detail_html))
+                telegram = extract_telegram(detail_html) or telegram
+                work_hours = extract_work_hours_from_html(detail_html) or work_hours
+                is_active, org_status = detect_org_status_from_html(detail_html, work_hours)
                 m_opf = re.search(r'"opf"\s*:\s*"(ИП|ООО)"', detail_html)
                 if m_opf:
                     etype = m_opf.group(1)
@@ -373,6 +405,11 @@ class OpenContactsCollector:
                     if e not in emails:
                         emails.append(e)
                 socials.update(site_info["socials"])
+                telegram = telegram or site_info.get("telegram", "")
+                work_hours = work_hours or site_info.get("work_hours", "")
+                if not site_info.get("is_active", True):
+                    is_active = False
+                    org_status = site_info.get("status", "Закрыта / не работает")
                 inn = site_info["inn"] or inn
                 ogrn = site_info["ogrn"] or ogrn
                 if site_info["entity_type"]:
@@ -428,6 +465,10 @@ class OpenContactsCollector:
                 emails=emails[:3],
                 websites=[site_url] if site_url else [],
                 socials=socials,
+                status=org_status,
+                is_active=is_active,
+                work_hours=work_hours,
+                telegram=telegram,
                 sources=sources,
             ).finalize()
 

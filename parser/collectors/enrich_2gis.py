@@ -43,7 +43,7 @@ class TwoGisEnricher:
             q = f"{clean_brand} {city_hint}".strip()
             params = urllib.parse.urlencode({
                 "q": q,
-                "fields": "items.contact_groups,items.address_name",
+                "fields": "items.contact_groups,items.address_name,items.schedule",
                 "page_size": "3",
                 "key": self.api_key,
             })
@@ -56,6 +56,17 @@ class TwoGisEnricher:
                     continue
 
                 top = items[0]
+                sched = top.get("schedule") or {}
+                if isinstance(sched, dict) and not lead.work_hours:
+                    comment = str(sched.get("comment") or "").strip()
+                    if sched.get("is_24x7"):
+                        lead.work_hours = "Круглосуточно (24/7)"
+                    elif comment:
+                        lead.work_hours = comment[:160]
+                    else:
+                        mon = (sched.get("Mon") or {}).get("working_hours") or []
+                        if mon and isinstance(mon, list) and mon[0].get("from") and mon[0].get("to"):
+                            lead.work_hours = f"Пн-Пт: {mon[0]['from']}-{mon[0]['to']}"
                 before = len(lead.phones)
                 for group in top.get("contact_groups") or []:
                     for c in group.get("contacts") or []:

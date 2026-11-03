@@ -69,14 +69,14 @@
           <div class="kpi-sub" id="kpi-phone-rate">Конверсия контактов: 0%</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">Мобильные (+7 9XX) / Email</div>
-          <div class="kpi-value" id="kpi-mobile">0</div>
-          <div class="kpi-sub" id="kpi-email-site">Email: 0 • Сайтов: 0</div>
+          <div class="kpi-label">Telegram у владельцев / компаний</div>
+          <div class="kpi-value" id="kpi-mobile" style="color: var(--accent)">0</div>
+          <div class="kpi-sub" id="kpi-email-site">✈️ @Telegram: 0 • 📱 По номеру: 0</div>
         </div>
         <div class="kpi-card">
-          <div class="kpi-label">География и режим сбора</div>
+          <div class="kpi-label">Статус и часы работы</div>
           <div class="kpi-value" id="kpi-regions">0 рег.</div>
-          <div class="kpi-sub" id="kpi-runs">Конвейер 2-в-1 • Автообновление</div>
+          <div class="kpi-sub" id="kpi-runs">🕒 График: 0 • Действующих: 0</div>
         </div>
       </div>
 
@@ -86,13 +86,18 @@
             type="search"
             id="f-search"
             class="input-control"
-            placeholder="Поиск по названию, ИНН, ОГРН/ОГРНИП, ФИО директора/ИП, городу или телефону (+7…)"
+            placeholder="Поиск по названию, ИНН, @telegram, часам работы, городу или телефону (+7…)"
           />
           <select id="f-region" class="select-control" aria-label="Регион РФ">
             <option value="">Все регионы РФ</option>
           </select>
           <select id="f-category" class="select-control" aria-label="Отрасль ОКВЭД">
             <option value="">Все отрасли ОКВЭД</option>
+          </select>
+          <select id="f-org-status" class="select-control" aria-label="Статус работы организации">
+            <option value="">Все по статусу работы</option>
+            <option value="active">🟢 Только действующие (не закрыты)</option>
+            <option value="closed">🔴 Закрытые / не работают</option>
           </select>
           <select id="f-crm" class="select-control" aria-label="Статус обзвона CRM">
             <option value="">Все CRM-статусы</option>
@@ -115,9 +120,10 @@
             <div class="segmented-group" id="seg-contact" role="group" aria-label="Наличие контактов">
               <button type="button" class="seg-btn active" data-val="">Все карточки</button>
               <button type="button" class="seg-btn" data-val="phone">📞 С телефоном</button>
-              <button type="button" class="seg-btn" data-val="mobile">📱 Мобильный +7(9…)</button>
+              <button type="button" class="seg-btn" data-val="telegram">✈️ Есть Telegram (@)</button>
+              <button type="button" class="seg-btn" data-val="mobile">📱 TG / Моб. +7(9…)</button>
+              <button type="button" class="seg-btn" data-val="hours">🕒 С часами работы</button>
               <button type="button" class="seg-btn" data-val="email">✉️ С Email</button>
-              <button type="button" class="seg-btn" data-val="site">🌐 С сайтом</button>
             </div>
 
             <select id="f-sort" class="select-control" style="width: auto;" aria-label="Сортировка">
@@ -153,12 +159,12 @@
         <table class="leads-table">
           <thead>
             <tr>
-              <th>Компания / ИП и реквизиты</th>
+              <th>Компания / ИП и статус</th>
               <th>Дата рег.</th>
-              <th>Регион и адрес</th>
+              <th>Регион, адрес и часы работы</th>
               <th>Отрасль / ОКВЭД</th>
               <th>Руководитель / ИП</th>
-              <th>Телефоны и контакты</th>
+              <th>Телефоны, Telegram и контакты</th>
               <th>Источник (2-в-1)</th>
               <th>CRM-статус</th>
             </tr>

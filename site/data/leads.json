@@ -1,7 +1,489 @@
 {
-  "generated_at": "2026-11-02T09:25:49Z",
-  "count": 264,
+  "generated_at": "2026-11-03T07:32:45Z",
+  "count": 277,
   "leads": [
+    {
+      "id": "orgpage-6193069",
+      "entity_type": "ООО",
+      "name": "ООО \"СЭПИР\"",
+      "full_name": "ООО \"СЭПИР\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "64",
+      "region_name": "Саратовская область",
+      "address": "Саратовская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Саратов",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (845) 275-50-13",
+        "+7 (900) 310-00-25",
+        "+7 (929) 967-53-82"
+      ],
+      "emails": [
+        "info@sepir.ru"
+      ],
+      "websites": [
+        "https://sepir.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/sepir_ru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:00-19:00; Сб-Вс: 9:00-16:00",
+      "telegram": "@sepir_ru",
+      "telegram_status": "verified",
+      "telegram_phone": "+79003100025",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:32:04Z"
+    },
+    {
+      "id": "orgpage-6206821",
+      "entity_type": "ООО",
+      "name": "ООО \"Официальные потолки\"",
+      "full_name": "ООО \"Официальные потолки\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "64",
+      "region_name": "Саратовская область",
+      "address": "Саратовская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Саратов",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (902) 710-24-64",
+        "+7 (845) 240-24-64",
+        "+7 (845) 237-47-79"
+      ],
+      "emails": [
+        "natygnoi.offis6@yandex.ru"
+      ],
+      "websites": [
+        "https://potolok-official.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/OfficialPotolokSaratov",
+        "whatsapp": "https://wa.me/79085550714",
+        "vk": "https://vk.com/potolok_official"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 8:00-17:00",
+      "telegram": "@OfficialPotolokSaratov",
+      "telegram_status": "verified",
+      "telegram_phone": "+79027102464",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:32:02Z"
+    },
+    {
+      "id": "orgpage-6206982",
+      "entity_type": "ООО",
+      "name": "ООО \"Время переезда\"",
+      "full_name": "ООО \"Время переезда\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "64",
+      "region_name": "Саратовская область",
+      "address": "Саратовская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Саратов",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (961) 677-26-77",
+        "+7 (927) 277-90-64",
+        "+7 (845) 225-51-66"
+      ],
+      "emails": [
+        "expert_logistik_34@mail.ru"
+      ],
+      "websites": [
+        "https://vremapereezda.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79616772677",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:32:01Z"
+    },
+    {
+      "id": "orgpage-6148969",
+      "entity_type": "ООО",
+      "name": "ООО \"Персонал+\"",
+      "full_name": "ООО \"Персонал+\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "64",
+      "region_name": "Саратовская область",
+      "address": "Саратовская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Саратов",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (924) 003-57-32",
+        "+7 (845) 245-96-01",
+        "+7 (845) 250-66-18",
+        "+7 (914) 650-41-70"
+      ],
+      "emails": [
+        "info@personal-dv.ru"
+      ],
+      "websites": [
+        "https://personal-dv.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:32:00Z"
+    },
+    {
+      "id": "orgpage-6207908",
+      "entity_type": "ИП",
+      "name": "ИП Семенов Александр Владимирович",
+      "full_name": "ИП Семенов Александр Владимирович",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "64",
+      "region_name": "Саратовская область",
+      "address": "Саратовская область",
+      "person_name": "Семенов Александр Владимирович",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Саратов",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (845) 271-12-22",
+        "+7 (929) 967-53-82",
+        "+7 (845) 356-90-63",
+        "+7 (845) 271-14-44"
+      ],
+      "emails": [
+        "info@easat.ru"
+      ],
+      "websites": [
+        "https://easat.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79299675382",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:32:00Z"
+    },
+    {
+      "id": "orgpage-6207513",
+      "entity_type": "ИП",
+      "name": "ИП Система Выравнивания Плитки",
+      "full_name": "ИП Система Выравнивания Плитки",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "64",
+      "region_name": "Саратовская область",
+      "address": "Саратовская область",
+      "person_name": "Система Выравнивания Плитки",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Саратов",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (987) 834-12-08",
+        "+7 (845) 249-53-52"
+      ],
+      "emails": [
+        "ultramarin1003@rambler.ru",
+        "rating@mail.ru"
+      ],
+      "websites": [
+        "https://svp164.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/svpru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79878341208",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:32:00Z"
+    },
+    {
+      "id": "orgpage-6207757",
+      "entity_type": "ООО",
+      "name": "ООО \"Бизнес партнер\"",
+      "full_name": "ООО \"Бизнес партнер\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "34",
+      "region_name": "Волгоградская область",
+      "address": "Волгоградская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Волгоград",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (844) 245-95-83"
+      ],
+      "emails": [
+        "manager@logist34.ru",
+        "0073fa61d3b26ade8aab3e1d4d094fcd@sentry.holdingbp.ru"
+      ],
+      "websites": [
+        "https://logist34.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:31:57Z"
+    },
+    {
+      "id": "orgpage-6206356",
+      "entity_type": "ООО",
+      "name": "ООО \"Волгопромпласт\"",
+      "full_name": "ООО \"Волгопромпласт\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "34",
+      "region_name": "Волгоградская область",
+      "address": "Волгоградская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Волгоград",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (937) 560-85-06",
+        "+7 (844) 259-33-51",
+        "+7 (844) 254-70-00",
+        "+7 (903) 468-32-99"
+      ],
+      "emails": [
+        "emk-avto@mail.ru"
+      ],
+      "websites": [
+        "https://emk34.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Ежедневно с 9:00-18:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79375608506",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:31:57Z"
+    },
+    {
+      "id": "orgpage-6204462",
+      "entity_type": "ООО",
+      "name": "ООО \"TenderAI\"",
+      "full_name": "ООО \"TenderAI\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "34",
+      "region_name": "Волгоградская область",
+      "address": "Волгоградская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Волгоград",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (961) 077-88-87",
+        "+7 (844) 290-01-99",
+        "+7 (844) 298-07-24"
+      ],
+      "emails": [
+        "support@tender-ai.tech"
+      ],
+      "websites": [
+        "https://tender-ai.tech"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79610778887",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:31:57Z"
+    },
+    {
+      "id": "orgpage-6148892",
+      "entity_type": "ООО",
+      "name": "ООО \"Персонал+\"",
+      "full_name": "ООО \"Персонал+\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "34",
+      "region_name": "Волгоградская область",
+      "address": "Волгоградская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Волгоград",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (924) 003-57-32",
+        "+7 (844) 226-78-65",
+        "+7 (844) 355-02-48",
+        "+7 (914) 650-41-70"
+      ],
+      "emails": [
+        "info@personal-dv.ru"
+      ],
+      "websites": [
+        "https://personal-dv.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:31:56Z"
+    },
+    {
+      "id": "orgpage-5383309",
+      "entity_type": "ООО",
+      "name": "ООО \"Вуокса Тур\"",
+      "full_name": "ООО \"Вуокса Тур\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-03",
+      "region_code": "47",
+      "region_name": "Ленинградская область",
+      "address": "Ленинградская область, Приозерск, Мельниково",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "79.11",
+      "okved_name": "Водные походы по Вуоксе на каяках",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (952) 208-46-02"
+      ],
+      "emails": [
+        "vuoksatravel.ru@yandex.ru"
+      ],
+      "websites": [
+        "https://vuoksatravel.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79522084602",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:31:26Z"
+    },
     {
       "id": "orgpage-2513242",
       "entity_type": "ООО",
@@ -37,7 +519,12 @@
         "vk": "https://vk.com/chersonese"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@chersonese92",
+      "telegram_status": "verified",
+      "telegram_phone": "+79780713171",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -73,7 +560,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -109,7 +601,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79288840202",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -146,7 +643,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "ПН - ПТ 08.00 - 19.00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -182,7 +684,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -218,7 +725,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79255560688",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -257,7 +769,12 @@
         "vk": "https://vk.com/an_dan_nedvizhimost"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "пн-пт 9:00 - 19:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -293,7 +810,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79272456247",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -329,7 +851,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79294757099",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -366,7 +893,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -402,7 +934,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -438,7 +975,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -477,7 +1019,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79681827190",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -513,7 +1060,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79882461006",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -551,7 +1103,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00 - 21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79267513714",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -587,7 +1144,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -623,7 +1185,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79111099337",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -659,7 +1226,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79384255550",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -693,7 +1265,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -729,7 +1306,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -765,7 +1347,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -799,7 +1386,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -836,7 +1428,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -877,7 +1474,12 @@
         "vk": "https://vk.com/bestremproekt"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -913,7 +1515,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79254886044",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -949,7 +1556,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -962,14 +1574,14 @@
       "entity_type": "ООО",
       "name": "ООО \"Santehniks.ru\"",
       "full_name": "ООО \"Santehniks.ru\"",
-      "inn": "",
-      "ogrn": "",
+      "inn": "772327292888",
+      "ogrn": "306770000190323",
       "kpp": "",
       "reg_date": "2026-11-02",
       "region_code": "77",
       "region_name": "г. Москва",
       "address": "Москва, г. Котельники, микрорайон Белая Дача, промзона Технопром. 15 км. МКАД (внешняя сторона),1.5 км. от развязки Дзержинский-Капотня, далее съезд со МКАД (после автосалона BMW), возле АЗС налево и далее по дороге до промзоны Технопром",
-      "person_name": "",
+      "person_name": "Еремина Любовь Евгеньевна",
       "person_role": "Генеральный директор",
       "okved_code": "43.39",
       "okved_name": "Магазин сантехники и мебели для ванных комнат",
@@ -988,10 +1600,16 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 09:00 - 18:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79291375309",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-02T09:20:42Z"
@@ -1029,7 +1647,12 @@
         "vk": "https://vk.com/oknarosta"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Ежедневно с 9:00-21:00",
+      "telegram": "@okna_rosta_bot",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1065,7 +1688,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1107,7 +1735,12 @@
         "vk": "https://vk.com/rtrg"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 08:30: 18:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79857649519",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1141,7 +1774,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1177,7 +1815,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1213,7 +1856,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1249,7 +1897,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1284,7 +1937,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79184017420",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1320,7 +1978,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79531474010",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1356,7 +2019,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1392,7 +2060,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1428,7 +2101,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79528502010",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1465,7 +2143,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79295510505",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1504,7 +2187,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79254757952",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1540,7 +2228,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1577,7 +2270,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1609,7 +2307,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -1640,7 +2343,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -1675,7 +2383,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1709,7 +2422,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79610269292",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1745,7 +2463,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1781,7 +2504,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1817,7 +2545,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1851,7 +2584,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-22:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79879157800",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1887,7 +2625,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-22:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79250080833",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1921,7 +2664,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79627065837",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1960,7 +2708,12 @@
         "vk": "https://vk.com/spbskyspace"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 11:00-4:00",
+      "telegram": "@PenthousePodnebesnaya",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -1996,7 +2749,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2033,7 +2791,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "с 8:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79687510008",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2067,7 +2830,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79854369876",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2104,7 +2872,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-пт 08:00-20:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79610269292",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2141,7 +2914,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пт-Сб: 19:00-6:00; Пн-Чт, Вс: 20:00-6:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79459957150",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2177,7 +2955,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-22:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79534202579",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2215,7 +2998,12 @@
         "vk": "https://vk.com/airsoftmax_rnd"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79287708834",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2251,7 +3039,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 18:00-20:30; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79534543188",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2287,7 +3080,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 11:00-24:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2323,7 +3121,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79158667333",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2359,7 +3162,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Сб: 10:00-19:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2391,7 +3199,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -2404,13 +3217,13 @@
       "name": "ООО \"Арена Морозово\"",
       "full_name": "ООО \"Арена Морозово\"",
       "inn": "7722760564",
-      "ogrn": "",
+      "ogrn": "1117746889590",
       "kpp": "",
       "reg_date": "2026-11-02",
       "region_code": "77",
       "region_name": "г. Москва",
       "address": "Москва, ул. Новоостаповская, д. 5",
-      "person_name": "",
+      "person_name": "Шишонин Евгений Александрович",
       "person_role": "Генеральный директор",
       "okved_code": "93.13",
       "okved_name": "Ледовый комплекс Арена Морозово",
@@ -2432,54 +3245,19 @@
         "vk": "https://vk.com/arenamorozovo"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Пт, Вс: 6:00-0:00; Сб: 6:00-5:00",
+      "telegram": "@sportkub1",
+      "telegram_status": "verified",
+      "telegram_phone": "+79670543827",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-02T09:20:14Z"
-    },
-    {
-      "id": "orgpage-2563463",
-      "entity_type": "ИП",
-      "name": "ИП Кашапов Марсель Халитович",
-      "full_name": "ИП Кашапов Марсель Халитович",
-      "inn": "",
-      "ogrn": "",
-      "kpp": "",
-      "reg_date": "2026-11-02",
-      "region_code": "77",
-      "region_name": "г. Москва",
-      "address": "Москва, ул. Симоновский Вал, д. 3",
-      "person_name": "Кашапов Марсель Халитович",
-      "person_role": "Индивидуальный предприниматель",
-      "okved_code": "93.13",
-      "okved_name": "Продажа спорттоваров и тренажеров",
-      "okved_category": "Образование, медицина, сервис",
-      "phones": [
-        "+7 (495) 120-15-97",
-        "+7 (958) 510-85-17",
-        "+7 (910) 675-33-67"
-      ],
-      "emails": [
-        "sale@01sport.ru"
-      ],
-      "websites": [
-        "https://01sport.ru"
-      ],
-      "socials": {
-        "telegram": "https://t.me/begovaya_dorozhka_kupit",
-        "vk": "https://vk.com/01sportru"
-      },
-      "capital": "",
-      "status": "Действующее",
-      "sources": [
-        "Открытый каталог РФ",
-        "Сайт компании"
-      ],
-      "has_phone": true,
-      "parsed_at": "2026-11-02T09:20:13Z"
     },
     {
       "id": "orgpage-5568296",
@@ -2509,7 +3287,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-18:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2541,7 +3324,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 16:00-21:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -2581,10 +3369,16 @@
         "vk": "https://vk.com/sportempschool"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-21:00",
+      "telegram": "@sportempp",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-02T09:20:12Z"
@@ -2619,7 +3413,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "пн-вс 07.00-23.00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2655,7 +3454,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-22:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79255606949",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2696,7 +3500,12 @@
         "vk": "https://vk.com/rtrg"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "пн 11:00 - 21:00; вт 11:00 - 21:00; ср 11:00 - 21:00; чт 11:00 - 21:00; пт 11:00 - 21:00; сб 11:00 - 21:00; вс 11:00 - 21:00 по предварительной записи",
+      "telegram": "@kiberfokslt",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2730,7 +3539,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-18:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2768,7 +3582,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79002120523",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2807,7 +3626,12 @@
         "vk": "https://vk.com/ocharovanieshaping"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-21:00; Сб: 10:00-12:00; Вс: выходной",
+      "telegram": "@charmsportsclub",
+      "telegram_status": "verified",
+      "telegram_phone": "+79850626107",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2839,7 +3663,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79104028863",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -2876,7 +3705,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "7.00-24.00, сб, вс 8.00-24.00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2912,7 +3746,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Сб: 9:00-19:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2948,7 +3787,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -2985,7 +3829,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3019,7 +3868,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-20:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3055,7 +3909,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3091,7 +3950,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3127,7 +3991,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-24:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79257133301",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3163,7 +4032,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 11:00-24:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3204,7 +4078,12 @@
         "telegram": "https://t.me/restoran_berendey"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "11.00-24.00",
+      "telegram": "@restoran_berendey",
+      "telegram_status": "verified",
+      "telegram_phone": "+79269932065",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3240,7 +4119,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 11:00-23:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79219047997",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3254,13 +4138,13 @@
       "name": "ООО \"МАРИ-МР\"",
       "full_name": "ООО \"МАРИ-МР\"",
       "inn": "7743000476",
-      "ogrn": "",
+      "ogrn": "1037739664192",
       "kpp": "",
       "reg_date": "2026-11-02",
       "region_code": "77",
       "region_name": "г. Москва",
       "address": "Москва, ул. Планерная, д. 12",
-      "person_name": "",
+      "person_name": "Исламов Маис Мурсал оглы",
       "person_role": "Генеральный директор",
       "okved_code": "56.10",
       "okved_name": "Вкус гостеприимства",
@@ -3278,10 +4162,16 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Ежедневно с 11:00: 02:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79671173300",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-02T09:19:55Z"
@@ -3312,7 +4202,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79207976969",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3350,7 +4245,12 @@
         "vk": "https://vk.com/restoranmeridian"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Ежедневно с 12:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79250360785",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3385,7 +4285,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "пн 12:00 - 00:00; вт 12:00 - 00:00; ср 12:00 - 00:00; чт 12:00 - 00:00; пт 12:00 - 02:00; сб 12:00 - 02:00; вс 12:00 - 00:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79296484945",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3423,7 +4328,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00 - 19:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3457,7 +4367,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Чт, Вс: 11:00-0:00; Пт-Сб: 11:00-1:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3493,7 +4408,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-19:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79213720008",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3534,7 +4454,12 @@
         "vk": "https://vk.com/verba_mayr"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@verba_mayr",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3570,7 +4495,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3606,7 +4536,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-20:00; Сб: 11:00-18:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3642,7 +4577,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-19:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3680,7 +4620,12 @@
         "vk": "https://vk.com/rtrg"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-19:00; Сб: 11:00-17:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3716,7 +4661,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79647907152",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3752,7 +4702,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-20:30",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3790,7 +4745,12 @@
         "vk": "https://vk.com/club69047918"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 11:00-19:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3822,7 +4782,8 @@
         "+7 (916) 218-96-87"
       ],
       "emails": [
-        "lavanda-azov@ya.ru"
+        "lavanda-azov@ya.ru",
+        "lavanda151@yandex.ru"
       ],
       "websites": [
         "https://lavanda-azov.ru"
@@ -3832,7 +4793,12 @@
         "vk": "https://vk.com/lavandaazov"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Временно не работает",
+      "is_active": false,
+      "work_hours": "Пн-Вс: выходной",
+      "telegram": "@LavandaAzov",
+      "telegram_status": "verified",
+      "telegram_phone": "+79881319996",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3873,7 +4839,12 @@
         "vk": "https://vk.com/meridian_tur"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "11.00-18.00, сб, вс - вых",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79652277495",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3905,7 +4876,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -3941,7 +4917,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 12 - 19; Сб: 12 - 16; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -3977,7 +4958,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Сб: 8:00-17:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4013,7 +4999,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 11:00-19:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4052,7 +5043,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79326076684",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4072,7 +5068,7 @@
       "region_code": "23",
       "region_name": "Краснодарский край",
       "address": "Краснодарский край",
-      "person_name": "",
+      "person_name": "Иванников Александр Сергеевич",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Краснодар",
@@ -4090,10 +5086,16 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79182509060",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T09:01:58Z"
@@ -4128,7 +5130,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн: Пт с 11:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79003888889",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4142,7 +5149,7 @@
       "name": "ИП Малейко Е",
       "full_name": "ИП Малейко Е",
       "inn": "616300533229",
-      "ogrn": "",
+      "ogrn": "324619600246804",
       "kpp": "",
       "reg_date": "2026-11-01",
       "region_code": "61",
@@ -4168,10 +5175,16 @@
         "telegram": "https://t.me/MEBELFORM_RU"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@MEBELFORM_RU",
+      "telegram_status": "verified",
+      "telegram_phone": "+79000218002",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T09:01:56Z"
@@ -4205,7 +5218,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4242,7 +5260,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79999898001",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4262,7 +5285,7 @@
       "region_code": "40",
       "region_name": "Калужская область",
       "address": "г. Москва",
-      "person_name": "",
+      "person_name": "Салахов Марат Марсович",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Таганский",
@@ -4283,10 +5306,16 @@
         "vk": "https://vk.com/lyukergrup"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Пт: с 9:00-18:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:36:44Z"
@@ -4303,7 +5332,7 @@
       "region_code": "77",
       "region_name": "г. Москва",
       "address": "г. Москва",
-      "person_name": "",
+      "person_name": "Бабаян Гарик Вагеевич",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Даниловский",
@@ -4323,10 +5352,16 @@
         "telegram": "https://t.me/fabricaucheta"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@fabricaucheta",
+      "telegram_status": "verified",
+      "telegram_phone": "+79991234567",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:36:43Z"
@@ -4362,10 +5397,16 @@
         "telegram": "https://t.me/tekstomat"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@tekstomat",
+      "telegram_status": "verified",
+      "telegram_phone": "+79271723329",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:36:43Z"
@@ -4389,7 +5430,9 @@
       "okved_category": "Прочие виды деятельности",
       "phones": [
         "+7 (345) 239-31-69",
-        "+7 (345) 253-58-58"
+        "+7 (345) 253-58-58",
+        "+7 (345) 261-05-20",
+        "+7 (800) 333-55-77"
       ],
       "emails": [
         "akvelit@list.ru"
@@ -4399,7 +5442,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-17:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4419,7 +5467,7 @@
       "region_code": "72",
       "region_name": "Тюменская область",
       "address": "Тюменская область",
-      "person_name": "",
+      "person_name": "Хренов Олег Сергеевич",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Тюмень",
@@ -4427,7 +5475,10 @@
       "phones": [
         "+7 (961) 207-93-21",
         "+7 (345) 246-29-68",
-        "+7 (843) 731-57-02"
+        "+7 (843) 731-57-02",
+        "+7 (800) 333-25-44",
+        "+7 (345) 256-95-56",
+        "+7 (345) 260-60-88"
       ],
       "emails": [
         "dekorf1@yandex.ru",
@@ -4439,10 +5490,16 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Сб-Вс: 9:00-18:00; Пн, Вт, Ср, Чт, Пт: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79612079321",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:36:41Z"
@@ -4477,7 +5534,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-22:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79044999296",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4491,7 +5553,7 @@
       "name": "ООО \"Школа сварки\"",
       "full_name": "ООО \"Школа сварки\"",
       "inn": "",
-      "ogrn": "",
+      "ogrn": "317554300007100",
       "kpp": "",
       "reg_date": "2026-11-01",
       "region_code": "72",
@@ -4504,7 +5566,10 @@
       "okved_category": "Прочие виды деятельности",
       "phones": [
         "+7 (906) 993-94-95",
-        "+7 (345) 258-50-06"
+        "+7 (345) 258-50-06",
+        "+7 (922) 261-03-23",
+        "+7 (800) 770-72-19",
+        "+7 (922) 004-06-79"
       ],
       "emails": [
         "svarka72uslugi@yandex.ru"
@@ -4512,9 +5577,16 @@
       "websites": [
         "https://школа-сварки.рф"
       ],
-      "socials": {},
+      "socials": {
+        "vk": "https://vk.com/video_ext.php"
+      },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-17:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79069939495",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4541,7 +5613,9 @@
       "okved_category": "Прочие виды деятельности",
       "phones": [
         "+7 (342) 264-01-42",
-        "+7 (342) 293-65-65"
+        "+7 (342) 293-65-65",
+        "+7 (342) 204-05-37",
+        "+7 (342) 298-99-59"
       ],
       "emails": [
         "zagorodom.pro@mail.ru"
@@ -4553,7 +5627,12 @@
         "telegram": "https://t.me/zagorodom59"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "@zagorodom59",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4581,7 +5660,9 @@
       "phones": [
         "+7 (924) 003-57-32",
         "+7 (345) 261-59-64",
-        "+7 (914) 650-41-70"
+        "+7 (914) 650-41-70",
+        "+7 (345) 260-03-72",
+        "+7 (345) 294-37-00"
       ],
       "emails": [
         "info@personal-dv.ru"
@@ -4591,7 +5672,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4605,13 +5691,13 @@
       "name": "ООО \"Сфайрос\"",
       "full_name": "ООО \"Сфайрос\"",
       "inn": "5904062539",
-      "ogrn": "",
+      "ogrn": "1025901218551",
       "kpp": "",
       "reg_date": "2026-11-01",
       "region_code": "59",
       "region_name": "Пермский край",
       "address": "Пермский край",
-      "person_name": "",
+      "person_name": "Блинов Артем Витальевич",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Пермь",
@@ -4630,10 +5716,16 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:36:39Z"
@@ -4644,13 +5736,13 @@
       "name": "ООО \"Артстрой\"",
       "full_name": "ООО \"Артстрой\"",
       "inn": "5904345745",
-      "ogrn": "",
+      "ogrn": "1165958122725",
       "kpp": "",
       "reg_date": "2026-11-01",
       "region_code": "59",
       "region_name": "Пермский край",
       "address": "Пермский край",
-      "person_name": "",
+      "person_name": "Туровец Алексей Константинович",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Пермь",
@@ -4658,7 +5750,9 @@
       "phones": [
         "+7 (342) 259-04-66",
         "+7 (342) 203-71-70",
-        "+7 (342) 259-30-37"
+        "+7 (342) 259-30-37",
+        "+7 (342) 257-00-90",
+        "+7 (342) 218-12-15"
       ],
       "emails": [
         "info@jur-perm.ru"
@@ -4670,10 +5764,16 @@
         "telegram": "https://t.me/jur_perm"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн: Пт с 9:00-19:00",
+      "telegram": "@jur_perm",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:36:38Z"
@@ -4697,7 +5797,9 @@
       "okved_category": "Прочие виды деятельности",
       "phones": [
         "+7 (922) 006-99-32",
-        "+7 (345) 238-35-56"
+        "+7 (345) 238-35-56",
+        "+7 (345) 260-16-26",
+        "+7 (345) 274-08-38"
       ],
       "emails": [
         "teoriyaotryvatumen@gmail.com"
@@ -4705,7 +5807,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79220069932",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -4732,7 +5839,9 @@
       "phones": [
         "+7 (924) 003-57-32",
         "+7 (342) 257-11-22",
-        "+7 (914) 650-41-70"
+        "+7 (914) 650-41-70",
+        "+7 (342) 270-01-19",
+        "+7 (342) 204-16-05"
       ],
       "emails": [
         "info@personal-dv.ru"
@@ -4742,7 +5851,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4769,7 +5883,9 @@
       "okved_category": "Прочие виды деятельности",
       "phones": [
         "+7 (342) 299-48-31",
-        "+7 (342) 271-75-05"
+        "+7 (342) 271-75-05",
+        "+7 (342) 236-50-90",
+        "+7 (342) 202-14-33"
       ],
       "emails": [
         "manager@permtransport.ru",
@@ -4780,7 +5896,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Круглосуточно (24/7)",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4807,7 +5928,9 @@
       "okved_category": "Прочие виды деятельности",
       "phones": [
         "+7 (342) 206-26-69",
-        "+7 (912) 495-92-64"
+        "+7 (912) 495-92-64",
+        "+7 (342) 244-64-53",
+        "+7 (342) 270-02-07"
       ],
       "emails": [
         "isaloni-perm@mail.ru"
@@ -4817,7 +5940,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-19:00; Сб: 11:00-17:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79124959264",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4855,7 +5983,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн: Пт: с 9:00-18:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4897,7 +6030,12 @@
         "vk": "https://vk.com/opticvrn"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79102866313",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4937,7 +6075,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -4975,7 +6118,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Круглосуточно (24/7)",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79321000627",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5012,7 +6160,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79601276397",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5051,7 +6204,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79003079233",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5090,7 +6248,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5130,7 +6293,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Круглосуточно (24/7)",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5170,10 +6338,16 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "пн-пт 08:00-19:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79625283474",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:11:07Z"
@@ -5210,7 +6384,12 @@
         "vk": "https://vk.com/singhere"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79504060666",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5249,7 +6428,12 @@
         "telegram": "https://t.me/seo_yes"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@seo_yes",
+      "telegram_status": "verified",
+      "telegram_phone": "+79135981015",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5288,7 +6472,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79130302564",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5326,9 +6515,16 @@
       "websites": [
         "https://ortodont-ufa.ru"
       ],
-      "socials": {},
+      "socials": {
+        "telegram": "https://t.me/dr_gelmutdinova"
+      },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@dr_gelmutdinova",
+      "telegram_status": "verified",
+      "telegram_phone": "+79150662373",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5367,7 +6563,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5407,7 +6608,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79659393931",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5443,7 +6649,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5481,7 +6692,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79512545454",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5521,7 +6737,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5562,7 +6783,12 @@
         "vk": "https://vk.com/video_ext.php"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5602,7 +6828,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5637,7 +6868,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -5676,11 +6912,14 @@
       "websites": [
         "https://vbeluyu.ru"
       ],
-      "socials": {
-        "telegram": "https://t.me/chetko_163"
-      },
+      "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79272093041",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5720,7 +6959,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Круглосуточно (24/7)",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79372057996",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5759,7 +7003,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Круглосуточно (24/7)",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79297053757",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5799,7 +7048,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5833,7 +7087,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5876,7 +7135,12 @@
         "vk": "https://vk.com/region_expert"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@gotovi_k_rostehnadzory",
+      "telegram_status": "verified",
+      "telegram_phone": "+79022902506",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5915,7 +7179,12 @@
         "vk": "https://vk.com/skoro_hot_anapa"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79180576767",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5956,7 +7225,12 @@
         "vk": "https://vk.com/dogself"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@dogself",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -5993,7 +7267,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79166414100",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6030,7 +7309,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79642589450",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -6064,7 +7348,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79062433901",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6100,7 +7389,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79083234222",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6132,7 +7426,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ"
       ],
@@ -6168,7 +7467,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79885073515",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6205,7 +7509,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79034000419",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6246,7 +7555,12 @@
         "telegram": "https://t.me/dostigatorBond"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн: Пт 09:00: 18:00",
+      "telegram": "@dostigatorBond",
+      "telegram_status": "verified",
+      "telegram_phone": "+79996984906",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6281,7 +7595,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6323,7 +7642,12 @@
         "vk": "https://vk.com/dv_bani_nn"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@dom_voevody",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6358,7 +7682,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6398,7 +7727,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6433,7 +7767,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79618509655",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6470,7 +7809,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79200713212",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6508,7 +7852,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79308088400",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6548,7 +7897,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Круглосуточно (24/7)",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6583,9 +7937,16 @@
       "websites": [
         "https://покадолгам.рф"
       ],
-      "socials": {},
+      "socials": {
+        "telegram": "https://t.me/pokadolgamru"
+      },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@pokadolgamru",
+      "telegram_status": "verified",
+      "telegram_phone": "+79196893575",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6622,7 +7983,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79939931030",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6663,7 +8029,12 @@
         "telegram": "https://t.me/antonkungurtsev"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@antonkungurtsev",
+      "telegram_status": "verified",
+      "telegram_phone": "+79600566536",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6703,7 +8074,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79874177172",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6745,7 +8121,12 @@
         "telegram": "https://t.me/krepipro"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@krepipro",
+      "telegram_status": "verified",
+      "telegram_phone": "+79018007007",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6780,7 +8161,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6820,7 +8206,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Круглосуточно (24/7)",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6852,7 +8243,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6888,7 +8284,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79172885126",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6930,7 +8331,12 @@
         "telegram": "https://t.me/alibabacarsru"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@alibabacarsru",
+      "telegram_status": "verified",
+      "telegram_phone": "+79625714374",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -6974,7 +8380,12 @@
         "vk": "https://vk.com/akimbo_kzn"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "ежедневно с 9:00-22:00",
+      "telegram": "@akimbo_fitnes",
+      "telegram_status": "verified",
+      "telegram_phone": "+79735943523",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7014,7 +8425,12 @@
         "telegram": "https://t.me/ussrfitnes_bot"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@ussrfitnes_bot",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7054,7 +8470,12 @@
         "telegram": "https://t.me/varvaravcadre"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@varvaravcadre",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7093,7 +8514,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7136,7 +8562,12 @@
         "vk": "https://vk.com/pvonline_official"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@praonline",
+      "telegram_status": "verified",
+      "telegram_phone": "+79139258674",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7172,7 +8603,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7208,7 +8644,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7244,7 +8685,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7284,7 +8730,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79169300737",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7320,7 +8771,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79693479454",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7355,7 +8811,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7391,7 +8852,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79852618565",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7425,7 +8891,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79277002626",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7461,7 +8932,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79220343750",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7500,7 +8976,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7537,7 +9018,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79923316357",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7575,7 +9061,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7613,7 +9104,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7652,7 +9148,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7691,7 +9192,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79628513538",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7731,7 +9237,12 @@
         "telegram": "https://t.me/vibeanton"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@vibeanton",
+      "telegram_status": "verified",
+      "telegram_phone": "+79180995514",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7766,7 +9277,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7801,7 +9317,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79182509060",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7836,7 +9357,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7873,11 +9399,14 @@
       "websites": [
         "https://studiocast.ru"
       ],
-      "socials": {
-        "telegram": "https://t.me/dst_sro"
-      },
+      "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79219085634",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7915,7 +9444,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79112958900",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7956,7 +9490,12 @@
         "vk": "https://vk.com/hauska_ru"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@ScandicStyleGroup_bot",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -7990,7 +9529,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79697260642",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8032,7 +9576,12 @@
         "vk": "https://vk.com/public68359678"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "ПН-ВС: 9:00 - 20:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79299314500",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8070,7 +9619,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79255423131",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8083,14 +9637,14 @@
       "entity_type": "ООО",
       "name": "ООО \"NIKSYOU\"",
       "full_name": "ООО \"NIKSYOU\"",
-      "inn": "",
-      "ogrn": "",
+      "inn": "773421225457",
+      "ogrn": "325508100023243",
       "kpp": "",
       "reg_date": "2026-11-01",
       "region_code": "77",
       "region_name": "г. Москва",
       "address": "г. Москва",
-      "person_name": "",
+      "person_name": "Наличкин Сергей Владимирович",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Пресненский",
@@ -8110,10 +9664,16 @@
         "telegram": "https://t.me/niksyou1"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Пт с 11:00-19:00",
+      "telegram": "@niksyou1",
+      "telegram_status": "verified",
+      "telegram_phone": "+79995587885",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:06:19Z"
@@ -8146,7 +9706,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8181,7 +9746,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8214,7 +9784,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8249,7 +9824,12 @@
       "websites": [],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79271723329",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8286,7 +9866,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8327,7 +9912,12 @@
         "vk": "https://vk.com/krymskie_2015"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@krymskie2015",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8363,7 +9953,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8399,7 +9994,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8434,7 +10034,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79787392555",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8473,7 +10078,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79157372363",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8509,7 +10119,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8547,7 +10162,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79117230147",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8583,7 +10203,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79859260866",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8619,7 +10244,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79663281172",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8633,13 +10263,13 @@
       "name": "ООО \"ПроЛицензия\"",
       "full_name": "ООО \"ПроЛицензия\"",
       "inn": "5017110040",
-      "ogrn": "",
+      "ogrn": "1165017050967",
       "kpp": "",
       "reg_date": "2026-11-01",
       "region_code": "50",
       "region_name": "Московская область",
       "address": "Москва, проезд Кожуховский 2 - й, д. 29, к. 2, стр. 18, этаж 3",
-      "person_name": "",
+      "person_name": "Тарасова Марина Владимировна",
       "person_role": "Генеральный директор",
       "okved_code": "69.10",
       "okved_name": "Юридические услуги",
@@ -8658,10 +10288,16 @@
         "vk": "https://vk.com/rtrg"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@LidiyaLoginova",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:06:13Z"
@@ -8699,7 +10335,12 @@
         "vk": "https://vk.com/gigagroup58"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@Giga_group",
+      "telegram_status": "verified",
+      "telegram_phone": "+79914569999",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8733,7 +10374,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8771,7 +10417,12 @@
         "vk": "https://vk.com/advokatkatsaylidi"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8807,7 +10458,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79282630634",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8841,7 +10497,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8883,7 +10544,12 @@
         "vk": "https://vk.com/rtrg"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "пн-пт: 9.00 - 20.00",
+      "telegram": "@layurist_spb",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8896,14 +10562,14 @@
       "entity_type": "ООО",
       "name": "ООО \"ПанОкна\"",
       "full_name": "ООО \"ПанОкна\"",
-      "inn": "",
-      "ogrn": "",
+      "inn": "9718117851",
+      "ogrn": "1187746867747",
       "kpp": "",
       "reg_date": "2026-11-01",
       "region_code": "77",
       "region_name": "г. Москва",
       "address": "Москва, Варшавское шоссе, д. 141",
-      "person_name": "",
+      "person_name": "Железнов Вячеслав Михайлович",
       "person_role": "Генеральный директор",
       "okved_code": "43.39",
       "okved_name": "Остекление балконов и лоджий.",
@@ -8922,10 +10588,16 @@
         "telegram": "https://t.me/panwindow"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Пт 8:00 - 20:00",
+      "telegram": "@panwindow",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:06:10Z"
@@ -8958,7 +10630,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -8998,7 +10675,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -9034,7 +10716,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79276868141",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -9070,7 +10757,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79136219007",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -9111,7 +10803,12 @@
         "vk": "https://vk.com/td_truck"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@td_truck",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -9147,7 +10844,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -9188,7 +10890,12 @@
         "telegram": "https://t.me/domprofi24"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@domprofi24",
+      "telegram_status": "verified",
+      "telegram_phone": "+79636686737",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -9224,7 +10931,12 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
@@ -9254,9 +10966,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:15Z"
@@ -9283,9 +11001,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:13Z"
@@ -9312,9 +11036,15 @@
       "websites": [],
       "socials": {},
       "capital": "100 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:12Z"
@@ -9341,9 +11071,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:11Z"
@@ -9370,9 +11106,15 @@
       "websites": [],
       "socials": {},
       "capital": "15 млн.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:09Z"
@@ -9389,7 +11131,7 @@
       "region_code": "74",
       "region_name": "Челябинская область",
       "address": "Челябинская область",
-      "person_name": "",
+      "person_name": "Кашаков Артем Олегович",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Челябинск",
@@ -9406,10 +11148,16 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79330918373",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:11:01Z"
@@ -9436,9 +11184,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:27Z"
@@ -9465,9 +11219,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:25Z"
@@ -9494,9 +11254,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:24Z"
@@ -9523,9 +11289,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:22Z"
@@ -9552,9 +11324,15 @@
       "websites": [],
       "socials": {},
       "capital": "10 тыс.руб.",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
       "sources": [
-        "ЕГРЮЛ Open (Фронтир 2026)"
+        "ЕГРЮЛ Open (Фронтир 2026)",
+        "ФНС/Saby"
       ],
       "has_phone": false,
       "parsed_at": "2026-11-01T08:05:20Z"
@@ -9571,7 +11349,7 @@
       "region_code": "52",
       "region_name": "Нижегородская область",
       "address": "Нижегородская область",
-      "person_name": "",
+      "person_name": "Парамонова Ирина Владимировна",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Нижний Новгород",
@@ -9593,10 +11371,16 @@
         "vk": "https://vk.com/vkpksot"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 08:00-17:00",
+      "telegram": "@pksot",
+      "telegram_status": "verified",
+      "telegram_phone": "+79334309688",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-02T09:20:56Z"
@@ -9613,7 +11397,7 @@
       "region_code": "24",
       "region_name": "Красноярский край",
       "address": "Красноярский край",
-      "person_name": "",
+      "person_name": "Пименов Роман Александрович",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Красноярск",
@@ -9635,13 +11419,67 @@
         "vk": "https://vk.com/opornoe_reshenie"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@opornoe_reshenie",
+      "telegram_status": "verified",
+      "telegram_phone": "+79029194659",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:11:08Z"
+    },
+    {
+      "id": "inn-6686154228",
+      "entity_type": "ООО",
+      "name": "ООО \"УльтраДрайвер\"",
+      "full_name": "ООО \"УльтраДрайвер\"",
+      "inn": "6686154228",
+      "ogrn": "1236600049828",
+      "kpp": "",
+      "reg_date": "2023-06-15",
+      "region_code": "66",
+      "region_name": "Свердловская область",
+      "address": "Волгоградская область",
+      "person_name": "Курзенева Оксана Борисовна",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Волгоград",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (932) 100-06-27",
+        "+7 (922) 100-00-67",
+        "+7 (844) 260-56-05"
+      ],
+      "emails": [
+        "gk-ultra1@mail.ru",
+        "gk-ultra@mail.ru"
+      ],
+      "websites": [
+        "https://volgograd.ultra-driver.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/ULTRA_DRIVERS1",
+        "vk": "https://vk.com/ultradrivers"
+      },
+      "capital": "",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 8:00-20:00",
+      "telegram": "@ULTRA_DRIVERS1",
+      "telegram_status": "verified",
+      "telegram_phone": "+79321000627",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании",
+        "ФНС/Saby"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-03T07:31:57Z"
     },
     {
       "id": "inn-9724135009",
@@ -9655,7 +11493,7 @@
       "region_code": "77",
       "region_name": "г. Москва",
       "address": "Челябинская область",
-      "person_name": "",
+      "person_name": "Райков Евгений Игоревич",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Челябинск",
@@ -9676,10 +11514,16 @@
         "telegram": "https://t.me/varvaravcadre"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@varvaravcadre",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:11:02Z"
@@ -9696,7 +11540,7 @@
       "region_code": "78",
       "region_name": "г. Санкт-Петербург",
       "address": "г. Санкт-Петербург",
-      "person_name": "",
+      "person_name": "Салтанов Александр Эдуардович",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Красногвардейский",
@@ -9717,13 +11561,65 @@
         "telegram": "https://t.me/tpk_sferix"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@tpk_sferix",
+      "telegram_status": "verified",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании",
+        "ФНС/Saby"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-01T09:01:53Z"
+    },
+    {
+      "id": "orgpage-2563463",
+      "entity_type": "ИП",
+      "name": "ИП Кашапов Марсель Халитович",
+      "full_name": "ИП Кашапов Марсель Халитович",
+      "inn": "",
+      "ogrn": "321774600746377",
+      "kpp": "",
+      "reg_date": "2021-06-15",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, ул. Симоновский Вал, д. 3",
+      "person_name": "Кашапов Марсель Халитович",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "93.13",
+      "okved_name": "Продажа спорттоваров и тренажеров",
+      "okved_category": "Образование, медицина, сервис",
+      "phones": [
+        "+7 (495) 120-15-97",
+        "+7 (958) 510-85-17",
+        "+7 (910) 675-33-67"
+      ],
+      "emails": [
+        "sale@01sport.ru"
+      ],
+      "websites": [
+        "https://01sport.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/begovaya_dorozhka_kupit",
+        "vk": "https://vk.com/01sportru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "пн: пт с 9.00-21.00",
+      "telegram": "@begovaya_dorozhka_kupit",
+      "telegram_status": "verified",
+      "telegram_phone": "+79585108517",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
       ],
       "has_phone": true,
-      "parsed_at": "2026-11-01T09:01:53Z"
+      "parsed_at": "2026-11-02T09:20:13Z"
     },
     {
       "id": "inn-471420515842",
@@ -9754,13 +11650,68 @@
       ],
       "socials": {},
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79697260642",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании",
+        "ФНС/Saby"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-01T09:01:51Z"
+    },
+    {
+      "id": "orgpage-6198068",
+      "entity_type": "ООО",
+      "name": "ООО \"ЭСТЕТИКА-ПЛЮС\"",
+      "full_name": "ООО \"ЭСТЕТИКА-ПЛЮС\"",
+      "inn": "",
+      "ogrn": "1203400010263",
+      "kpp": "",
+      "reg_date": "2020-06-15",
+      "region_code": "34",
+      "region_name": "Волгоградская область",
+      "address": "Волгоградская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Волгоград",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (919) 546-20-08",
+        "+7 (844) 226-70-80",
+        "+7 (960) 896-85-67",
+        "+7 (927) 512-07-09"
+      ],
+      "emails": [
+        "moyaklinikavlg@yandex.ru",
+        "info@moyaklinika.ru"
+      ],
+      "websites": [
+        "https://moyaklinika.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/moyaklinika",
+        "whatsapp": "https://wa.me/79275120709",
+        "vk": "https://vk.com/my.clinic"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Сб-Вс: 9:00-20:00; Пн, Вт, Ср, Чт, Пт: выходной",
+      "telegram": "@moyaklinika",
+      "telegram_status": "verified",
+      "telegram_phone": "+79195462008",
       "sources": [
         "Открытый каталог РФ",
         "Сайт компании"
       ],
       "has_phone": true,
-      "parsed_at": "2026-11-01T09:01:51Z"
+      "parsed_at": "2026-11-03T07:32:01Z"
     },
     {
       "id": "inn-5404163419",
@@ -9774,7 +11725,7 @@
       "region_code": "54",
       "region_name": "Новосибирская область",
       "address": "Новосибирская область",
-      "person_name": "",
+      "person_name": "Гаврилов Руслан Александрович",
       "person_role": "Генеральный директор",
       "okved_code": "",
       "okved_name": "Новосибирск",
@@ -9794,10 +11745,16 @@
         "telegram": "https://t.me/sibenergomet"
       },
       "capital": "",
-      "status": "Действующее",
+      "status": "Действующая (ФНС)",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "@sibenergomet",
+      "telegram_status": "verified",
+      "telegram_phone": "",
       "sources": [
         "Открытый каталог РФ",
-        "Сайт компании"
+        "Сайт компании",
+        "ФНС/Saby"
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T09:02:01Z"

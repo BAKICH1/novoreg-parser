@@ -7,19 +7,19 @@
       },
       "rateLimit": "600/hour/ip"
     },
-    "/api/egrul/*": {
-      "upstream": "https://egrul.itsoft.ru",
-      "headers": {
-        "Accept": "application/json"
-      },
-      "rateLimit": "180/hour/ip"
-    },
-    "/api/findorg/*": {
-      "upstream": "https://www.find-org.com",
+    "/api/saby/*": {
+      "upstream": "https://sbis.ru",
       "headers": {
         "Accept-Language": "ru-RU,ru;q=0.9"
       },
-      "rateLimit": "120/hour/ip"
+      "rateLimit": "180/hour/ip"
+    },
+    "/api/tg/*": {
+      "upstream": "https://t.me",
+      "headers": {
+        "Accept-Language": "ru-RU,ru;q=0.9"
+      },
+      "rateLimit": "240/hour/ip"
     }
   }
 }

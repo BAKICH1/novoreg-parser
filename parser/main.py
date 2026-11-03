@@ -13,6 +13,7 @@ from .collectors.api_checko import CheckoCollector
 from .collectors.api_dadata import DaDataCollector
 from .collectors.api_fns import ApiFnsCollector
 from .collectors.enrich_2gis import TwoGisEnricher
+from .collectors.enrich_status_tg import StatusScheduleTelegramEnricher
 from .collectors.open_contacts import OpenContactsCollector
 from .collectors.open_egrul import FindOrgFrontierCollector, FnsDirectCollector
 from .models import Lead
@@ -108,6 +109,10 @@ def run_cycle(
     enr_web = open_contacts.enrich_existing_leads(collected, max_probes=12)
     if enr_web:
         active_sources.append(f"Веб-обогащение (+{enr_web} тел.)")
+
+    enr_st = StatusScheduleTelegramEnricher().enrich_batch(collected, max_inn_checks=12, max_tg_checks=15)
+    if enr_st:
+        active_sources.append(f"ФНС/Saby статус ({enr_st})")
 
     # --- СОХРАНЕНИЕ И ДЕДУПЛИКАЦИЯ ---
     added_new = 0

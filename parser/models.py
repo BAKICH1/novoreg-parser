@@ -143,6 +143,140 @@ def normalize_website(raw: str) -> str | None:
     return f"https://{s}"
 
 
+BAD_TELEGRAM_SLUGS = {
+    "share", "iv", "joinchat", "addstickers", "proxy", "socks", "login",
+    "orgpage", "tilda", "wordpress", "bitrix", "telegram", "botfather",
+    "contact", "dl", "setlanguage",
+}
+
+
+def normalize_telegram(raw: str | None) -> str:
+    """Нормализует ссылку или ник Telegram к виду @username (или +79... для телефонной ссылки)."""
+    if not raw:
+        return ""
+    s = str(raw).strip()
+    m_ph = re.search(r"(?:t\.me|telegram\.me)/(\+79\d{9})\b", s, re.I)
+    if m_ph:
+        return m_ph.group(1)
+    m_url = re.search(
+        r"(?:https?://(?:t\.me|telegram\.me)/(?:s/)?|tg://resolve\?domain=|^@)([a-zA-Z][a-zA-Z0-9_]{3,31})\b",
+        s,
+        re.I,
+    )
+    if m_url:
+        slug = m_url.group(1)
+        if slug.lower() not in BAD_TELEGRAM_SLUGS:
+            return f"@{slug}"
+    if re.fullmatch(r"[a-zA-Z][a-zA-Z0-9_]{3,31}", s) and s.lower() not in BAD_TELEGRAM_SLUGS:
+        return f"@{s}"
+    return ""
+
+
+def extract_telegram(html_text: str) -> str:
+    """Извлекает публичный Telegram-аккаунт/канал компании или владельца из HTML."""
+    if not html_text:
+        return ""
+    for m in re.finditer(
+        r"(?:https?://(?:t\.me|telegram\.me)/(?:s/)?|tg://resolve\?domain=)([a-zA-Z][a-zA-Z0-9_]{3,31})\b",
+        html_text,
+        re.I,
+    ):
+        slug = m.group(1)
+        if slug.lower() not in BAD_TELEGRAM_SLUGS:
+            return f"@{slug}"
+    return ""
+
+
+def compact_work_hours(raw: str | None) -> str:
+    """Приводит строку с часами работы к компактному единому формату."""
+    if not raw:
+        return ""
+    s = clean_text(raw)
+    replacements = [
+        (r"\bПонедельник\s*[-–—]\s*пятница\b", "Пн-Пт"),
+        (r"\bПонедельник\s*[-–—]\s*четверг\b", "Пн-Чт"),
+        (r"\bПонедельник\s*[-–—]\s*суббота\b", "Пн-Сб"),
+        (r"\bПонедельник\s*[-–—]\s*воскресенье\b", "Пн-Вс"),
+        (r"\bСуббота\s*[,–—\-]\s*воскресенье\b", "Сб-Вс"),
+        (r"\bПятница\s*[-–—]\s*суббота\b", "Пт-Сб"),
+        (r"\bПонедельник\b", "Пн"),
+        (r"\bВторник\b", "Вт"),
+        (r"\bСреда\b", "Ср"),
+        (r"\bЧетверг\b", "Чт"),
+        (r"\bПятница\b", "Пт"),
+        (r"\bСуббота\b", "Сб"),
+        (r"\bВоскресенье\b", "Вс"),
+        (r"\s*[–—]\s*", ": "),
+        (r":\s*:", ":"),
+        (r"\(перерыв:\s*с\s*", "(пер. "),
+        (r"\s+до\s+", "-"),
+    ]
+    for pat, rep in replacements:
+        s = re.sub(pat, rep, s, flags=re.I)
+    s = re.sub(r"\s+", " ", s).strip(" ;,.")
+    return s[:180]
+
+
+def extract_work_hours_from_html(html_text: str) -> str:
+    """Извлекает часы работы из карточки каталога или сайта компании."""
+    if not html_text:
+        return ""
+    # 1. Структурированный блок <div class="period"><p>...</p></div> (Orgpage)
+    periods = re.findall(r'<div[^>]*class=["\']period["\'][^>]*>([\s\S]*?)</div>', html_text, re.I)
+    if periods:
+        lines: list[str] = []
+        for block in periods:
+            for p in re.findall(r"<p[^>]*>([\s\S]*?)</p>", block, re.I):
+                cp = compact_work_hours(p)
+                if cp and cp not in lines:
+                    lines.append(cp)
+        if lines:
+            return "; ".join(lines)[:180]
+
+    # 2. Schema.org openingHours
+    m_meta = re.search(
+        r'itemprop=["\']openingHours["\'][^>]*content=["\']([^"\']{3,120})["\']',
+        html_text,
+        re.I,
+    )
+    if m_meta:
+        return compact_work_hours(m_meta.group(1))
+
+    # 3. Текстовые шаблоны на сайте компании
+    stripped = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", html_text, flags=re.I)
+    flat = clean_text(stripped)
+    if re.search(r"\bкруглосуточно\b|\b24\s*/\s*7\b", flat, re.I):
+        if re.search(r"(?:режим|график|часы|время\s+работы|работаем)[^.]{0,35}(?:круглосуточно|24\s*/\s*7)", flat, re.I):
+            return "Круглосуточно (24/7)"
+
+    m_sched = re.search(
+        r"((?:Пн\s*[-–—]\s*(?:Пт|Сб|Вс)|Понедельник\s*[-–—]\s*(?:пятница|воскресенье)|Ежедневно)\s*[:\-–—]?\s*(?:с\s*)?\d{1,2}[:.]\d{2}\s*(?:[-–—]|до)\s*\d{1,2}[:.]\d{2})",
+        flat,
+        re.I,
+    )
+    if m_sched:
+        return compact_work_hours(m_sched.group(1))
+    return ""
+
+
+def detect_org_status_from_html(html_text: str, work_hours: str = "") -> tuple[bool, str]:
+    """Проверяет признаки закрытия / прекращения работы организации."""
+    wh_low = (work_hours or "").lower()
+    if wh_low in ("пн-вс: выходной", "выходной"):
+        return False, "Временно не работает"
+
+    if html_text:
+        stripped = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", html_text, flags=re.I)
+        flat = clean_text(stripped)
+        if re.search(
+            r"(?:организация\s+(?:больше\s+не\s+работает|закрыта|ликвидирована)|компания\s+(?:закрыта|больше\s+не\s+работает)|деятельность\s+прекращена|временно\s+не\s+работает|закрыто\s+навсегда)",
+            flat,
+            re.I,
+        ):
+            return False, "Закрыта / не работает"
+    return True, "Действующая"
+
+
 def normalize_date(raw: Any) -> str:
     """Приводит дату к ISO YYYY-MM-DD."""
     if raw is None or raw == "":
@@ -188,7 +322,12 @@ class Lead:
     websites: list[str] = field(default_factory=list)
     socials: dict[str, str] = field(default_factory=dict)
     capital: str = ""
-    status: str = "Действующее"
+    status: str = "Действующая"
+    is_active: bool = True
+    work_hours: str = ""
+    telegram: str = ""
+    telegram_status: str = ""
+    telegram_phone: str = ""
     sources: list[str] = field(default_factory=list)
     parsed_at: str = ""
     id: str = ""
@@ -242,6 +381,41 @@ class Lead:
                 norm_sites.append(nw)
         self.websites = norm_sites
 
+        # Нормализация статуса активности организации (действующая / закрыта)
+        st_clean = clean_text(self.status) or "Действующая"
+        if st_clean in ("Действующее", "ACTIVE"):
+            st_clean = "Действующая"
+        st_low = st_clean.lower()
+        if any(w in st_low for w in ("ликвидир", "закрыт", "прекращ", "не работает", "не действует", "банкрот")):
+            self.is_active = False
+            self.status = st_clean
+        else:
+            self.is_active = True
+            self.status = st_clean
+
+        # Нормализация часов работы
+        self.work_hours = compact_work_hours(self.work_hours) if self.work_hours else ""
+
+        # Нормализация Telegram у компании / владельца
+        tg_norm = normalize_telegram(self.telegram) or normalize_telegram(self.socials.get("telegram"))
+        if tg_norm and tg_norm.startswith("@"):
+            self.telegram = tg_norm
+            self.socials["telegram"] = f"https://t.me/{tg_norm.lstrip('@')}"
+            self.telegram_status = "verified"
+        else:
+            self.telegram = ""
+
+        # Проверяем мобильный телефон владельца (+7 9XX ...) для быстрого поиска в Telegram по номеру
+        mob_digits = ""
+        for ph in self.phones:
+            d = re.sub(r"\D", "", ph)
+            if len(d) == 11 and d.startswith("79"):
+                mob_digits = f"+{d}"
+                break
+        self.telegram_phone = mob_digits
+        if not self.telegram:
+            self.telegram_status = "by_phone" if mob_digits else "none"
+
         self.sources = list(dict.fromkeys(s for s in self.sources if s))
         if not self.parsed_at:
             self.parsed_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -267,9 +441,16 @@ class Lead:
         for attr in (
             "full_name", "inn", "ogrn", "kpp", "address",
             "person_name", "okved_code", "okved_name", "capital",
+            "work_hours", "telegram",
         ):
             if not getattr(self, attr) and getattr(other, attr):
                 setattr(self, attr, getattr(other, attr))
+
+        if not other.is_active:
+            self.is_active = False
+            self.status = other.status
+        elif other.status and self.status in ("", "Действующая") and "действует на" in other.status.lower():
+            self.status = other.status
 
         if other.reg_date and (not self.reg_date or other.reg_date < self.reg_date):
             self.reg_date = other.reg_date
@@ -317,6 +498,11 @@ class Lead:
             "socials": self.socials,
             "capital": self.capital,
             "status": self.status,
+            "is_active": self.is_active,
+            "work_hours": self.work_hours,
+            "telegram": self.telegram,
+            "telegram_status": self.telegram_status,
+            "telegram_phone": self.telegram_phone,
             "sources": self.sources,
             "has_phone": self.has_phone,
             "parsed_at": self.parsed_at,
@@ -346,7 +532,12 @@ class Lead:
             websites=list(data.get("websites") or []),
             socials=dict(data.get("socials") or {}),
             capital=str(data.get("capital", "")),
-            status=str(data.get("status", "Действующее")),
+            status=str(data.get("status", "Действующая")),
+            is_active=bool(data.get("is_active", True)),
+            work_hours=str(data.get("work_hours", "")),
+            telegram=str(data.get("telegram", "")),
+            telegram_status=str(data.get("telegram_status", "")),
+            telegram_phone=str(data.get("telegram_phone", "")),
             sources=list(data.get("sources") or []),
             parsed_at=str(data.get("parsed_at", "")),
         )

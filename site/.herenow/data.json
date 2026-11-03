@@ -18,6 +18,12 @@
         "email_primary": { "type": "string", "maxLength": 140, "trim": true },
         "website": { "type": "string", "maxLength": 200, "trim": true },
         "address": { "type": "string", "maxLength": 260, "trim": true },
+        "org_status": { "type": "string", "maxLength": 80, "trim": true },
+        "is_active": { "type": "boolean", "default": true },
+        "work_hours": { "type": "string", "maxLength": 200, "trim": true },
+        "telegram": { "type": "string", "maxLength": 64, "trim": true },
+        "telegram_status": { "type": "string", "maxLength": 24, "trim": true },
+        "telegram_phone": { "type": "string", "maxLength": 24, "trim": true },
         "source_tag": { "type": "string", "maxLength": 140, "trim": true },
         "has_phone": { "type": "boolean", "default": false }
       },

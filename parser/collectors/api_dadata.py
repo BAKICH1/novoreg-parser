@@ -39,8 +39,15 @@ class DaDataCollector:
     def _parse_suggestion(self, item: dict[str, Any], min_date_iso: str) -> Lead | None:
         data = item.get("data") or {}
         state = data.get("state") or {}
-        if state.get("status") != "ACTIVE":
-            return None
+        raw_st = str(state.get("status") or "ACTIVE").upper()
+        status_map = {
+            "ACTIVE": ("Действующая (ЕГРЮЛ)", True),
+            "LIQUIDATING": ("В процессе ликвидации", False),
+            "LIQUIDATED": ("Закрыта / ликвидирована", False),
+            "BANKRUPT": ("Банкротство", False),
+            "REORGANIZING": ("Реорганизация", True),
+        }
+        org_status, is_active = status_map.get(raw_st, ("Действующая", True))
 
         reg_ts = state.get("registration_date")
         if not reg_ts:
@@ -110,6 +117,8 @@ class DaDataCollector:
             okved_name="",
             phones=phones,
             emails=emails,
+            status=org_status,
+            is_active=is_active,
             sources=["DaData API"],
         ).finalize()
 

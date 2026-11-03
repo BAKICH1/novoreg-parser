@@ -4,9 +4,21 @@
     "77": "0035",
     "78": "0000"
   },
-  "orgpage_cursor": 3,
-  "runs_count": 7,
+  "orgpage_cursor": 7,
+  "runs_count": 8,
   "run_history": [
+    {
+      "timestamp": "2026-11-03T07:32:45Z",
+      "fetched": 80,
+      "added_new": 13,
+      "updated": 67,
+      "duration_sec": 107.9,
+      "sources": [
+        "Открытые каталоги + Сайты (80)",
+        "Веб-обогащение (+2 тел.)",
+        "ФНС/Saby статус (7)"
+      ]
+    },
     {
       "timestamp": "2026-11-02T09:25:35Z",
       "fetched": 42,
@@ -173,6 +185,6 @@
     "orgpage-6207317",
     "orgpage-6207803"
   ],
-  "orgpage_city_cursor": 13,
+  "orgpage_city_cursor": 17,
   "orgpage_cat_page": 2
 }

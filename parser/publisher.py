@@ -227,6 +227,12 @@ class HereNowPublisher:
                 "email_primary": (lead.emails[0] if lead.emails else "")[:120],
                 "website": (lead.websites[0] if lead.websites else "")[:180],
                 "address": lead.address[:240],
+                "org_status": (lead.status or "Действующая")[:80],
+                "is_active": bool(lead.is_active),
+                "work_hours": (lead.work_hours or "")[:195],
+                "telegram": (lead.telegram or "")[:64],
+                "telegram_status": (lead.telegram_status or "none")[:24],
+                "telegram_phone": (lead.telegram_phone or "")[:24],
                 "source_tag": ", ".join(lead.sources)[:120],
                 "has_phone": lead.has_phone,
             }

@@ -38,9 +38,15 @@ def _build_opener(use_ru_proxy: bool = False) -> tuple[urllib.request.OpenerDire
 
 def _encode_url(url: str) -> str:
     parts = urllib.parse.urlsplit(url)
+    host = parts.hostname or ""
+    try:
+        ascii_host = host.encode("idna").decode("ascii") if host else ""
+    except Exception:
+        ascii_host = host
+    netloc = f"{ascii_host}:{parts.port}" if parts.port else ascii_host
     path = urllib.parse.quote(urllib.parse.unquote(parts.path), safe="/:@!$&'()*+,;=-._~")
     query = urllib.parse.quote(urllib.parse.unquote(parts.query), safe="=&+:;@!$'()*+,/?-._~")
-    return urllib.parse.urlunsplit((parts.scheme, parts.netloc, path, query, parts.fragment))
+    return urllib.parse.urlunsplit((parts.scheme, netloc, path, query, parts.fragment))
 
 
 def http_get_text(
