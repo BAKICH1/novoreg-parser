@@ -741,15 +741,15 @@
 
   async function runEdgeAutoHarvest(isManual) {
     if (state.harvestRunning) {
-      if (isManual) showToast("⏳ Облачный сбор уже выполняется…");
+      if (isManual) showToast("Облачный сбор уже выполняется…");
       return;
     }
     state.harvestRunning = true;
     const btn = document.getElementById("btn-edge-harvest");
-    const origBtnText = btn ? btn.textContent : "";
+    const origBtnHtml = btn ? btn.innerHTML : "";
     if (btn) {
       btn.disabled = true;
-      btn.textContent = "⏳ Сбор свежих…";
+      btn.textContent = "Сбор свежих…";
     }
 
     try {
@@ -763,7 +763,7 @@
       const [catSlug, catOkved, catName] = EDGE_CATEGORY_FEEDS[catIdx];
 
       if (isManual) {
-        showToast(`⚡ Сканируем ${regName1}, ${regName2} и рубрику (стр. ${catPage})…`);
+        showToast(`Сканируем ${regName1}, ${regName2} и рубрику (стр. ${catPage})…`);
       }
 
       const feedSpecs = [
@@ -880,18 +880,19 @@
       applyFiltersAndRender(false);
 
       if (newlyDiscovered.length > 0) {
-        showToast(`✅ Добавлено +${newlyDiscovered.length} свежих ИП/ООО с телефонами в облако!`);
+        showToast(`Добавлено +${newlyDiscovered.length} свежих ИП/ООО с телефонами в облако`);
       } else if (isManual) {
-        showToast("🔄 Курсор сдвинут дальше — нажмите ещё раз для следующей порции городов");
+        showToast("Курсор сдвинут дальше — нажмите ещё раз для следующей порции городов");
       }
     } catch (err) {
       console.warn("Edge harvest error:", err);
-      if (isManual) showToast("⚠️ Ошибка сети при опросе прокси");
+      if (isManual) showToast("Ошибка сети при опросе прокси");
     } finally {
       state.harvestRunning = false;
       if (btn) {
         btn.disabled = false;
-        btn.textContent = origBtnText || "⚡ Подтянуть свежие";
+        if (origBtnHtml) btn.innerHTML = origBtnHtml;
+        else btn.textContent = "Подтянуть свежие";
       }
     }
   }
@@ -971,7 +972,7 @@
         state.stats = st;
         state.lastUpdatedIso = st.updated_at || "";
         if (isSilentPoll && prevIso && state.lastUpdatedIso && prevIso !== state.lastUpdatedIso) {
-          showToast("🔔 Получены свежие данные от фонового парсера!");
+          showToast("Получены свежие данные от фонового парсера");
         }
       }
 
@@ -1044,14 +1045,14 @@
     document.getElementById("nav-count-total").textContent = String(total);
     document.getElementById("kpi-total").textContent = String(total);
     document.getElementById("kpi-split").textContent =
-      `ООО: ${oooCount} • ИП: ${ipCount} • 🟢 Действ.: ${activeOrgCount}` +
-      (closedOrgCount ? ` • 🔴 Закр.: ${closedOrgCount}` : "");
+      `ООО: ${oooCount} · ИП: ${ipCount} · Действующих: ${activeOrgCount}` +
+      (closedOrgCount ? ` · Закрытых: ${closedOrgCount}` : "");
     document.getElementById("kpi-phones").textContent = String(withPhone);
-    document.getElementById("kpi-phone-rate").textContent = `Покрытие телефонами: ${pct}%`;
+    document.getElementById("kpi-phone-rate").textContent = `Покрытие номерами: ${pct}%`;
     document.getElementById("kpi-mobile").textContent = String(withTelegramAny);
     document.getElementById("kpi-email-site").textContent =
-      `✈️ @Telegram: ${withTelegramHandle} • 📱 По номеру +79…: ${withMobile}`;
-    document.getElementById("kpi-regions").textContent = `${regs} субъектов РФ`;
+      `Прямой @ник: ${withTelegramHandle} · Моб. +79…: ${withMobile}`;
+    document.getElementById("kpi-regions").textContent = `${regs} рег.`;
 
     const statsIso = (state.stats && state.stats.updated_at) || "";
     const bestIso =
@@ -1070,11 +1071,11 @@
             hour: "2-digit",
             minute: "2-digit",
           });
-      document.getElementById("last-updated-label").textContent = `Автопарсер активен • Обновлено: ${timeStr}`;
+      document.getElementById("last-updated-label").textContent = `Обновлено ${timeStr}`;
       document.getElementById("kpi-runs").textContent =
-        `🕒 Часы работы: ${withWorkHours} • Облако: ${state.siteDataLeads.length}`;
+        `С часами работы: ${withWorkHours} · В облаке: ${state.siteDataLeads.length}`;
     } else {
-      document.getElementById("last-updated-label").textContent = `База загружена (${total} записей)`;
+      document.getElementById("last-updated-label").textContent = `База загружена (${total})`;
     }
 
     const edgeBox = document.getElementById("edge-harvest-status-box");
@@ -1151,14 +1152,16 @@
       return;
     }
     const maxVal = Math.max(...items.map((x) => x.count || 0), 1);
+    const sumVal = Math.max(items.reduce((acc, x) => acc + (x.count || 0), 0), 1);
     el.innerHTML = items
       .map((item) => {
-        const w = Math.max(4, Math.round(((item.count || 0) / maxVal) * 100));
+        const w = Math.max(2, Math.round(((item.count || 0) / maxVal) * 100));
+        const sharePct = Math.round(((item.count || 0) / sumVal) * 100);
         return `
           <div class="bar-row">
             <div class="bar-row-top">
               <span>${esc(item.label)}</span>
-              <strong>${esc(item.count)}</strong>
+              <strong>${esc(item.count)} <span style="color:var(--text-dim); font-size:11px; font-weight:400;">(${sharePct}%)</span></strong>
             </div>
             <div class="bar-track">
               <div class="bar-fill" style="width: ${w}%"></div>
@@ -1270,7 +1273,7 @@
       tbody.innerHTML = `
         <tr>
           <td colspan="8" style="text-align: center; padding: 38px; color: var(--text-muted);">
-            По выбранным фильтрам записей не найдено. Попробуйте сбросить фильтры или запустить «⚡ Живой поиск по API».
+            По выбранным фильтрам записей не найдено. Сбросьте фильтры или откройте вкладку «Живой API-поиск».
           </td>
         </tr>
       `;
@@ -1296,56 +1299,56 @@
                   return `
                     <div class="phone-item">
                       <a href="tel:+${dg}" class="phone-link" onclick="event.stopPropagation()">${esc(ph)}</a>
-                      <button type="button" class="mini-action js-copy" data-copy="${esc(ph)}" title="Скопировать номер">📋</button>
+                      <button type="button" class="mini-action js-copy" data-copy="${esc(ph)}" title="Скопировать номер">Копия</button>
                       ${waBtn}
                     </div>
                   `;
                 })
                 .join("") +
               (l.phones.length > 2
-                ? `<span style="font-size:11px; color:var(--text-muted);">+ ещё ${l.phones.length - 2} ном.</span>`
+                ? `<span style="font-size:11px; color:var(--text-dim);">+ ещё ${l.phones.length - 2} ном.</span>`
                 : "") +
               `</div>`
-            : `<span class="no-phone-tag">Нет публичного номера</span>`;
+            : `<span class="no-phone-tag">—</span>`;
 
         const extraContacts = [];
         if (l.telegram) {
           const cleanSlug = l.telegram.replace(/^@/, "");
           extraContacts.push(
             `<div onclick="event.stopPropagation()" style="display:flex; align-items:center; gap:4px; margin-bottom:2px;">
-              <span class="tg-tag-verified" style="user-select:text;">✈️ ${esc(l.telegram)}</span>
-              <button type="button" class="mini-action js-copy" data-copy="${esc(l.telegram)}" title="Скопировать ник Telegram">📋</button>
-              <a href="https://t.me/${esc(cleanSlug)}" target="_blank" rel="noopener" class="mini-action" title="Открыть профиль/канал в Telegram">↗</a>
+              <span class="tg-tag-verified" style="user-select:text;">TG ${esc(l.telegram)}</span>
+              <button type="button" class="mini-action js-copy" data-copy="${esc(l.telegram)}" title="Скопировать ник Telegram">Копия</button>
+              <a href="https://t.me/${esc(cleanSlug)}" target="_blank" rel="noopener" class="mini-action" title="Открыть профиль в Telegram">↗</a>
             </div>`
           );
         } else if (l.telegram_phone) {
           extraContacts.push(
             `<div onclick="event.stopPropagation()" style="display:flex; align-items:center; gap:4px; margin-bottom:2px;">
-              <span class="tg-tag-phone" title="Прямой ник на сайте не указан, но есть мобильный номер владельца/ИП для поиска в Telegram">✈️ По номеру ${esc(l.telegram_phone)}</span>
-              <a href="https://t.me/${esc(l.telegram_phone)}" target="_blank" rel="noopener" class="mini-action" title="Открыть чат в Telegram по номеру телефона">TG↗</a>
+              <span class="tg-tag-phone" title="Мобильный номер владельца/ИП для поиска чата в Telegram">TG ${esc(l.telegram_phone)}</span>
+              <a href="https://t.me/${esc(l.telegram_phone)}" target="_blank" rel="noopener" class="mini-action" title="Открыть чат в Telegram по номеру телефона">↗</a>
             </div>`
           );
         } else {
           extraContacts.push(
-            `<span style="font-size:11px; color:var(--text-dim);">✈️ Telegram: не найден</span>`
+            `<span style="font-size:11px; color:var(--text-dim);">TG: —</span>`
           );
         }
 
         if (l.emails && l.emails[0]) {
           extraContacts.push(
-            `<span onclick="event.stopPropagation()" style="font-size:12px; color:var(--text); user-select:text;">✉️ ${esc(l.emails[0])}</span>`
+            `<span onclick="event.stopPropagation()" style="font-family:var(--font-mono); font-size:11.5px; color:var(--text); user-select:text;">${esc(l.emails[0])}</span>`
           );
         }
         if (l.websites && l.websites[0]) {
           const shortHost = l.websites[0].replace(/^https?:\/\//, "");
           extraContacts.push(
-            `<a href="${esc(l.websites[0])}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:12px;">🌐 ${esc(shortHost)}</a>`
+            `<a href="${esc(l.websites[0])}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:11.5px;">${esc(shortHost)} ↗</a>`
           );
         }
 
         const statusBadgeHtml =
           l.is_active === false
-            ? `<span class="status-pill-closed">✕ ${esc(l.status || "Закрыта / не работает")}</span>`
+            ? `<span class="status-pill-closed">● ${esc(l.status || "Закрыта / не работает")}</span>`
             : `<span class="status-pill-active">● ${esc(l.status || "Действующая")}</span>`;
 
         const codesHtml = [
@@ -1357,52 +1360,52 @@
           .join(" ");
 
         const hoursHtml = l.work_hours
-          ? `<div class="work-hours-line">🕒 ${esc(l.work_hours)}</div>`
-          : `<div style="font-size:11px; color:var(--text-dim); margin-top:4px;">🕒 График: не указан</div>`;
+          ? `<div class="work-hours-line">${esc(l.work_hours)}</div>`
+          : `<div style="font-size:11px; color:var(--text-dim); margin-top:4px;">График: —</div>`;
 
         return `
           <tr class="js-lead-row ${stageClass}" data-id="${esc(l.id)}">
-            <td>
+            <td style="min-width: 240px;">
               <div class="lead-title">
                 <span class="type-badge ${isIp ? "type-ip" : "type-ooo"}">${esc(l.entity_type)}</span>
-                ${esc(l.name)}
+                <span>${esc(l.name)}</span>
               </div>
-              <div class="lead-codes" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; margin-top:5px;">${codesHtml}</div>
+              <div class="lead-codes">${codesHtml}</div>
             </td>
-            <td style="white-space: nowrap; font-weight: 600;">
+            <td style="white-space: nowrap; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums;">
               ${esc(formatDateRu(l.reg_date))}
             </td>
             <td style="max-width: 250px;">
-              <div style="font-weight: 600; font-size: 12.5px;">${esc(l.region_code)} — ${esc(l.region_name)}</div>
+              <div style="font-weight: 500; font-size: 12.5px;">${esc(l.region_code)} — ${esc(l.region_name)}</div>
               <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">${esc((l.address || "").slice(0, 85))}</div>
               ${hoursHtml}
             </td>
             <td style="max-width: 210px;">
-              <div style="font-size: 12px; font-weight: 600;">
+              <div style="font-size: 12px; font-weight: 500;">
                 ${l.okved_code ? `<span class="code-chip">${esc(l.okved_code)}</span> ` : ""}${esc(l.okved_category)}
               </div>
               <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">${esc((l.okved_name || "").slice(0, 75))}</div>
             </td>
             <td style="max-width: 180px;">
-              <div style="font-size: 12.5px; font-weight: 600;">${esc(l.person_name || "—")}</div>
+              <div style="font-size: 12.5px; font-weight: 500;">${esc(l.person_name || "—")}</div>
               <div style="font-size: 11px; color: var(--text-dim);">${esc(l.person_role || "")}</div>
             </td>
-            <td>
+            <td style="min-width: 215px;">
               ${phonesHtml}
-              ${extraContacts.length ? `<div style="margin-top:5px; display:flex; flex-direction:column; gap:2px;">${extraContacts.join("")}</div>` : ""}
+              ${extraContacts.length ? `<div style="margin-top:6px; display:flex; flex-direction:column; gap:3px;">${extraContacts.join("")}</div>` : ""}
             </td>
             <td>
               ${(l.sources || []).map((s) => `<span class="source-pill">${esc(s)}</span>`).join("")}
             </td>
             <td onclick="event.stopPropagation()">
               <select class="crm-select js-crm-stage" data-id="${esc(l.id)}" aria-label="Статус CRM">
-                <option value="new" ${crm.stage === "new" ? "selected" : ""}>🆕 Новый</option>
-                <option value="work" ${crm.stage === "work" ? "selected" : ""}>⏳ В работе</option>
-                <option value="callback" ${crm.stage === "callback" ? "selected" : ""}>📞 Перезвон</option>
-                <option value="won" ${crm.stage === "won" ? "selected" : ""}>✅ Клиент</option>
-                <option value="lost" ${crm.stage === "lost" ? "selected" : ""}>❌ Отказ</option>
+                <option value="new" ${crm.stage === "new" ? "selected" : ""}>Новый</option>
+                <option value="work" ${crm.stage === "work" ? "selected" : ""}>В работе</option>
+                <option value="callback" ${crm.stage === "callback" ? "selected" : ""}>Перезвон</option>
+                <option value="won" ${crm.stage === "won" ? "selected" : ""}>Клиент</option>
+                <option value="lost" ${crm.stage === "lost" ? "selected" : ""}>Отказ</option>
               </select>
-              ${crm.note ? `<div style="font-size:11px; color:var(--amber); margin-top:4px; max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${esc(crm.note)}">📝 ${esc(crm.note)}</div>` : ""}
+              ${crm.note ? `<div style="font-size:11px; color:var(--warning); margin-top:4px; max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="${esc(crm.note)}">${esc(crm.note)}</div>` : ""}
             </td>
           </tr>
         `;
@@ -1418,7 +1421,7 @@
     const isIp = lead.entity_type === "ИП";
     const drawerStatusPill =
       lead.is_active === false
-        ? `<span class="status-pill-closed">✕ ${esc(lead.status || "Закрыта / не работает")}</span>`
+        ? `<span class="status-pill-closed">● ${esc(lead.status || "Закрыта / не работает")}</span>`
         : `<span class="status-pill-active">● ${esc(lead.status || "Действующая")}</span>`;
 
     document.getElementById("d-badges").innerHTML = `
@@ -1435,43 +1438,43 @@
             .map((ph) => {
               const dg = digitsOnly(ph);
               return `
-                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; padding:8px 10px; background:var(--bg-input); border:1px solid var(--border); border-radius:8px; margin-bottom:6px; flex-wrap:wrap;">
-                  <a href="tel:+${dg}" class="phone-link" style="font-size:15px;">${esc(ph)}</a>
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; padding:9px 12px; background:var(--bg-input); border:1px solid var(--border); border-radius:6px; margin-bottom:6px; flex-wrap:wrap;">
+                  <a href="tel:+${dg}" class="phone-link" style="font-size:14.5px;">${esc(ph)}</a>
                   <div style="display:flex; gap:6px;">
-                    <a href="tel:+${dg}" class="btn btn-sm btn-emerald">📞 Позвонить</a>
-                    ${isMobilePhone(ph) ? `<a href="https://wa.me/${dg}" target="_blank" rel="noopener" class="btn btn-sm">💬 WhatsApp</a>` : ""}
-                    <button type="button" class="btn btn-sm js-copy" data-copy="${esc(ph)}">📋 Копия</button>
+                    <a href="tel:+${dg}" class="btn btn-sm btn-emerald">Позвонить</a>
+                    ${isMobilePhone(ph) ? `<a href="https://wa.me/${dg}" target="_blank" rel="noopener" class="btn btn-sm">WhatsApp</a>` : ""}
+                    <button type="button" class="btn btn-sm js-copy" data-copy="${esc(ph)}">Копировать</button>
                   </div>
                 </div>
               `;
             })
             .join("")
-        : `<div style="color:var(--text-muted); font-size:13px;">В открытом доступе телефон пока не опубликован. Проверьте контрагента во внешних справочниках ниже или через 2ГИС API.</div>`;
+        : `<div style="color:var(--text-muted); font-size:13px;">Публичный телефон не указан в карточке. Проверьте компанию во внешних справочниках ниже.</div>`;
 
     const checkQuery = encodeURIComponent(lead.inn || lead.ogrn || lead.name);
     const body = document.getElementById("drawer-body");
     body.innerHTML = `
       <div>
-        <div style="font-size:12px; font-weight:700; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;">Деловые телефоны и связь</div>
+        <div style="font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:8px;">Телефоны и каналы связи</div>
         ${phonesBlock}
         ${
           lead.telegram
-            ? `<div style="margin-top:8px;"><strong>Telegram владельца / компании:</strong> <span style="user-select:text; font-weight:700; color:var(--accent);">${esc(lead.telegram)}</span> <button type="button" class="mini-action js-copy" data-copy="${esc(lead.telegram)}">📋</button> <a href="https://t.me/${esc(lead.telegram.replace(/^@/, ""))}" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left:6px;">Открыть Telegram ↗</a></div>`
+            ? `<div style="margin-top:8px;"><strong>Telegram:</strong> <span style="font-family:var(--font-mono); user-select:text; font-weight:600; color:var(--accent);">${esc(lead.telegram)}</span> <button type="button" class="mini-action js-copy" data-copy="${esc(lead.telegram)}">Копия</button> <a href="https://t.me/${esc(lead.telegram.replace(/^@/, ""))}" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left:6px;">Открыть в Telegram ↗</a></div>`
             : lead.telegram_phone
-            ? `<div style="margin-top:8px;"><strong>Telegram по моб. владельца:</strong> <span style="user-select:text;">${esc(lead.telegram_phone)}</span> <a href="https://t.me/${esc(lead.telegram_phone)}" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left:6px;">Найти в Telegram по номеру ↗</a></div>`
-            : `<div style="margin-top:8px; color:var(--text-muted);"><strong>Telegram:</strong> публичный аккаунт не найден (только городской телефон)</div>`
+            ? `<div style="margin-top:8px;"><strong>Telegram по номеру:</strong> <span style="font-family:var(--font-mono); user-select:text;">${esc(lead.telegram_phone)}</span> <a href="https://t.me/${esc(lead.telegram_phone)}" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left:6px;">Проверить в Telegram ↗</a></div>`
+            : `<div style="margin-top:8px; color:var(--text-muted);"><strong>Telegram:</strong> прямой аккаунт не найден</div>`
         }
         ${
           lead.emails && lead.emails.length
             ? `<div style="margin-top:8px;"><strong>Email:</strong> ${lead.emails
-                .map((e) => `<span style="user-select:text;">${esc(e)}</span>`)
+                .map((e) => `<span style="font-family:var(--font-mono); user-select:text;">${esc(e)}</span>`)
                 .join(", ")}</div>`
             : ""
         }
         ${
           lead.websites && lead.websites.length
             ? `<div style="margin-top:6px;"><strong>Сайт:</strong> ${lead.websites
-                .map((w) => `<a href="${esc(w)}" target="_blank" rel="noopener">${esc(w)}</a>`)
+                .map((w) => `<a href="${esc(w)}" target="_blank" rel="noopener">${esc(w)} ↗</a>`)
                 .join(", ")}</div>`
             : ""
         }
@@ -1488,15 +1491,15 @@
         </div>
         <div class="detail-box">
           <div class="lbl">ИНН</div>
-          <div class="val">${lead.inn ? `${esc(lead.inn)} <button class="mini-action js-copy" data-copy="${esc(lead.inn)}">📋</button>` : "Не указан"}</div>
+          <div class="val" style="font-family:var(--font-mono);">${lead.inn ? `${esc(lead.inn)} <button class="mini-action js-copy" data-copy="${esc(lead.inn)}">Копия</button>` : "—"}</div>
         </div>
         <div class="detail-box">
           <div class="lbl">ОГРН / ОГРНИП</div>
-          <div class="val">${lead.ogrn ? `${esc(lead.ogrn)} <button class="mini-action js-copy" data-copy="${esc(lead.ogrn)}">📋</button>` : "Не указан"}</div>
+          <div class="val" style="font-family:var(--font-mono);">${lead.ogrn ? `${esc(lead.ogrn)} <button class="mini-action js-copy" data-copy="${esc(lead.ogrn)}">Копия</button>` : "—"}</div>
         </div>
         <div class="detail-box">
           <div class="lbl">Дата регистрации</div>
-          <div class="val">${esc(formatDateRu(lead.reg_date))}</div>
+          <div class="val" style="font-family:var(--font-mono);">${esc(formatDateRu(lead.reg_date))}</div>
         </div>
         <div class="detail-box">
           <div class="lbl">Регион РФ</div>
@@ -1504,7 +1507,7 @@
         </div>
         <div class="detail-box" style="grid-column: span 2;">
           <div class="lbl">${esc(lead.person_role || "Руководитель / ИП")}</div>
-          <div class="val">${esc(lead.person_name || "Не указан")}</div>
+          <div class="val">${esc(lead.person_name || "—")}</div>
         </div>
         <div class="detail-box" style="grid-column: span 2;">
           <div class="lbl">Юридический адрес / локация</div>
@@ -1512,43 +1515,43 @@
         </div>
         <div class="detail-box" style="grid-column: span 2;">
           <div class="lbl">Основной ОКВЭД и сфера деятельности</div>
-          <div class="val">${lead.okved_code ? `${esc(lead.okved_code)} — ` : ""}${esc(lead.okved_name || lead.okved_category)}</div>
+          <div class="val">${lead.okved_code ? `<span class="code-chip">${esc(lead.okved_code)}</span> ` : ""}${esc(lead.okved_name || lead.okved_category)}</div>
         </div>
       </div>
 
       <div class="detail-box">
-        <div class="lbl" style="margin-bottom:8px;">Онлайн-проверка закрытия организации и реестров</div>
+        <div class="lbl" style="margin-bottom:8px;">Проверка закрытия в ФНС и внешних реестрах</div>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
           ${
             lead.inn
-              ? `<button type="button" class="btn btn-sm btn-emerald" id="btn-live-fns-check" data-id="${esc(lead.id)}" data-inn="${esc(lead.inn)}">🔍 Проверить статус по ИНН онлайн (ФНС/Saby)</button>`
+              ? `<button type="button" class="btn btn-sm btn-emerald" id="btn-live-fns-check" data-id="${esc(lead.id)}" data-inn="${esc(lead.inn)}">Проверить статус по ИНН (ФНС/Saby)</button>`
               : ""
           }
           <a class="btn btn-sm" href="https://sbis.ru/contragents/${encodeURIComponent(lead.inn || "")}" target="_blank" rel="noopener">Saby (СБИС) ↗</a>
           <a class="btn btn-sm" href="https://checko.ru/search?query=${checkQuery}" target="_blank" rel="noopener">Checko.ru ↗</a>
           <a class="btn btn-sm" href="https://www.rusprofile.ru/search?query=${checkQuery}" target="_blank" rel="noopener">Rusprofile ↗</a>
-          <a class="btn btn-sm" href="https://2gis.ru/search/${encodeURIComponent(lead.name + " " + (lead.region_name || ""))}" target="_blank" rel="noopener">Найти в 2ГИС ↗</a>
+          <a class="btn btn-sm" href="https://2gis.ru/search/${encodeURIComponent(lead.name + " " + (lead.region_name || ""))}" target="_blank" rel="noopener">2ГИС ↗</a>
         </div>
       </div>
 
       <div class="detail-box">
-        <div class="lbl" style="margin-bottom:8px; font-weight:700; color:var(--text);">Мини-CRM прозвона (сохраняется автоматически)</div>
+        <div class="lbl" style="margin-bottom:8px; font-weight:600; color:var(--text);">CRM-статус и заметка менеджера</div>
         <div class="form-group">
-          <label for="drawer-crm-stage">Этап работы с лидом</label>
+          <label for="drawer-crm-stage">Этап работы с контрагентом</label>
           <select id="drawer-crm-stage" class="select-control">
-            <option value="new" ${crm.stage === "new" ? "selected" : ""}>🆕 Новый (не звонили)</option>
-            <option value="work" ${crm.stage === "work" ? "selected" : ""}>⏳ В работе</option>
-            <option value="callback" ${crm.stage === "callback" ? "selected" : ""}>📞 Перезвонить позже</option>
-            <option value="won" ${crm.stage === "won" ? "selected" : ""}>✅ Клиент / Передан в отдел продаж</option>
-            <option value="lost" ${crm.stage === "lost" ? "selected" : ""}>❌ Отказ / Неактуально</option>
+            <option value="new" ${crm.stage === "new" ? "selected" : ""}>Новый (не звонили)</option>
+            <option value="work" ${crm.stage === "work" ? "selected" : ""}>В работе</option>
+            <option value="callback" ${crm.stage === "callback" ? "selected" : ""}>Перезвонить позже</option>
+            <option value="won" ${crm.stage === "won" ? "selected" : ""}>Клиент / передан в отдел продаж</option>
+            <option value="lost" ${crm.stage === "lost" ? "selected" : ""}>Отказ / неактуально</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="drawer-crm-note">Заметка менеджера по звонку</label>
-          <textarea id="drawer-crm-note" rows="3" class="input-control" placeholder="Например: ЛПР выходит в понедельник, отправить КП на расчётный счёт / бухгалтерию…">${esc(crm.note || "")}</textarea>
+          <label for="drawer-crm-note">Комментарий по звонку</label>
+          <textarea id="drawer-crm-note" rows="3" class="input-control" placeholder="Например: ЛПР выходит в понедельник, отправить КП…">${esc(crm.note || "")}</textarea>
         </div>
         <button type="button" class="btn btn-primary" id="btn-save-drawer-crm" data-id="${esc(lead.id)}">
-          💾 Сохранить статус и заметку
+          Сохранить заметку
         </button>
       </div>
     `;
@@ -1758,7 +1761,7 @@
 
     if (!dadataKey) {
       logEl.textContent =
-        "⚠️ Укажите бесплатный API-ключ DaData.ru (выдаётся сразу после подтверждения почты на dadata.ru/profile — 10 000 запросов в день бесплатно).";
+        "[!] Укажите бесплатный API-ключ DaData.ru (выдаётся сразу после подтверждения почты на dadata.ru/profile — 10 000 запросов в день бесплатно).";
       showToast("Введите API-ключ DaData");
       return;
     }
@@ -1768,7 +1771,7 @@
       .map((s) => s.trim())
       .filter(Boolean);
     if (!queries.length) {
-      logEl.textContent = "⚠️ Введите хотя бы одно ключевое слово или префикс ОГРН.";
+      logEl.textContent = "[!] Введите хотя бы одно ключевое слово или префикс ОГРН.";
       return;
     }
 
@@ -1776,7 +1779,7 @@
     const partyTypes = entityMode === "BOTH" ? ["INDIVIDUAL", "LEGAL"] : [entityMode];
     const discovered = [];
 
-    logEl.textContent = `⏳ Запуск живого поиска (${queries.length} запросов, возраст <= ${maxDays} дн.)…\n`;
+    logEl.textContent = `[RUN] Запуск живого поиска (${queries.length} запросов, возраст <= ${maxDays} дн.)…\n`;
 
     for (const q of queries) {
       for (const ptype of partyTypes) {
@@ -1800,7 +1803,7 @@
           );
 
           if (!res.ok) {
-            logEl.textContent += `❌ Ошибка DaData HTTP ${res.status} на запросе "${q}"\n`;
+            logEl.textContent += `[ERR] Ошибка DaData HTTP ${res.status} на запросе "${q}"\n`;
             continue;
           }
           const json = await res.json();
@@ -1859,16 +1862,16 @@
             });
             matchedHere++;
           }
-          logEl.textContent += `✔ Запрос "${q}" (${ptype === "INDIVIDUAL" ? "ИП" : "ООО"}): найдено свежих новорегов — ${matchedHere}\n`;
+          logEl.textContent += `[OK] Запрос "${q}" (${ptype === "INDIVIDUAL" ? "ИП" : "ООО"}): найдено свежих новорегов — ${matchedHere}\n`;
         } catch (err) {
-          logEl.textContent += `❌ Сбой сети на "${q}": ${err.message}\n`;
+          logEl.textContent += `[ERR] Сбой сети на "${q}": ${err.message}\n`;
         }
       }
     }
 
     // Опциональное дообогащение телефонов через 2ГИС API прямо в браузере
     if (twogisKey && discovered.length) {
-      logEl.textContent += `🔎 Дообогащение телефонов через 2ГИС API…\n`;
+      logEl.textContent += `[2GIS] Дообогащение телефонов через 2ГИС API…\n`;
       let enriched = 0;
       for (const lead of discovered.slice(0, 15)) {
         if (lead.phones.length) continue;
@@ -1899,7 +1902,7 @@
           }
         } catch (_) {}
       }
-      logEl.textContent += `📞 Дообогащено номерами из 2ГИС: +${enriched}\n`;
+      logEl.textContent += `[2GIS] Дообогащено номерами из 2ГИС: +${enriched}\n`;
     }
 
     state.liveLeads = [...discovered, ...state.liveLeads].slice(0, 1000);
@@ -1912,7 +1915,7 @@
     renderKPIsAndAnalytics();
     applyFiltersAndRender(true);
 
-    logEl.textContent += `\n🎉 Готово! Добавлено в таблицу: ${discovered.length} свежих записей. Перейдите во вкладку «База новорегов» для фильтрации и выгрузки в Excel.`;
+    logEl.textContent += `\n[DONE] Добавлено в таблицу: ${discovered.length} свежих записей. Перейдите во вкладку «Реестр» для фильтрации и выгрузки в Excel.`;
     showToast(`Добавлено новорегов: ${discovered.length}`);
   }
 
@@ -2048,12 +2051,12 @@
         const lid = liveFnsBtn.dataset.id;
         const inn = liveFnsBtn.dataset.inn;
         liveFnsBtn.disabled = true;
-        liveFnsBtn.textContent = "⏳ Проверка в ФНС/Saby…";
+        liveFnsBtn.textContent = "Проверка в ФНС/Saby…";
         checkSabyFnsOnline(inn).then((res) => {
           liveFnsBtn.disabled = false;
-          liveFnsBtn.textContent = "🔍 Проверить статус по ИНН онлайн (ФНС/Saby)";
+          liveFnsBtn.textContent = "Проверить статус по ИНН (ФНС/Saby)";
           if (!res) {
-            showToast("⚠️ Не удалось получить ответ прокси Saby");
+            showToast("Не удалось получить ответ прокси Saby");
             return;
           }
           const target = state.mergedLeads.find((x) => x.id === lid);
@@ -2066,7 +2069,7 @@
             renderKPIsAndAnalytics();
             applyFiltersAndRender(false);
           }
-          showToast(`✅ ФНС/Saby: ${res.status}`);
+          showToast(`ФНС/Saby: ${res.status}`);
         });
         return;
       }
@@ -2077,7 +2080,7 @@
         const stg = document.getElementById("drawer-crm-stage").value;
         const note = document.getElementById("drawer-crm-note").value;
         saveCrm(lid, stg, note);
-        showToast("✅ Статус и заметка сохранены");
+        showToast("Статус и заметка сохранены");
         return;
       }
 
@@ -2130,7 +2133,7 @@
       const dadata = document.getElementById("live-dadata-key").value.trim();
       const twogis = document.getElementById("live-twogis-key").value.trim();
       localStorage.setItem(LS_KEYS_KEY, JSON.stringify({ dadata, twogis }));
-      showToast("🔑 Ключи сохранены в вашем браузере");
+      showToast("Ключи сохранены в вашем браузере");
     });
     document.getElementById("btn-clear-live").addEventListener("click", () => {
       state.liveLeads = [];
