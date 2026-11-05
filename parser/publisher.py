@@ -69,6 +69,7 @@ class HereNowPublisher:
 
     def _api_request(self, method: str, url: str, body: dict[str, Any] | None = None) -> dict[str, Any]:
         headers = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) NovoRegParser/2.0",
             "X-HereNow-Client": CLIENT_HEADER,
             "Accept": "application/json",
         }
@@ -239,6 +240,7 @@ class HereNowPublisher:
 
             url = f"{HERENOW_API_BASE}/api/v1/publishes/{self.slug}/data/leads"
             headers = {
+                "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) NovoRegParser/2.0",
                 "X-HereNow-Client": CLIENT_HEADER,
                 "Authorization": f"Bearer {self.api_key}",
                 "Content-Type": "application/json; charset=utf-8",
