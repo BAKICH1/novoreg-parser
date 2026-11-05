@@ -59,6 +59,11 @@ jobs:
             --dir-items 14 \
             --publish
 
+      - name: Verify this run is actually published on the website
+        env:
+          HERENOW_SLUG: ${{ secrets.HERENOW_SLUG || 'vivid-quill-yz5r' }}
+        run: python3 scripts/verify_published_run.py
+
       - name: Persist updated leads & frontier cursors to repository
         run: |
           git config user.name "novoreg-bot"

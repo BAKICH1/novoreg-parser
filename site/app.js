@@ -1307,8 +1307,11 @@
     const ageMinutes = Number.isFinite(lastMs) ? Math.max(0, Math.floor((Date.now() - lastMs) / 60000)) : null;
     const trigger = automation.last_trigger || run.trigger || "unknown";
     const scheduledAt = automation.last_scheduled_at || "";
+    const scheduledMs = Date.parse(scheduledAt);
+    const scheduledAge = Number.isFinite(scheduledMs) ? Math.max(0, Math.floor((Date.now() - scheduledMs) / 60000)) : null;
+    const scheduledFresh = scheduledAge !== null && scheduledAge <= 25;
     const stale = ageMinutes === null || ageMinutes > 25;
-    box.dataset.health = state.lastSyncError || stale || !scheduledAt ? "warning" : "ok";
+    box.dataset.health = state.lastSyncError || stale || !scheduledFresh ? "warning" : "ok";
     if (state.lastSyncError) {
       label.textContent = "Проблема синхронизации";
       details.textContent = state.lastSyncError;
@@ -1320,8 +1323,10 @@
     } else {
       const mode = trigger === "schedule" ? "По расписанию" : trigger === "workflow_dispatch" ? "Ручной серверный запуск" : "Серверный сбор";
       label.textContent = `${mode}: +${Number(run.added_new || 0)} · ${ageMinutes} мин назад`;
-      details.textContent = scheduledAt
-        ? "Срабатывание расписания подтверждено. Следующий запуск зависит от очереди GitHub."
+      details.textContent = scheduledFresh
+        ? "Недавний запуск по расписанию подтверждён. Следующий запуск зависит от очереди GitHub."
+        : scheduledAge !== null
+        ? `Последний запуск по расписанию был ${scheduledAge} мин назад. Ручной сбор не подтверждает восстановление расписания.`
         : "Данные опубликованы, но автоматическое срабатывание расписания пока не подтверждено.";
     }
     const link = document.getElementById("automation-run-link");
