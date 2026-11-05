@@ -98,6 +98,8 @@ class LeadStore:
             history = list(self.state.get("run_history") or [])
             history.insert(0, {"timestamp": now_iso, **run_summary})
             self.state["run_history"] = history[:30]
+            if run_summary.get("trigger") == "schedule":
+                self.state["last_scheduled_run_at"] = now_iso
 
         total = len(sorted_leads)
         with_phone = sum(1 for x in sorted_leads if x.has_phone)
@@ -140,6 +142,13 @@ class LeadStore:
                 {"date": d, "count": c} for d, c in sorted(by_date.items(), reverse=True)[:14]
             ],
             "recent_runs": list(self.state.get("run_history") or [])[:10],
+            "automation": {
+                "expected_interval_minutes": 10,
+                "last_completed_at": (self.state.get("run_history") or [{}])[0].get("timestamp", ""),
+                "last_trigger": (self.state.get("run_history") or [{}])[0].get("trigger", "unknown"),
+                "last_run_url": (self.state.get("run_history") or [{}])[0].get("run_url", ""),
+                "last_scheduled_at": self.state.get("last_scheduled_run_at", ""),
+            },
         }
 
         leads_doc = {

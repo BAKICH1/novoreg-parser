@@ -133,6 +133,11 @@ def run_cycle(
         "updated": updated_existing,
         "duration_sec": elapsed,
         "sources": active_sources,
+        "trigger": os.getenv("GITHUB_EVENT_NAME", "local"),
+        "run_url": (
+            f"https://github.com/{os.getenv('GITHUB_REPOSITORY')}/actions/runs/{os.getenv('GITHUB_RUN_ID')}"
+            if os.getenv("GITHUB_REPOSITORY") and os.getenv("GITHUB_RUN_ID") else ""
+        ),
     }
     stats = store.save(run_summary=run_summary)
     logger.info(

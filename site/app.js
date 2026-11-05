@@ -16,6 +16,8 @@
     mergedLeads: [],
     filteredLeads: [],
     stats: null,
+    serverLoadPromise: null,
+    lastSyncError: "",
     lastUpdatedIso: "",
     cloudHarvestIso: "",
     harvestCursor: {
@@ -53,6 +55,23 @@
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
+  }
+
+  // Таймаут включает чтение тела: один зависший источник не блокирует весь сбор.
+  async function fetchBounded(url, options = {}, timeoutMs = 12000) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, { ...options, signal: controller.signal });
+      const body = await response.text();
+      return new Response([204, 205, 304].includes(response.status) ? null : body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      });
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   function showToast(msg) {
@@ -166,13 +185,13 @@
     try {
       const existingRecId = state.cloudNoteIds[leadId];
       if (existingRecId) {
-        await fetch(`./.herenow/data/crm_notes/${encodeURIComponent(existingRecId)}`, {
+        await fetchBounded(`./.herenow/data/crm_notes/${encodeURIComponent(existingRecId)}`, {
           method: "PATCH",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ crm_stage: stage, note: note || "" }),
         });
       } else {
-        const res = await fetch("./.herenow/data/crm_notes", {
+        const res = await fetchBounded("./.herenow/data/crm_notes", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -428,7 +447,7 @@
     const cleanInn = String(inn || "").replace(/\D/g, "");
     if (cleanInn.length !== 10 && cleanInn.length !== 12) return null;
     try {
-      const res = await fetch(`./api/saby/contragents/${cleanInn}`, { cache: "no-store" });
+      const res = await fetchBounded(`./api/saby/contragents/${cleanInn}`, { cache: "no-store" });
       if (!res.ok) return null;
       const html = await res.text();
       const liqDate = /"ДатаЛиквидации"\s*:\s*"([^"]+)"/.exec(html);
@@ -522,7 +541,7 @@
     await Promise.allSettled([
       (async () => {
         try {
-          const notesRes = await fetch("./.herenow/data/crm_notes?limit=100", { cache: "no-store" });
+          const notesRes = await fetchBounded("./.herenow/data/crm_notes?limit=100", { cache: "no-store" });
           if (notesRes.ok) {
             state.siteDataReady = true;
             const notesJson = await notesRes.json();
@@ -541,7 +560,7 @@
       })(),
       (async () => {
         try {
-          const hsRes = await fetch("./.herenow/data/harvest_state?limit=5", { cache: "no-store" });
+          const hsRes = await fetchBounded("./.herenow/data/harvest_state?limit=5", { cache: "no-store" });
           if (hsRes.ok) {
             const hsJson = await hsRes.json();
             const recs = hsJson.records || [];
@@ -574,7 +593,7 @@
         const url = cursor
           ? `./.herenow/data/leads?limit=100&cursor=${encodeURIComponent(cursor)}`
           : "./.herenow/data/leads?limit=100";
-        const leadsRes = await fetch(url, { cache: "no-store" });
+        const leadsRes = await fetchBounded(url, { cache: "no-store" });
         if (!leadsRes.ok) break;
         const lj = await leadsRes.json();
         const batch = lj.records || [];
@@ -805,7 +824,7 @@
         source_tag: String((lead.sources || ["Edge-парсер Here.now"]).join(", ")).slice(0, 140),
         has_phone: Boolean(lead.phones && lead.phones.length > 0),
       };
-      const res = await fetch("./.herenow/data/leads", {
+      const res = await fetchBounded("./.herenow/data/leads", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -831,13 +850,13 @@
     };
     try {
       if (state.harvestCursor.recId) {
-        await fetch(`./.herenow/data/harvest_state/${encodeURIComponent(state.harvestCursor.recId)}`, {
+        await fetchBounded(`./.herenow/data/harvest_state/${encodeURIComponent(state.harvestCursor.recId)}`, {
           method: "PATCH",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(bodyObj),
         });
       } else {
-        const res = await fetch("./.herenow/data/harvest_state", {
+        const res = await fetchBounded("./.herenow/data/harvest_state", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -1038,7 +1057,7 @@
         workingCursor = advanceCursorLocal(workingCursor);
 
         const feedResponses = await Promise.allSettled(
-          feedSpecs.map((f) => fetch(f.url, { cache: "no-store" }))
+          feedSpecs.map((f) => fetchBounded(f.url, { cache: "no-store" }))
         );
 
         for (let i = 0; i < feedResponses.length; i++) {
@@ -1056,7 +1075,7 @@
 
       if (!proxyAvailable) {
         if (isManual) {
-          showToast("Серверный Edge-прокси активен на домене .here.now");
+          showToast("Источник не ответил. Автосбор повторит попытку; можно нажать ещё раз.");
         }
         return;
       }
@@ -1072,7 +1091,7 @@
       for (let offset = 0; offset < toFetch.length && newlyDiscovered.length < targetBatch; offset += CONCURRENCY) {
         const chunk = toFetch.slice(offset, offset + CONCURRENCY);
         const cardRes = await Promise.allSettled(
-          chunk.map((c) => fetch(`./api/orgpage${c.pathPart}`, { cache: "no-store" }))
+          chunk.map((c) => fetchBounded(`./api/orgpage${c.pathPart}`, { cache: "no-store" }))
         );
 
         const waveAdded = [];
@@ -1225,44 +1244,98 @@
     });
   }
 
-  async function loadServerData(isSilentPoll) {
-    try {
-      const [statsRes, leadsRes] = await Promise.all([
-        fetch(`./data/stats.json?t=${Date.now()}`, { cache: "no-store" }),
-        fetch(`./data/leads.json?t=${Date.now()}`, { cache: "no-store" }),
-      ]);
+  function loadServerData(isSilentPoll) {
+    // Не плодим параллельные полные загрузки при медленной сети / возвращении во вкладку.
+    if (state.serverLoadPromise) return state.serverLoadPromise;
+    state.serverLoadPromise = performServerDataLoad(isSilentPoll).finally(() => {
+      state.serverLoadPromise = null;
+    });
+    return state.serverLoadPromise;
+  }
 
-      if (statsRes.ok) {
-        const st = await statsRes.json();
-        const prevIso = state.lastUpdatedIso;
-        state.stats = st;
-        state.lastUpdatedIso = st.updated_at || "";
-        if (isSilentPoll && prevIso && state.lastUpdatedIso && prevIso !== state.lastUpdatedIso) {
-          showToast("Получены свежие данные от фонового парсера");
-        }
+  async function performServerDataLoad(isSilentPoll) {
+    const nonce = Date.now();
+    const results = await Promise.allSettled([
+      fetchBounded(`./data/stats.json?t=${nonce}`, { cache: "no-store" }).then((r) => {
+        if (!r.ok) throw new Error(`stats HTTP ${r.status}`);
+        return r.json();
+      }),
+      fetchBounded(`./data/leads.json?t=${nonce}`, { cache: "no-store" }).then((r) => {
+        if (!r.ok) throw new Error(`leads HTTP ${r.status}`);
+        return r.json();
+      }),
+    ]);
+    state.lastSyncError = results.some((r) => r.status === "rejected")
+      ? "Не удалось получить часть серверных данных; показана последняя загруженная база."
+      : "";
+    if (results[0].status === "fulfilled") {
+      const st = results[0].value;
+      const prevIso = state.lastUpdatedIso;
+      state.stats = st;
+      state.lastUpdatedIso = st.updated_at || "";
+      if (isSilentPoll && prevIso && state.lastUpdatedIso && prevIso !== state.lastUpdatedIso) {
+        showToast("Получены свежие данные от серверного парсера");
       }
-
-      if (leadsRes.ok) {
-        const ld = await leadsRes.json();
-        state.serverLeads = Array.isArray(ld.leads) ? ld.leads : Array.isArray(ld) ? ld : [];
-      }
-    } catch (err) {
-      console.warn("Не удалось загрузить JSON:", err);
+    }
+    if (results[1].status === "fulfilled") {
+      const ld = results[1].value;
+      state.serverLeads = Array.isArray(ld.leads) ? ld.leads : Array.isArray(ld) ? ld : [];
     }
 
-    // Мгновенный первый рендер локальной и статической базы без ожидания всех страниц облачной БД
-    if (!isSilentPoll && (state.serverLeads.length || state.edgeLocalLeads.length)) {
-      mergeAllLeads();
-      populateDynamicSelects();
-      renderKPIsAndAnalytics();
-      applyFiltersAndRender(false);
-    }
-
+    // Серверные изменения видны сразу, даже если Site Data отвечает медленно.
+    mergeAllLeads();
+    populateDynamicSelects();
+    renderKPIsAndAnalytics();
+    applyFiltersAndRender(false);
     await fetchCloudSiteData(Boolean(isSilentPoll));
     mergeAllLeads();
     populateDynamicSelects();
     renderKPIsAndAnalytics();
     applyFiltersAndRender(false);
+  }
+
+  function renderAutomationHealth() {
+    const box = document.getElementById("automation-health");
+    const label = document.getElementById("automation-health-label");
+    const details = document.getElementById("automation-health-details");
+    if (!box || !label || !details) return;
+    const stats = state.stats || {};
+    const automation = stats.automation || {};
+    const run = (stats.recent_runs || [])[0] || {};
+    const lastIso = automation.last_completed_at || run.timestamp || stats.updated_at || "";
+    const lastMs = Date.parse(lastIso);
+    const ageMinutes = Number.isFinite(lastMs) ? Math.max(0, Math.floor((Date.now() - lastMs) / 60000)) : null;
+    const trigger = automation.last_trigger || run.trigger || "unknown";
+    const scheduledAt = automation.last_scheduled_at || "";
+    const stale = ageMinutes === null || ageMinutes > 25;
+    box.dataset.health = state.lastSyncError || stale || !scheduledAt ? "warning" : "ok";
+    if (state.lastSyncError) {
+      label.textContent = "Проблема синхронизации";
+      details.textContent = state.lastSyncError;
+    } else if (stale) {
+      label.textContent = ageMinutes === null
+        ? "Серверный запуск ещё не подтверждён"
+        : `Нет серверного обновления ${ageMinutes} мин`;
+      details.textContent = "Расписание GitHub запрошено каждые 10 минут. Проверьте журнал запусков; сбор в открытой вкладке — отдельный режим.";
+    } else {
+      const mode = trigger === "schedule" ? "По расписанию" : trigger === "workflow_dispatch" ? "Ручной серверный запуск" : "Серверный сбор";
+      label.textContent = `${mode}: +${Number(run.added_new || 0)} · ${ageMinutes} мин назад`;
+      details.textContent = scheduledAt
+        ? "Срабатывание расписания подтверждено. Следующий запуск зависит от очереди GitHub."
+        : "Данные опубликованы, но автоматическое срабатывание расписания пока не подтверждено.";
+    }
+    const link = document.getElementById("automation-run-link");
+    const runUrl = automation.last_run_url || run.run_url || "";
+    if (link) {
+      link.href = /^https:\/\/github\.com\/BAKICH1\/novoreg-parser\/actions\/runs\/\d+$/.test(runUrl)
+        ? runUrl
+        : "https://github.com/BAKICH1/novoreg-parser/actions/workflows/parser-cron.yml";
+    }
+    const pill = document.querySelector(".pulse-pill");
+    if (pill) {
+      pill.classList.toggle("sync-stale", stale || Boolean(state.lastSyncError));
+      pill.title = "Время обновления общей базы. Статус серверного расписания показан отдельно под счётчиками.";
+    }
   }
 
   function populateDynamicSelects() {
@@ -1302,6 +1375,7 @@
   }
 
   function renderKPIsAndAnalytics() {
+    renderAutomationHealth();
     const all = state.mergedLeads;
     const total = all.length;
     const ipCount = all.filter((x) => x.entity_type === "ИП").length;
@@ -1359,10 +1433,10 @@
       const nextCat =
         EDGE_CATEGORY_FEEDS[state.harvestCursor.cat_cursor % EDGE_CATEGORY_FEEDS.length][2];
       edgeBox.textContent = [
-        `Статус Edge-прокси Here.now : АКТИВЕН (/api/orgpage/* + /.herenow/data/leads)`,
+        `Сбор в браузере             : ${state.harvestRunning ? "идёт" : "ожидание"} (только при открытой вкладке)`,
         `Сохранено в облаке Site Data: ${state.siteDataLeads.length} карточек (всего в сводной витрине: ${total})`,
         `Следующий обход ротации     : ${nextCity} + «${nextCat}» (стр. ${state.harvestCursor.cat_page || 1})`,
-        `Последний автосбор          : ${bestIso || "только что"}`,
+        `Последнее обновление данных : ${bestIso || "ещё не подтверждено"}`,
       ].join("\n");
     }
 
@@ -1397,11 +1471,11 @@
       runsBox.textContent = runs
         .map(
           (r) =>
-            `[${r.timestamp}] Найдено за цикл: ${r.fetched} | Новых: +${r.added_new} | Обновлено: ${r.updated} | Время: ${r.duration_sec}с | Модули: ${(r.sources || []).join(", ")}`
+            `[${r.timestamp}] ${r.trigger === "schedule" ? "ПО РАСПИСАНИЮ" : r.trigger === "workflow_dispatch" ? "РУЧНОЙ ЗАПУСК" : "СБОР"} | Найдено за цикл: ${r.fetched} | Новых: +${r.added_new} | Обновлено: ${r.updated} | Время: ${r.duration_sec}с | Модули: ${(r.sources || []).join(", ")}`
         )
         .join("\n");
     } else {
-      runsBox.textContent = "Циклы сбора выполнены успешно.";
+      runsBox.textContent = "Подтверждённых циклов сбора пока нет.";
     }
 
     // Автоподстановка slug текущего сайта here.now во вкладке настройки
@@ -2439,6 +2513,15 @@
     if (isStaleDay || isOlderThan2m) {
       setTimeout(() => runEdgeAutoHarvest(false, false), 450);
     }
+  });
+
+  // Возвращение из спящей вкладки / восстановление сети: не ждём следующего таймера.
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) loadServerData(true);
+  });
+  window.addEventListener("online", () => loadServerData(true));
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) loadServerData(true);
   });
 
   // Ускоренный авто-пуллинг свежих данных из облака Site Data каждые 30 секунд

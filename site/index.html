@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./styles.css?v=20261105-health1" />
 </head>
 <body>
   <div class="app-frame">
@@ -97,6 +97,14 @@
               <div class="kpi-value" id="kpi-regions">0</div>
               <div class="kpi-sub" id="kpi-runs">Часы работы: 0 • Облако: 0</div>
             </div>
+          </div>
+
+          <div class="automation-health" id="automation-health" data-health="warning" role="status" aria-live="polite">
+            <div class="automation-health-copy">
+              <strong id="automation-health-label">Проверяем последний серверный сбор…</strong>
+              <span id="automation-health-details">Фоновое расписание и сбор в открытой вкладке проверяются отдельно.</span>
+            </div>
+            <a id="automation-run-link" href="https://github.com/BAKICH1/novoreg-parser/actions/workflows/parser-cron.yml" target="_blank" rel="noopener">Журнал запусков ↗</a>
           </div>
 
           <div class="filter-panel">
@@ -344,17 +352,17 @@
         <!-- TAB 4: ПОДКЛЮЧЕНИЕ АВТОПАРСИНГА 24/7 -->
         <section id="tab-setup" class="tab-panel">
           <div class="panel-card panel-card-status" style="margin-bottom: 20px;">
-            <h2>Автономный облачный Edge-парсер на Here.now активен</h2>
+            <h2>Сбор в открытой вкладке через Here.now Edge</h2>
             <p class="desc">
-              Серверные прокси-маршруты <code>.herenow/proxy.json</code> и облачная база <code>/.herenow/data/leads</code> + <code>/.herenow/data/harvest_state</code> работают напрямую на сети Cloudflare. При открытии сайта, каждые 3 минуты в фоне и по кнопке «Подтянуть свежие» система обходит новые города и страницы рубрик, проверяет статус, часы работы и Telegram, и сохраняет карточки в облако.
+              Серверные прокси-маршруты <code>.herenow/proxy.json</code> и облачная база <code>/.herenow/data/leads</code> + <code>/.herenow/data/harvest_state</code> работают напрямую на сети Cloudflare. При открытии сайта, каждые 35 секунд в активной вкладке и по кнопке «Подтянуть свежие» система обходит новые города и страницы рубрик, проверяет статус, часы работы и Telegram, и сохраняет карточки в облако.
             </p>
             <div id="edge-harvest-status-box" class="code-block" style="margin-top: 12px;">Инициализация облачного курсора…</div>
           </div>
 
           <div class="panel-card">
-            <h2>Дополнительный внешний крон через GitHub Actions (по желанию)</h2>
+            <h2>Серверный сбор через GitHub Actions</h2>
             <p class="desc">
-              Если требуется дополнительный сбор каждые 20 минут даже при полностью закрытом браузере, подключите готовый workflow <code>.github/workflows/parser-cron.yml</code> в своём GitHub-репозитории.
+              Workflow <a href="https://github.com/BAKICH1/novoreg-parser/actions/workflows/parser-cron.yml" target="_blank" rel="noopener">BAKICH1/novoreg-parser</a> настроен на запуск каждые 10 минут без открытого браузера. GitHub может задерживать или пропускать запуски. Индикатор под счётчиками показывает фактическое время последнего сбора и отличает ручной запуск от запуска по расписанию.
             </p>
 
             <div class="step-list">
@@ -371,7 +379,7 @@
               <div class="step-item">
                 <div class="step-num">2</div>
                 <div style="flex: 1;">
-                  <strong>Загрузите проект <code>novoreg-parser</code> в GitHub</strong>
+                  <strong>Проект <code>novoreg-parser</code> загружен в GitHub</strong>
                   <p class="step-text">
                     В репозитории уже настроен файл <code>.github/workflows/parser-cron.yml</code> на стандартной библиотеке Python без внешних платных зависимостей.
                   </p>
@@ -381,7 +389,7 @@
               <div class="step-item">
                 <div class="step-num">3</div>
                 <div style="flex: 1;">
-                  <strong>Укажите секреты в Settings → Secrets and variables → Actions</strong>
+                  <strong>Ключ публикации уже задан в GitHub Actions Secrets</strong>
                   <div class="code-block" id="setup-secrets-block">HERENOW_SLUG        = ваш-slug-сайта (первая часть адреса &lt;slug&gt;.here.now)
 HERENOW_API_KEY     = hnk_ваш_ключ_из_here_now_dashboard
 
@@ -416,6 +424,6 @@ RU_PROXY_URL        = http://user:pass@ip:port (опционально для п
 
   <div class="toast" id="toast">Скопировано в буфер обмена</div>
 
-  <script src="./app.js"></script>
+  <script src="./app.js?v=20261105-health1"></script>
 </body>
 </html>
