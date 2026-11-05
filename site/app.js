@@ -933,9 +933,14 @@
       // Проверяем окно разметки после заголовка карточки: есть ли уже опубликованный телефон в листинге
       const snippet = html.slice(m.index, m.index + 1350);
       const hasListingPhone = /class=["'][^"']*phone[^"']*["'][\s\S]{0,180}?(?:\+7|8)[\s\-()]*\d{3}/i.test(snippet);
+      const isExplicitEntity = /\/(?:ip|ooo)[-_]/i.test(pathPart);
       const numId = Number(compId) || 0;
       const isFreshId = numId >= 6100000;
-      const priority = (hasListingPhone ? 4 : 0) + (isFreshId ? 2 : 0) + (numId >= 5300000 ? 1 : 0);
+      const priority =
+        (hasListingPhone ? 4 : 0) +
+        (isFreshId ? 2 : 0) +
+        (isExplicitEntity ? 2 : 0) +
+        (numId >= 5300000 ? 1 : 0);
 
       out.push({
         pathPart,
@@ -987,18 +992,28 @@
   }
 
   async function runEdgeAutoHarvest(isManual, isTurboWave) {
+    const btn = document.getElementById("btn-edge-harvest");
     if (state.harvestRunning) {
-      if (isManual) showToast("Параллельный сбор уже выполняется…");
+      if (isManual) {
+        state.queuedManualHarvest = true;
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = "Сбор свежих…";
+        }
+        showToast("Идёт потоковая подкачка ИП и ООО…");
+      }
       return;
     }
     state.harvestRunning = true;
-    const btn = document.getElementById("btn-edge-harvest");
-    const origBtnHtml = btn ? btn.innerHTML : "";
+    const origBtnHtml = btn && !btn.textContent.startsWith("Сбор") ? btn.innerHTML : state._savedEdgeBtnHtml || (btn ? btn.innerHTML : "");
+    if (origBtnHtml && !origBtnHtml.startsWith("Сбор")) {
+      state._savedEdgeBtnHtml = origBtnHtml;
+    }
     const targetBatch = isManual ? 36 : isTurboWave ? 28 : 18;
     const CONCURRENCY = 14;
 
-    if (btn && (isManual || isTurboWave)) {
-      btn.disabled = isManual;
+    if (btn) {
+      if (isManual) btn.disabled = true;
       btn.textContent = "Сбор: 0…";
     }
 
@@ -1088,7 +1103,7 @@
             state.turboAddedCount += waveAdded.length;
             updateTurboButtonUI();
           }
-          if (btn && (isManual || isTurboWave)) {
+          if (btn) {
             btn.textContent = `Сбор: +${newlyDiscovered.length}…`;
           }
           mergeAllLeads();
@@ -1107,15 +1122,15 @@
         } catch (_) {}
       }
 
-      await Promise.allSettled([
-        ...pendingCloudWrites,
-        saveHarvestCursor({
-          city_cursor: workingCursor.city_cursor,
-          cat_cursor: workingCursor.cat_cursor,
-          cat_page: workingCursor.cat_page,
-          last_harvest_iso: new Date().toISOString(),
-        }),
-      ]);
+      // Не блокируем интерфейс ожиданием записи в облако: курсор обновляем сразу в памяти, запись завершается фоном
+      const nextCursorState = {
+        city_cursor: workingCursor.city_cursor,
+        cat_cursor: workingCursor.cat_cursor,
+        cat_page: workingCursor.cat_page,
+        last_harvest_iso: new Date().toISOString(),
+      };
+      state.harvestCursor = { ...state.harvestCursor, ...nextCursorState };
+      Promise.allSettled([...pendingCloudWrites, saveHarvestCursor(nextCursorState)]);
 
       if (newlyDiscovered.length > 0) {
         const ipCnt = newlyDiscovered.filter((x) => x.entity_type === "ИП").length;
@@ -1133,8 +1148,12 @@
       state.harvestRunning = false;
       if (btn) {
         btn.disabled = false;
-        if (origBtnHtml) btn.innerHTML = origBtnHtml;
+        if (state._savedEdgeBtnHtml) btn.innerHTML = state._savedEdgeBtnHtml;
         else btn.textContent = "Подтянуть свежие";
+      }
+      if (state.queuedManualHarvest) {
+        state.queuedManualHarvest = false;
+        runEdgeAutoHarvest(true, false);
       }
     }
   }
