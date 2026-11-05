@@ -2,8 +2,9 @@ name: NovoReg 24/7 Parser & Here.now Publisher
 
 on:
   schedule:
-    # Ускоренный запуск каждые 10 минут круглосуточно (24/7)
-    - cron: "*/10 * * * *"
+    # Разнесённые минуты: меньше конкуренции с заданиями в начале часа.
+    # Изменение cron также повторно регистрирует расписание GitHub.
+    - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
     inputs:
       regions_per_run:
