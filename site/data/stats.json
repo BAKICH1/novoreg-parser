@@ -1,36 +1,56 @@
 {
-  "updated_at": "2026-11-05T12:24:55Z",
+  "updated_at": "2026-11-05T12:43:04Z",
   "mode": "2-в-1 (Открытые реестры и каталоги + API контрагентов)",
-  "total_leads": 363,
-  "with_phone": 353,
-  "phone_rate_pct": 97.2,
-  "with_email": 299,
-  "with_website": 324,
-  "active_count": 362,
+  "total_leads": 506,
+  "with_phone": 496,
+  "phone_rate_pct": 98.0,
+  "with_email": 407,
+  "with_website": 456,
+  "active_count": 505,
   "closed_count": 1,
-  "with_work_hours": 197,
-  "with_telegram": 58,
-  "with_telegram_phone": 185,
-  "ip_count": 39,
-  "ooo_count": 324,
-  "regions_covered": 37,
-  "runs_count": 9,
+  "with_work_hours": 342,
+  "with_telegram": 79,
+  "with_telegram_phone": 258,
+  "ip_count": 58,
+  "ooo_count": 448,
+  "regions_covered": 43,
+  "runs_count": 10,
   "top_regions": [
     {
       "label": "77 — г. Москва",
-      "count": 74
+      "count": 93
     },
     {
       "label": "78 — г. Санкт-Петербург",
-      "count": 47
+      "count": 58
+    },
+    {
+      "label": "50 — Московская область",
+      "count": 32
     },
     {
       "label": "63 — Самарская область",
       "count": 28
     },
     {
-      "label": "50 — Московская область",
-      "count": 24
+      "label": "56 — Оренбургская область",
+      "count": 22
+    },
+    {
+      "label": "76 — Ярославская область",
+      "count": 21
+    },
+    {
+      "label": "70 — Томская область",
+      "count": 19
+    },
+    {
+      "label": "23 — Краснодарский край",
+      "count": 19
+    },
+    {
+      "label": "25 — Приморский край",
+      "count": 18
     },
     {
       "label": "18 — Удмуртская Республика",
@@ -41,46 +61,38 @@
       "count": 16
     },
     {
-      "label": "23 — Краснодарский край",
-      "count": 16
+      "label": "42 — Кемеровская область — Кузбасс",
+      "count": 14
+    },
+    {
+      "label": "16 — Республика Татарстан",
+      "count": 12
     },
     {
       "label": "52 — Нижегородская область",
       "count": 11
     },
     {
-      "label": "24 — Красноярский край",
-      "count": 10
-    },
-    {
-      "label": "66 — Свердловская область",
-      "count": 10
-    },
-    {
-      "label": "16 — Республика Татарстан",
-      "count": 10
-    },
-    {
-      "label": "61 — Ростовская область",
-      "count": 9
-    },
-    {
       "label": "72 — Тюменская область",
-      "count": 9
-    },
-    {
-      "label": "54 — Новосибирская область",
-      "count": 8
-    },
-    {
-      "label": "74 — Челябинская область",
-      "count": 8
+      "count": 10
     }
   ],
   "top_categories": [
     {
       "label": "Прочие виды деятельности",
-      "count": 152
+      "count": 176
+    },
+    {
+      "label": "Строительство и ремонт",
+      "count": 86
+    },
+    {
+      "label": "Образование, медицина, сервис",
+      "count": 68
+    },
+    {
+      "label": "Торговля и E-commerce",
+      "count": 56
     },
     {
       "label": "Общепит, кафе и HoReCa",
@@ -91,20 +103,8 @@
       "count": 41
     },
     {
-      "label": "Образование, медицина, сервис",
-      "count": 41
-    },
-    {
       "label": "Недвижимость и аренда",
       "count": 31
-    },
-    {
-      "label": "Торговля и E-commerce",
-      "count": 28
-    },
-    {
-      "label": "Строительство и ремонт",
-      "count": 22
     },
     {
       "label": "Производство",
@@ -122,15 +122,15 @@
   "sources_breakdown": [
     {
       "label": "Открытый каталог РФ",
-      "count": 353
+      "count": 496
     },
     {
       "label": "Сайт компании",
-      "count": 337
+      "count": 469
     },
     {
       "label": "ФНС/Saby",
-      "count": 34
+      "count": 39
     },
     {
       "label": "ЕГРЮЛ Open (Фронтир 2026)",
@@ -140,7 +140,7 @@
   "daily_registrations": [
     {
       "date": "2026-11-05",
-      "count": 84
+      "count": 225
     },
     {
       "date": "2026-11-03",
@@ -160,7 +160,7 @@
     },
     {
       "date": "2026-10-15",
-      "count": 1
+      "count": 2
     },
     {
       "date": "2026-01-13",
@@ -169,6 +169,10 @@
     {
       "date": "2025-06-15",
       "count": 3
+    },
+    {
+      "date": "2024-06-15",
+      "count": 1
     },
     {
       "date": "2023-06-15",
@@ -188,6 +192,17 @@
     }
   ],
   "recent_runs": [
+    {
+      "timestamp": "2026-11-05T12:42:50Z",
+      "fetched": 159,
+      "added_new": 143,
+      "updated": 16,
+      "duration_sec": 66.9,
+      "sources": [
+        "Открытые каталоги + Сайты (159)",
+        "ФНС/Saby статус (8)"
+      ]
+    },
     {
       "timestamp": "2026-11-05T12:24:55Z",
       "fetched": 105,
