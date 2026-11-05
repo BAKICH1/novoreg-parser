@@ -2,8 +2,8 @@ name: NovoReg 24/7 Parser & Here.now Publisher
 
 on:
   schedule:
-    # Запуск каждые 20 минут круглосуточно (24/7)
-    - cron: "*/20 * * * *"
+    # Ускоренный запуск каждые 10 минут круглосуточно (24/7)
+    - cron: "*/10 * * * *"
   workflow_dispatch:
     inputs:
       regions_per_run:
@@ -52,10 +52,10 @@ jobs:
           ONLY_WITH_PHONE: ${{ inputs.only_phone || 'false' }}
         run: |
           python3 -m parser.main \
-            --regions-per-run "${{ inputs.regions_per_run || '3' }}" \
-            --cards-per-region 4 \
-            --dir-categories 2 \
-            --dir-items 6 \
+            --regions-per-run "${{ inputs.regions_per_run || '4' }}" \
+            --cards-per-region 6 \
+            --dir-categories 5 \
+            --dir-items 14 \
             --publish
 
       - name: Persist updated leads & frontier cursors to repository

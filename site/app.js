@@ -4,12 +4,14 @@
   const PAGE_SIZE = 30;
   const LS_CRM_KEY = "novoreg_crm_map_v1";
   const LS_LIVE_LEADS_KEY = "novoreg_live_leads_v1";
+  const LS_EDGE_LEADS_KEY = "novoreg_edge_leads_v1";
   const LS_KEYS_KEY = "novoreg_api_keys_v1";
   const LS_THEME_KEY = "novoreg_theme_v1";
 
   const state = {
     serverLeads: [],
     siteDataLeads: [],
+    edgeLocalLeads: [],
     liveLeads: [],
     mergedLeads: [],
     filteredLeads: [],
@@ -24,6 +26,9 @@
       last_harvest_iso: "",
     },
     harvestRunning: false,
+    turboActive: false,
+    turboAddedCount: 0,
+    turboTimer: null,
     crmMap: {},
     cloudNoteIds: {},
     siteDataReady: false,
@@ -133,6 +138,11 @@
       state.liveLeads = [];
     }
     try {
+      state.edgeLocalLeads = JSON.parse(localStorage.getItem(LS_EDGE_LEADS_KEY) || "[]") || [];
+    } catch (_) {
+      state.edgeLocalLeads = [];
+    }
+    try {
       const keys = JSON.parse(localStorage.getItem(LS_KEYS_KEY) || "{}") || {};
       if (keys.dadata) document.getElementById("live-dadata-key").value = keys.dadata;
       if (keys.twogis) document.getElementById("live-twogis-key").value = keys.twogis;
@@ -233,10 +243,32 @@
   ];
 
   const EDGE_CATEGORY_FEEDS = [
-    ["ремонт", "43.39", "Строительство, ремонт и недвижимость"],
+    ["строительство", "41.20", "Строительство, ремонт и недвижимость"],
+    ["бизнес", "70.22", "Консалтинг, право и бухгалтерия"],
+    ["услуги", "96.09", "Услуги населению и бизнесу"],
+    ["промышленность", "25.11", "Производство и промышленность"],
+    ["розничная_торговля", "47.19", "Торговля оптовая и розничная"],
+    ["транспорт", "49.41", "Транспорт и логистика"],
+    ["informatsionnye-tekhnologii", "62.01", "ИТ, связь и разработка ПО"],
     ["nedvizhimost", "68.31", "Строительство, ремонт и недвижимость"],
+    ["avto-i-moto", "45.20", "Транспорт и логистика"],
     ["yuridicheskie-uslugi", "69.10", "Консалтинг, право и бухгалтерия"],
+    ["reklama-i-poligrafiya", "73.11", "Консалтинг, право и бухгалтерия"],
+    ["dom-i-interer", "43.39", "Строительство, ремонт и недвижимость"],
+    ["otdelochnye-raboty", "43.39", "Строительство, ремонт и недвижимость"],
+    ["ремонт", "43.39", "Строительство, ремонт и недвижимость"],
+    ["odezhda-i-obuv", "47.71", "Торговля оптовая и розничная"],
+    ["krasota-i-zdorove", "96.02", "Услуги населению и бизнесу"],
     ["restorany-kafe", "56.10", "Гостиницы и общепит"],
+    ["oteli-i-gostinitsy", "55.10", "Гостиницы и общепит"],
+    ["медицина", "86.21", "Медицина и фармацевтика"],
+    ["kompyuternyy-remont", "95.11", "ИТ, связь и разработка ПО"],
+    ["remont-elektriki", "43.21", "Строительство, ремонт и недвижимость"],
+    ["remont-instrumentov", "33.12", "Производство и промышленность"],
+    ["dorozhnyy-remont", "42.11", "Строительство, ремонт и недвижимость"],
+    ["remont-elektroniki", "95.21", "Услуги населению и бизнесу"],
+    ["жкх_и_благоустройство", "81.21", "Строительство, ремонт и недвижимость"],
+    ["образование", "85.42", "Услуги населению и бизнесу"],
     ["sport", "93.11", "Услуги населению и бизнесу"],
     ["туризм_и_отдых", "79.11", "Услуги населению и бизнесу"],
     ["досуг", "93.29", "Услуги населению и бизнесу"],
@@ -434,51 +466,111 @@
     }
   }
 
-  async function fetchCloudSiteData() {
-    try {
-      const notesRes = await fetch("./.herenow/data/crm_notes?limit=100", { cache: "no-store" });
-      if (notesRes.ok) {
-        state.siteDataReady = true;
-        const notesJson = await notesRes.json();
-        (notesJson.records || []).forEach((rec) => {
-          const d = rec.data || rec;
-          if (d.lead_key) {
-            state.cloudNoteIds[d.lead_key] = rec.id;
-            state.crmMap[d.lead_key] = {
-              stage: d.crm_stage || "new",
-              note: d.note || "",
-            };
+  function mapCloudRecordToLead(r) {
+    const d = r.data || r;
+    const cleanPhones = [];
+    const rawPhones = d.phones_all
+      ? String(d.phones_all).split(",")
+      : d.phone_primary
+      ? [d.phone_primary]
+      : [];
+    rawPhones.forEach((s) => {
+      const np = normalizePhoneJS(s);
+      if (np && !cleanPhones.includes(np)) cleanPhones.push(np);
+    });
+    return {
+      id: d.lead_key || `sd-${r.id}`,
+      entity_type: d.entity_type || "ООО",
+      name: d.name || "",
+      full_name: d.name || "",
+      inn: d.inn || "",
+      ogrn: d.ogrn || "",
+      kpp: "",
+      reg_date: d.reg_date || "",
+      created_at: r.createdAt || "",
+      region_code: d.region_code || "",
+      region_name: d.region_name || "",
+      address: d.address || "",
+      person_name: d.person_name || "",
+      person_role:
+        d.entity_type === "ИП" ? "Индивидуальный предприниматель" : "Руководитель",
+      okved_code: d.okved_code || "",
+      okved_name: d.okved_category || "",
+      okved_category: d.okved_category || "Прочие виды деятельности",
+      phones: cleanPhones,
+      emails: d.email_primary ? [d.email_primary] : [],
+      websites: d.website ? [d.website] : [],
+      socials: d.telegram ? { telegram: `https://t.me/${String(d.telegram).replace(/^@/, "")}` } : {},
+      status: d.org_status || "Действующая",
+      is_active: d.is_active !== false,
+      work_hours: d.work_hours || "",
+      telegram: d.telegram || "",
+      telegram_status: d.telegram_status || "",
+      telegram_phone: d.telegram_phone || "",
+      sources: d.source_tag
+        ? String(d.source_tag)
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : ["Edge-облако Here.now"],
+      has_phone: cleanPhones.length > 0,
+    };
+  }
+
+  async function fetchCloudSiteData(isIncremental) {
+    // Запускаем чтение CRM-заметок и курсора параллельно без блокировки
+    await Promise.allSettled([
+      (async () => {
+        try {
+          const notesRes = await fetch("./.herenow/data/crm_notes?limit=100", { cache: "no-store" });
+          if (notesRes.ok) {
+            state.siteDataReady = true;
+            const notesJson = await notesRes.json();
+            (notesJson.records || []).forEach((rec) => {
+              const d = rec.data || rec;
+              if (d.lead_key) {
+                state.cloudNoteIds[d.lead_key] = rec.id;
+                state.crmMap[d.lead_key] = {
+                  stage: d.crm_stage || "new",
+                  note: d.note || "",
+                };
+              }
+            });
           }
-        });
-      }
-    } catch (_) {}
+        } catch (_) {}
+      })(),
+      (async () => {
+        try {
+          const hsRes = await fetch("./.herenow/data/harvest_state?limit=5", { cache: "no-store" });
+          if (hsRes.ok) {
+            const hsJson = await hsRes.json();
+            const recs = hsJson.records || [];
+            const globalRec = recs.find((r) => (r.data || r).state_key === "global") || recs[0];
+            if (globalRec) {
+              const d = globalRec.data || globalRec;
+              state.harvestCursor = {
+                recId: globalRec.id,
+                city_cursor: Math.max(state.harvestCursor.city_cursor || 0, Number(d.city_cursor || 0)),
+                cat_cursor: Math.max(state.harvestCursor.cat_cursor || 0, Number(d.cat_cursor || 0)),
+                cat_page: Math.max(1, Number(d.cat_page || 1)),
+                last_harvest_iso: d.last_harvest_iso || globalRec.updatedAt || "",
+              };
+              if (state.harvestCursor.last_harvest_iso) {
+                state.cloudHarvestIso = state.harvestCursor.last_harvest_iso;
+              }
+            }
+          }
+        } catch (_) {}
+      })(),
+    ]);
 
     try {
-      const hsRes = await fetch("./.herenow/data/harvest_state?limit=5", { cache: "no-store" });
-      if (hsRes.ok) {
-        const hsJson = await hsRes.json();
-        const recs = hsJson.records || [];
-        const globalRec = recs.find((r) => (r.data || r).state_key === "global") || recs[0];
-        if (globalRec) {
-          const d = globalRec.data || globalRec;
-          state.harvestCursor = {
-            recId: globalRec.id,
-            city_cursor: Number(d.city_cursor || 0),
-            cat_cursor: Number(d.cat_cursor || 0),
-            cat_page: Math.max(1, Number(d.cat_page || 1)),
-            last_harvest_iso: d.last_harvest_iso || globalRec.updatedAt || "",
-          };
-          if (state.harvestCursor.last_harvest_iso) {
-            state.cloudHarvestIso = state.harvestCursor.last_harvest_iso;
-          }
-        }
-      }
-    } catch (_) {}
-
-    try {
-      const allCloudRecords = [];
+      // На фоновом опросе, если облако уже загружено, подтягиваем только свежую первую страницу (мгновенно!)
+      const maxPages = isIncremental && state.siteDataLeads.length > 0 ? 2 : 25;
+      const fetchedRecords = [];
       let cursor = "";
-      for (let pageIdx = 0; pageIdx < 10; pageIdx++) {
+
+      for (let pageIdx = 0; pageIdx < maxPages; pageIdx++) {
         const url = cursor
           ? `./.herenow/data/leads?limit=100&cursor=${encodeURIComponent(cursor)}`
           : "./.herenow/data/leads?limit=100";
@@ -486,72 +578,44 @@
         if (!leadsRes.ok) break;
         const lj = await leadsRes.json();
         const batch = lj.records || [];
-        allCloudRecords.push(...batch);
+        fetchedRecords.push(...batch);
+
+        // Мгновенное прогрессивное отображение первой сотни облачных лидов без ожидания хвоста пагинации
+        if (pageIdx === 0 && batch.length && !isIncremental) {
+          const firstMapped = batch.map(mapCloudRecordToLead).filter((x) => x.name);
+          if (firstMapped.length) {
+            const byId = new Map(state.siteDataLeads.map((x) => [x.id, x]));
+            firstMapped.forEach((x) => byId.set(x.id, x));
+            state.siteDataLeads = Array.from(byId.values());
+            mergeAllLeads();
+            populateDynamicSelects();
+            renderKPIsAndAnalytics();
+            applyFiltersAndRender(false);
+          }
+        }
+
         if (!lj.nextCursor || !batch.length) break;
         cursor = lj.nextCursor;
       }
 
-      if (allCloudRecords.length) {
-        const newestCreated = allCloudRecords[0].createdAt || "";
+      if (fetchedRecords.length) {
+        const newestCreated = fetchedRecords[0].createdAt || "";
         if (newestCreated && (!state.cloudHarvestIso || newestCreated > state.cloudHarvestIso)) {
           state.cloudHarvestIso = newestCreated;
         }
+        const mapped = fetchedRecords.map(mapCloudRecordToLead).filter((x) => x.name);
+        if (isIncremental && state.siteDataLeads.length > 0) {
+          const mergedCloud = new Map(state.siteDataLeads.map((x) => [x.id, x]));
+          mapped.forEach((x) => mergedCloud.set(x.id, x));
+          state.siteDataLeads = Array.from(mergedCloud.values());
+        } else {
+          state.siteDataLeads = mapped;
+        }
       }
-
-      state.siteDataLeads = allCloudRecords
-        .map((r) => {
-          const d = r.data || r;
-          const cleanPhones = [];
-          const rawPhones = d.phones_all
-            ? String(d.phones_all).split(",")
-            : d.phone_primary
-            ? [d.phone_primary]
-            : [];
-          rawPhones.forEach((s) => {
-            const np = normalizePhoneJS(s);
-            if (np && !cleanPhones.includes(np)) cleanPhones.push(np);
-          });
-          return {
-            id: d.lead_key || `sd-${r.id}`,
-            entity_type: d.entity_type || "ООО",
-            name: d.name || "",
-            full_name: d.name || "",
-            inn: d.inn || "",
-            ogrn: d.ogrn || "",
-            kpp: "",
-            reg_date: d.reg_date || "",
-            created_at: r.createdAt || "",
-            region_code: d.region_code || "",
-            region_name: d.region_name || "",
-            address: d.address || "",
-            person_name: d.person_name || "",
-            person_role:
-              d.entity_type === "ИП" ? "Индивидуальный предприниматель" : "Руководитель",
-            okved_code: d.okved_code || "",
-            okved_name: d.okved_category || "",
-            okved_category: d.okved_category || "Прочие виды деятельности",
-            phones: cleanPhones,
-            emails: d.email_primary ? [d.email_primary] : [],
-            websites: d.website ? [d.website] : [],
-            socials: d.telegram ? { telegram: `https://t.me/${String(d.telegram).replace(/^@/, "")}` } : {},
-            status: d.org_status || "Действующая",
-            is_active: d.is_active !== false,
-            work_hours: d.work_hours || "",
-            telegram: d.telegram || "",
-            telegram_status: d.telegram_status || "",
-            telegram_phone: d.telegram_phone || "",
-            sources: d.source_tag
-              ? String(d.source_tag)
-                  .split(",")
-                  .map((s) => s.trim())
-                  .filter(Boolean)
-              : ["Edge-облако Here.now"],
-            has_phone: cleanPhones.length > 0,
-          };
-        })
-        .filter((x) => x.name);
     } catch (_) {}
   }
+
+  const EXCLUDED_OPF_RX = /^(?:ЗАО|ОАО|ПАО|НАО|АО|ГБУ|ГБУЗ|ГБОУ|МБУ|МБОУ|МУП|ГУП|ФГУП|ФГБУ|АНО|ТСЖ|ТСН|СНТ|ДНП|ФОНД|КОЛЛЕГИЯ)$/i;
 
   function parseOrgpageCardHtml(html, pathUrl, fallbackReg, fallbackCat, fallbackOkved) {
     const cm = /companyData\s*=\s*(\{[\s\S]*?\});/.exec(html);
@@ -565,16 +629,12 @@
     const rawName = decodeHtmlEntities(cd.name || "");
     if (!rawName || rawName.length < 2) return null;
 
-    const opfUpper = String(cd.opf || "").toUpperCase();
-    const entityType = opfUpper.includes("ИП") ? "ИП" : "ООО";
-    const displayName =
-      entityType === "ИП"
-        ? rawName.toUpperCase().startsWith("ИП ")
-          ? rawName
-          : `ИП ${rawName}`
-        : rawName.toUpperCase().startsWith("ООО")
-        ? rawName
-        : `ООО "${rawName.replace(/^["«]+|["»]+$/g, "")}"`;
+    const opfRaw = decodeHtmlEntities(cd.opf || "").trim();
+    const opfUpper = opfRaw.toUpperCase();
+    // Пропускаем бюджетные учреждения, ЗАО/ПАО/АО/ТСЖ — собираем целевые ИП и ООО
+    if (opfUpper && EXCLUDED_OPF_RX.test(opfUpper)) {
+      return null;
+    }
 
     const phones = [];
     const addPh = (raw) => {
@@ -608,6 +668,55 @@
       if (!w.includes("orgpage.ru") && !websites.includes(w)) websites.push(w);
     }
 
+    // Извлекаем ИНН/ОГРН и явные упоминания ИП ФИО / ООО из текста карточки, если есть
+    const flatText = decodeHtmlEntities(stripped.replace(/<[^>]+>/g, " "));
+    const innHit = /\bИНН[\s:№]*(\d{12}|\d{10})\b/i.exec(flatText);
+    const ogrnHit = /\bОГРН(?:ИП)?[\s:№]*(\d{15}|\d{13})\b/i.exec(flatText);
+    const innVal = innHit ? innHit[1] : "";
+    const ogrnVal = ogrnHit ? ogrnHit[1] : "";
+
+    const ipFioHit = /\bИП\s+([А-ЯЁ][а-яё\-]+\s+[А-ЯЁ][а-яё.\-]+(?:\s+[А-ЯЁ][а-яё.\-]+)?)/.exec(flatText);
+    const h1Match = /<h1[^>]*>([\s\S]*?)<\/h1>/i.exec(html);
+    const h1Text = h1Match ? decodeHtmlEntities(h1Match[1].replace(/<[^>]+>/g, " ")) : "";
+
+    let entityType = "";
+    if (
+      opfUpper.includes("ИП") ||
+      lenEq(innVal, 12) ||
+      lenEq(ogrnVal, 15) ||
+      /\bИП\b/.test(h1Text) ||
+      /^ИП\s+/i.test(rawName) ||
+      /\/ip[-_]/i.test(String(pathUrl || "")) ||
+      Boolean(ipFioHit)
+    ) {
+      entityType = "ИП";
+    } else if (
+      opfUpper.includes("ООО") ||
+      lenEq(innVal, 10) ||
+      lenEq(ogrnVal, 13) ||
+      /\bООО\b/.test(h1Text) ||
+      /^ООО[\s"«]/i.test(rawName) ||
+      /\/ooo[-_]/i.test(String(pathUrl || ""))
+    ) {
+      entityType = "ООО";
+    } else {
+      // Если ОПФ не указана явно: микробизнес с мобильным номером без сайта чаще ИП, остальные — ООО
+      entityType = phones[0] && isMobilePhone(phones[0]) && !websites.length ? "ИП" : "ООО";
+    }
+
+    const cleanBrand = rawName.replace(/^(?:ООО|ИП)\s*/i, "").replace(/^["«]+|["»]+$/g, "").trim();
+    const personFio = ipFioHit ? ipFioHit[1].trim() : entityType === "ИП" ? cleanBrand.slice(0, 150) : "";
+    const displayName =
+      entityType === "ИП"
+        ? ipFioHit
+          ? `ИП ${ipFioHit[1].trim()}`
+          : rawName.toUpperCase().startsWith("ИП ")
+          ? rawName
+          : `ИП — ${cleanBrand}`
+        : rawName.toUpperCase().startsWith("ООО")
+        ? rawName
+        : `ООО "${cleanBrand}"`;
+
     const slugParts = String(pathUrl || "").split("/").filter(Boolean);
     const citySlug = slugParts[0] || "moskva";
     const reg = fallbackReg || inferRegionFromCitySlug(citySlug);
@@ -621,7 +730,7 @@
       .slice(0, 250);
 
     const compId = cd.company_id || (/-(\d+)\.html/.exec(pathUrl) || [])[1] || Date.now();
-    const leadKey = `orgpage-${compId}`;
+    const leadKey = innVal ? `inn-${innVal}` : `orgpage-${compId}`;
     const todayIso = getTodayIsoDate();
     const workHours = extractWorkHoursJS(html);
     const orgSt = detectOrgStatusJS(html, workHours);
@@ -634,15 +743,15 @@
       entity_type: entityType,
       name: displayName.slice(0, 195),
       full_name: displayName.slice(0, 195),
-      inn: "",
-      ogrn: "",
+      inn: innVal,
+      ogrn: ogrnVal,
       kpp: "",
       reg_date: todayIso,
       created_at: new Date().toISOString(),
       region_code: reg.code,
       region_name: reg.name,
       address: fullAddr || reg.name,
-      person_name: entityType === "ИП" ? rawName.slice(0, 150) : "",
+      person_name: personFio,
       person_role: entityType === "ИП" ? "Индивидуальный предприниматель" : "Руководитель",
       okved_code: fallbackOkved || "",
       okved_name: rubric || category,
@@ -653,6 +762,7 @@
       socials: tgHandle ? { telegram: `https://t.me/${tgHandle.slice(1)}` } : {},
       status: orgSt.status,
       is_active: orgSt.isActive,
+      workHoursHint: Boolean(workHours),
       work_hours: workHours,
       telegram: tgHandle,
       telegram_status: tgHandle ? "verified" : tgPhone ? "by_phone" : "none",
@@ -660,6 +770,10 @@
       sources: ["Edge-парсер Here.now", "Открытый каталог РФ"],
       has_phone: true,
     };
+  }
+
+  function lenEq(s, n) {
+    return Boolean(s && String(s).length === n);
   }
 
   async function persistLeadToSiteData(lead) {
@@ -739,105 +853,214 @@
     } catch (_) {}
   }
 
-  async function runEdgeAutoHarvest(isManual) {
+  async function persistLeadsBatch(leads) {
+    const CONCURRENCY = 10;
+    for (let i = 0; i < leads.length; i += CONCURRENCY) {
+      const slice = leads.slice(i, i + CONCURRENCY);
+      await Promise.allSettled(slice.map((l) => persistLeadToSiteData(l)));
+    }
+  }
+
+  function buildFeedBatch(cursorObj) {
+    const specs = [];
+    const cBase = cursorObj.city_cursor || 0;
+    const rBase = cursorObj.cat_cursor || 0;
+    const pageBase = Math.max(1, cursorObj.cat_page || 1);
+
+    // 1) 2 свежие городские ленты для перехвата самых новых 7-значных ID (-61XXXXX / -62XXXXX)
+    for (let k = 0; k < 2; k++) {
+      const [cSlug, rCode, rName] = EDGE_CITY_FEEDS[(cBase + k) % EDGE_CITY_FEEDS.length];
+      specs.push({
+        url: `./api/orgpage/${cSlug}/`,
+        reg: { code: rCode, name: rName },
+        cat: "",
+        okved: "",
+      });
+    }
+
+    // 2) 4 регионально-отраслевые пагинированные ленты (город × рубрика × страница — по ~29 карточек каждая)
+    for (let k = 0; k < 4; k++) {
+      const [cSlug, rCode, rName] = EDGE_CITY_FEEDS[(cBase + 2 + k * 3) % EDGE_CITY_FEEDS.length];
+      const [catSlug, catOkved, catName] = EDGE_CATEGORY_FEEDS[(rBase + k) % EDGE_CATEGORY_FEEDS.length];
+      const pg = ((pageBase + k - 1) % 35) + 1;
+      const encCat = encodeURIComponent(catSlug);
+      specs.push({
+        url: pg <= 1 ? `./api/orgpage/${cSlug}/${encCat}/` : `./api/orgpage/${cSlug}/${encCat}/${pg}/`,
+        reg: { code: rCode, name: rName },
+        cat: catName,
+        okved: catOkved,
+      });
+    }
+
+    // 3) 2 общероссийские пагинированные отраслевые ленты
+    for (let k = 0; k < 2; k++) {
+      const [catSlug, catOkved, catName] = EDGE_CATEGORY_FEEDS[(rBase + 4 + k) % EDGE_CATEGORY_FEEDS.length];
+      const pg = ((pageBase + k) % 45) + 1;
+      const encCat = encodeURIComponent(catSlug);
+      specs.push({
+        url: pg <= 1 ? `./api/orgpage/rossiya/${encCat}/` : `./api/orgpage/rossiya/${encCat}/${pg}/`,
+        reg: null,
+        cat: catName,
+        okved: catOkved,
+      });
+    }
+
+    return specs;
+  }
+
+  function advanceCursorLocal(cursorObj) {
+    const nextCat = (cursorObj.cat_cursor || 0) + 6;
+    const wrapped = nextCat >= EDGE_CATEGORY_FEEDS.length;
+    return {
+      ...cursorObj,
+      city_cursor: ((cursorObj.city_cursor || 0) + 5) % EDGE_CITY_FEEDS.length,
+      cat_cursor: nextCat % EDGE_CATEGORY_FEEDS.length,
+      cat_page: wrapped ? ((cursorObj.cat_page || 1) % 45) + 1 : cursorObj.cat_page || 1,
+    };
+  }
+
+  function extractCandidatesFromFeedHtml(html, feedSpec, existingIds, seenPaths) {
+    const out = [];
+    const cardRx = /https?:\/\/www\.orgpage\.ru(\/[a-z0-9_\-]+\/[a-z0-9_\-]+-(\d{6,8})\.html)/gi;
+    let m;
+    while ((m = cardRx.exec(html)) !== null) {
+      const pathPart = m[1];
+      const compId = m[2];
+      const leadKey = `orgpage-${compId}`;
+      if (existingIds.has(leadKey) || seenPaths.has(pathPart)) continue;
+      seenPaths.add(pathPart);
+
+      // Проверяем окно разметки после заголовка карточки: есть ли уже опубликованный телефон в листинге
+      const snippet = html.slice(m.index, m.index + 1350);
+      const hasListingPhone = /class=["'][^"']*phone[^"']*["'][\s\S]{0,180}?(?:\+7|8)[\s\-()]*\d{3}/i.test(snippet);
+      const numId = Number(compId) || 0;
+      const isFreshId = numId >= 6100000;
+      const priority = (hasListingPhone ? 4 : 0) + (isFreshId ? 2 : 0) + (numId >= 5300000 ? 1 : 0);
+
+      out.push({
+        pathPart,
+        leadKey,
+        compId: numId,
+        priority,
+        hasListingPhone,
+        reg: feedSpec.reg,
+        cat: feedSpec.cat,
+        okved: feedSpec.okved,
+      });
+    }
+    return out;
+  }
+
+  function updateTurboButtonUI() {
+    const tBtn = document.getElementById("btn-turbo-harvest");
+    if (!tBtn) return;
+    tBtn.classList.toggle("btn-turbo-active", state.turboActive);
+    tBtn.setAttribute("aria-pressed", state.turboActive ? "true" : "false");
+    const labelSpan = tBtn.querySelector("span");
+    if (labelSpan) {
+      labelSpan.textContent = state.turboActive
+        ? `Турбо: ВКЛ (+${state.turboAddedCount})`
+        : "Турбо-поток";
+    }
+  }
+
+  function toggleTurboHarvest() {
+    state.turboActive = !state.turboActive;
+    if (state.turboActive) {
+      state.turboAddedCount = 0;
+      updateTurboButtonUI();
+      showToast("Турбо-поток запущен: параллельная подкачка ИП и ООО");
+      const loop = async () => {
+        if (!state.turboActive) return;
+        await runEdgeAutoHarvest(false, true);
+        if (state.turboActive) {
+          state.turboTimer = setTimeout(loop, 1800);
+        }
+      };
+      loop();
+    } else {
+      clearTimeout(state.turboTimer);
+      state.turboTimer = null;
+      updateTurboButtonUI();
+      showToast(`Турбо-поток остановлен (добавлено: +${state.turboAddedCount})`);
+    }
+  }
+
+  async function runEdgeAutoHarvest(isManual, isTurboWave) {
     if (state.harvestRunning) {
-      if (isManual) showToast("Облачный сбор уже выполняется…");
+      if (isManual) showToast("Параллельный сбор уже выполняется…");
       return;
     }
     state.harvestRunning = true;
     const btn = document.getElementById("btn-edge-harvest");
     const origBtnHtml = btn ? btn.innerHTML : "";
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = "Сбор свежих…";
+    const targetBatch = isManual ? 36 : isTurboWave ? 28 : 18;
+    const CONCURRENCY = 14;
+
+    if (btn && (isManual || isTurboWave)) {
+      btn.disabled = isManual;
+      btn.textContent = "Сбор: 0…";
     }
 
     try {
-      const cityIdx = state.harvestCursor.city_cursor % EDGE_CITY_FEEDS.length;
-      const cityIdx2 = (cityIdx + 1) % EDGE_CITY_FEEDS.length;
-      const catIdx = state.harvestCursor.cat_cursor % EDGE_CATEGORY_FEEDS.length;
-      const catPage = Math.max(1, state.harvestCursor.cat_page || 1);
-
-      const [citySlug1, regCode1, regName1] = EDGE_CITY_FEEDS[cityIdx];
-      const [citySlug2, regCode2, regName2] = EDGE_CITY_FEEDS[cityIdx2];
-      const [catSlug, catOkved, catName] = EDGE_CATEGORY_FEEDS[catIdx];
+      const existingIds = new Set(state.mergedLeads.map((l) => String(l.id)));
+      for (const l of state.mergedLeads) {
+        if (l.inn) existingIds.add(`inn-${l.inn}`);
+      }
+      const seenPaths = new Set();
+      let candidateCards = [];
+      let proxyAvailable = false;
+      let workingCursor = { ...state.harvestCursor };
 
       if (isManual) {
-        showToast(`Сканируем ${regName1}, ${regName2} и рубрику (стр. ${catPage})…`);
+        const [ , , regName1] = EDGE_CITY_FEEDS[workingCursor.city_cursor % EDGE_CITY_FEEDS.length];
+        showToast(`Параллельное сканирование 8 лент (${regName1} и ещё 5 регионов)…`);
       }
 
-      const feedSpecs = [
-        {
-          url: `./api/orgpage/${citySlug1}/`,
-          reg: { code: regCode1, name: regName1 },
-          cat: "",
-          okved: "",
-        },
-        {
-          url: `./api/orgpage/${citySlug2}/`,
-          reg: { code: regCode2, name: regName2 },
-          cat: "",
-          okved: "",
-        },
-        {
-          url:
-            catPage <= 1
-              ? `./api/orgpage/rossiya/${encodeURIComponent(catSlug)}/`
-              : `./api/orgpage/rossiya/${encodeURIComponent(catSlug)}/${catPage}/`,
-          reg: null,
-          cat: catName,
-          okved: catOkved,
-        },
-      ];
+      // До 2 волн параллельного опроса 8 лент, чтобы гарантировать полный пакет свежих кандидатов с телефонами
+      for (let wave = 0; wave < 2; wave++) {
+        const feedSpecs = buildFeedBatch(workingCursor);
+        workingCursor = advanceCursorLocal(workingCursor);
 
-      const existingIds = new Set(state.mergedLeads.map((l) => String(l.id)));
-      const candidateCards = [];
-      const seenPaths = new Set();
-      let proxyAvailable = false;
+        const feedResponses = await Promise.allSettled(
+          feedSpecs.map((f) => fetch(f.url, { cache: "no-store" }))
+        );
 
-      const feedResponses = await Promise.allSettled(
-        feedSpecs.map((f) => fetch(f.url, { cache: "no-store" }))
-      );
-
-      for (let i = 0; i < feedResponses.length; i++) {
-        const fr = feedResponses[i];
-        if (fr.status !== "fulfilled" || !fr.value.ok) continue;
-        proxyAvailable = true;
-        const html = await fr.value.text();
-        // Свежие карточки имеют 7-значный ID вида -61XXXXX.html / -62XXXXX.html или любые карточки на глубоких страницах
-        const cardRx = /https?:\/\/www\.orgpage\.ru(\/[a-z0-9_\-]+\/[a-z0-9_\-]+-(\d{6,8})\.html)/gi;
-        let m;
-        while ((m = cardRx.exec(html)) !== null) {
-          const pathPart = m[1];
-          const compId = m[2];
-          const leadKey = `orgpage-${compId}`;
-          if (existingIds.has(leadKey) || seenPaths.has(pathPart)) continue;
-          seenPaths.add(pathPart);
-          candidateCards.push({
-            pathPart,
-            leadKey,
-            reg: feedSpecs[i].reg,
-            cat: feedSpecs[i].cat,
-            okved: feedSpecs[i].okved,
-          });
+        for (let i = 0; i < feedResponses.length; i++) {
+          const fr = feedResponses[i];
+          if (fr.status !== "fulfilled" || !fr.value.ok) continue;
+          proxyAvailable = true;
+          const html = await fr.value.text();
+          const extracted = extractCandidatesFromFeedHtml(html, feedSpecs[i], existingIds, seenPaths);
+          candidateCards.push(...extracted);
         }
+
+        const withPhoneCount = candidateCards.filter((c) => c.hasListingPhone || c.priority >= 2).length;
+        if (!proxyAvailable || withPhoneCount >= targetBatch + 8) break;
       }
 
       if (!proxyAvailable) {
         if (isManual) {
-          showToast("ℹ️ Серверный Edge-прокси работает на домене .here.now");
+          showToast("Серверный Edge-прокси активен на домене .here.now");
         }
         return;
       }
 
-      const toFetch = candidateCards.slice(0, isManual ? 10 : 6);
-      const newlyDiscovered = [];
+      // Приоритет: карточки с уже подтверждённым в листинге телефоном и самыми свежими ID
+      candidateCards.sort((a, b) => b.priority - a.priority || b.compId - a.compId);
 
-      for (let offset = 0; offset < toFetch.length; offset += 4) {
-        const chunk = toFetch.slice(offset, offset + 4);
+      // Берём с небольшим запасом, чтобы компенсировать отсев ЗАО/ГБУ и дублей
+      const toFetch = candidateCards.slice(0, Math.min(candidateCards.length, Math.round(targetBatch * 1.25)));
+      const newlyDiscovered = [];
+      const pendingCloudWrites = [];
+
+      for (let offset = 0; offset < toFetch.length && newlyDiscovered.length < targetBatch; offset += CONCURRENCY) {
+        const chunk = toFetch.slice(offset, offset + CONCURRENCY);
         const cardRes = await Promise.allSettled(
           chunk.map((c) => fetch(`./api/orgpage${c.pathPart}`, { cache: "no-store" }))
         );
+
+        const waveAdded = [];
         for (let j = 0; j < cardRes.length; j++) {
           const cr = cardRes[j];
           if (cr.status !== "fulfilled" || !cr.value.ok) continue;
@@ -852,37 +1075,56 @@
           if (parsed && !existingIds.has(parsed.id)) {
             existingIds.add(parsed.id);
             newlyDiscovered.push(parsed);
+            waveAdded.push(parsed);
+            if (newlyDiscovered.length >= targetBatch) break;
           }
+        }
+
+        // Живой стриминг: сразу отрисовываем каждую волну в таблице и KPI без ожидания конца пакета!
+        if (waveAdded.length > 0) {
+          state.siteDataLeads = [...waveAdded, ...state.siteDataLeads];
+          state.edgeLocalLeads = [...waveAdded, ...state.edgeLocalLeads].slice(0, 1500);
+          if (state.turboActive) {
+            state.turboAddedCount += waveAdded.length;
+            updateTurboButtonUI();
+          }
+          if (btn && (isManual || isTurboWave)) {
+            btn.textContent = `Сбор: +${newlyDiscovered.length}…`;
+          }
+          mergeAllLeads();
+          populateDynamicSelects();
+          renderKPIsAndAnalytics();
+          applyFiltersAndRender(false);
+
+          // Параллельная запись волны в облачную БД без блокировки следующей сетевой волны
+          pendingCloudWrites.push(persistLeadsBatch(waveAdded));
         }
       }
 
       if (newlyDiscovered.length > 0) {
-        await Promise.allSettled(newlyDiscovered.map((l) => persistLeadToSiteData(l)));
-        state.siteDataLeads = [...newlyDiscovered, ...state.siteDataLeads];
+        try {
+          localStorage.setItem(LS_EDGE_LEADS_KEY, JSON.stringify(state.edgeLocalLeads));
+        } catch (_) {}
       }
 
-      const nextCatCursor = state.harvestCursor.cat_cursor + 1;
-      const nextCatPage =
-        nextCatCursor % EDGE_CATEGORY_FEEDS.length === 0
-          ? ((state.harvestCursor.cat_page || 1) % 40) + 1
-          : state.harvestCursor.cat_page || 1;
-
-      await saveHarvestCursor({
-        city_cursor: (state.harvestCursor.city_cursor + 2) % EDGE_CITY_FEEDS.length,
-        cat_cursor: nextCatCursor % EDGE_CATEGORY_FEEDS.length,
-        cat_page: nextCatPage,
-        last_harvest_iso: new Date().toISOString(),
-      });
-
-      mergeAllLeads();
-      populateDynamicSelects();
-      renderKPIsAndAnalytics();
-      applyFiltersAndRender(false);
+      await Promise.allSettled([
+        ...pendingCloudWrites,
+        saveHarvestCursor({
+          city_cursor: workingCursor.city_cursor,
+          cat_cursor: workingCursor.cat_cursor,
+          cat_page: workingCursor.cat_page,
+          last_harvest_iso: new Date().toISOString(),
+        }),
+      ]);
 
       if (newlyDiscovered.length > 0) {
-        showToast(`Добавлено +${newlyDiscovered.length} свежих ИП/ООО с телефонами в облако`);
+        const ipCnt = newlyDiscovered.filter((x) => x.entity_type === "ИП").length;
+        const oooCnt = newlyDiscovered.length - ipCnt;
+        if (isManual || !state.turboActive) {
+          showToast(`Добавлено +${newlyDiscovered.length} (ООО: ${oooCnt}, ИП: ${ipCnt})`);
+        }
       } else if (isManual) {
-        showToast("Курсор сдвинут дальше — нажмите ещё раз для следующей порции городов");
+        showToast("Лента прокручена вперёд — нажмите ещё раз");
       }
     } catch (err) {
       console.warn("Edge harvest error:", err);
@@ -899,7 +1141,12 @@
 
   function mergeAllLeads() {
     const map = new Map();
-    const all = [...state.liveLeads, ...state.siteDataLeads, ...state.serverLeads];
+    const all = [
+      ...state.liveLeads,
+      ...state.siteDataLeads,
+      ...state.edgeLocalLeads,
+      ...state.serverLeads,
+    ];
 
     for (const item of all) {
       if (!item || !item.name) continue;
@@ -984,7 +1231,15 @@
       console.warn("Не удалось загрузить JSON:", err);
     }
 
-    await fetchCloudSiteData();
+    // Мгновенный первый рендер локальной и статической базы без ожидания всех страниц облачной БД
+    if (!isSilentPoll && (state.serverLeads.length || state.edgeLocalLeads.length)) {
+      mergeAllLeads();
+      populateDynamicSelects();
+      renderKPIsAndAnalytics();
+      applyFiltersAndRender(false);
+    }
+
+    await fetchCloudSiteData(Boolean(isSilentPoll));
     mergeAllLeads();
     populateDynamicSelects();
     renderKPIsAndAnalytics();
@@ -1942,7 +2197,14 @@
     const edgeBtn = document.getElementById("btn-edge-harvest");
     if (edgeBtn) {
       edgeBtn.addEventListener("click", () => {
-        runEdgeAutoHarvest(true);
+        runEdgeAutoHarvest(true, false);
+      });
+    }
+
+    const turboBtn = document.getElementById("btn-turbo-harvest");
+    if (turboBtn) {
+      turboBtn.addEventListener("click", () => {
+        toggleTurboHarvest();
       });
     }
 
@@ -2154,19 +2416,21 @@
     const lastIso = state.harvestCursor.last_harvest_iso || state.lastUpdatedIso || "";
     const lastMs = lastIso ? Date.parse(lastIso) : 0;
     const isStaleDay = !lastIso.startsWith(todayIso);
-    const isOlderThan10m = !lastMs || Date.now() - lastMs > 10 * 60 * 1000;
-    if (isStaleDay || isOlderThan10m) {
-      setTimeout(() => runEdgeAutoHarvest(false), 1800);
+    const isOlderThan2m = !lastMs || Date.now() - lastMs > 2 * 60 * 1000;
+    if (isStaleDay || isOlderThan2m) {
+      setTimeout(() => runEdgeAutoHarvest(false, false), 450);
     }
   });
 
-  // Авто-пуллинг свежих данных из облака Site Data каждые 60 секунд
+  // Ускоренный авто-пуллинг свежих данных из облака Site Data каждые 30 секунд
   setInterval(() => {
     loadServerData(true);
-  }, 60000);
+  }, 30000);
 
-  // Автономный фоновый сбор свежих ИП/ООО через Edge-прокси каждые 3 минуты
+  // Ускоренный автономный фоновый сбор свежих ИП/ООО через Edge-прокси каждые 35 секунд
   setInterval(() => {
-    runEdgeAutoHarvest(false);
-  }, 180000);
+    if (!state.turboActive) {
+      runEdgeAutoHarvest(false, false);
+    }
+  }, 35000);
 })();

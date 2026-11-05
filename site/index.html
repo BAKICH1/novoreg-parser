@@ -36,9 +36,13 @@
             <span class="pulse-dot"></span>
             <span id="last-updated-label">Синхронизация базы…</span>
           </div>
-          <button class="btn btn-primary btn-sm" id="btn-edge-harvest" type="button" title="Собрать свежую порцию новых ИП и ООО с телефонами через серверный прокси Here.now">
+          <button class="btn btn-primary btn-sm" id="btn-edge-harvest" type="button" title="Быстро подтянуть пачку свежих ИП и ООО (~30+ карточек параллельно)">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9.2 1.5L3.5 9h4.3l-.9 5.5L12.5 7H8.2l1-5.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
             <span>Подтянуть свежие</span>
+          </button>
+          <button class="btn btn-sm" id="btn-turbo-harvest" type="button" aria-pressed="false" title="Непрерывный турбо-поток: автоматическая параллельная подкачка ИП и ООО каждые 2 секунды">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 4.5l4.5 3.5-4.5 3.5V4.5zM8.5 4.5L13 8l-4.5 3.5V4.5z" stroke="currentColor" stroke-width="1.35" stroke-linejoin="round"/></svg>
+            <span>Турбо-поток</span>
           </button>
           <button class="btn btn-sm" id="btn-refresh" type="button" title="Перезагрузить актуальные данные из облачной базы">
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9M13.5 2.5v3.2h-3.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>

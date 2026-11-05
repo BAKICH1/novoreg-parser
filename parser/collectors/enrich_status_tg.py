@@ -105,26 +105,32 @@ class StatusScheduleTelegramEnricher:
     def enrich_batch(self, leads: list[Lead], max_inn_checks: int = 12, max_tg_checks: int = 15) -> int:
         updated = 0
 
-        # 1. Проверка статуса организации в ЕГРЮЛ/ЕГРИП через Saby для карточек с ИНН
+        # 1. Параллельная проверка статуса организации в ЕГРЮЛ/ЕГРИП через Saby для карточек с ИНН
         inn_targets = [
             l for l in leads
             if l.inn and "(ФНС)" not in (l.status or "")
         ][:max_inn_checks]
 
-        for lead in inn_targets:
-            info = check_saby_fns_by_inn(lead.inn)
-            if info["checked"] and info["status"]:
-                lead.is_active = info["is_active"]
-                lead.status = info["status"]
-                if info["person_name"] and not lead.person_name:
-                    lead.person_name = info["person_name"]
-                if info["ogrn"] and not lead.ogrn:
-                    lead.ogrn = info["ogrn"]
-                if "ФНС/Saby" not in lead.sources:
-                    lead.sources.append("ФНС/Saby")
-                lead.finalize()
-                updated += 1
-            polite_sleep(0.25)
+        if inn_targets:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+                inn_fmap = {pool.submit(check_saby_fns_by_inn, lead.inn): lead for lead in inn_targets}
+                for fut in inn_fmap:
+                    lead = inn_fmap[fut]
+                    try:
+                        info = fut.result(timeout=7.5)
+                    except Exception:
+                        continue
+                    if info["checked"] and info["status"]:
+                        lead.is_active = info["is_active"]
+                        lead.status = info["status"]
+                        if info["person_name"] and not lead.person_name:
+                            lead.person_name = info["person_name"]
+                        if info["ogrn"] and not lead.ogrn:
+                            lead.ogrn = info["ogrn"]
+                        if "ФНС/Saby" not in lead.sources:
+                            lead.sources.append("ФНС/Saby")
+                        lead.finalize()
+                        updated += 1
 
         # 2. Верификация публичных Telegram-аккаунтов (@username)
         tg_targets = [l for l in leads if l.telegram][:max_tg_checks]

@@ -509,6 +509,19 @@ code {
   border-color: var(--positive);
 }
 
+.btn-turbo-active {
+  background: var(--pill-positive-bg);
+  border-color: var(--positive);
+  color: var(--pill-positive-ink);
+  font-weight: 600;
+}
+
+.btn-turbo-active:hover:not(:disabled) {
+  background: var(--pill-positive-bg);
+  border-color: var(--positive);
+  color: var(--pill-positive-ink);
+}
+
 .btn-outline-strong {
   border-color: var(--control);
   font-weight: 600;

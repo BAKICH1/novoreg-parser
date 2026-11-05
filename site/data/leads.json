@@ -1,7 +1,3578 @@
 {
-  "generated_at": "2026-11-03T07:32:45Z",
-  "count": 277,
+  "generated_at": "2026-11-05T12:24:55Z",
+  "count": 363,
   "leads": [
+    {
+      "id": "orgpage-6204376",
+      "entity_type": "ООО",
+      "name": "ООО \"Прозрение\"",
+      "full_name": "ООО \"Прозрение\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Ульяновская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ульяновск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (842) 244-54-14",
+        "+7 (842) 250-53-15",
+        "+7 (842) 241-03-80"
+      ],
+      "emails": [
+        "prozrenie73@mail.ru"
+      ],
+      "websites": [
+        "https://prozrenie73.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00; Сб: 9:00-16:00; Вс: 9:00-12:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:43Z"
+    },
+    {
+      "id": "orgpage-6148973",
+      "entity_type": "ООО",
+      "name": "ООО \"Персонал+\"",
+      "full_name": "ООО \"Персонал+\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Ульяновская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ульяновск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (924) 003-57-32",
+        "+7 (842) 241-14-87",
+        "+7 (842) 224-23-10"
+      ],
+      "emails": [
+        "info@personal-dv.ru"
+      ],
+      "websites": [
+        "https://personal-dv.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:42Z"
+    },
+    {
+      "id": "orgpage-6204280",
+      "entity_type": "ООО",
+      "name": "ООО \"Премиум-резиденция \"Парус\"",
+      "full_name": "ООО \"Премиум-резиденция \"Парус\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Самарская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Тольятти",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (848) 274-39-99",
+        "+7 (848) 261-66-53",
+        "+7 (848) 225-05-23",
+        "+7 (838) 665-37-46"
+      ],
+      "emails": [],
+      "websites": [
+        "https://parusdom63.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/parusdom63"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-20:00; Сб: 10:00-18:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:41Z"
+    },
+    {
+      "id": "orgpage-6148972",
+      "entity_type": "ООО",
+      "name": "ООО \"Персонал+\"",
+      "full_name": "ООО \"Персонал+\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "22",
+      "region_name": "Алтайский край",
+      "address": "Алтайский край",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Барнаул",
+      "okved_category": "Общепит, кафе и HoReCa",
+      "phones": [
+        "+7 (924) 003-57-32",
+        "+7 (385) 246-51-90",
+        "+7 (913) 094-67-76"
+      ],
+      "emails": [
+        "info@personal-dv.ru"
+      ],
+      "websites": [
+        "https://personal-dv.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:40Z"
+    },
+    {
+      "id": "orgpage-6161203",
+      "entity_type": "ООО",
+      "name": "ООО \"Asm Agro\"",
+      "full_name": "ООО \"Asm Agro\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "22",
+      "region_name": "Алтайский край",
+      "address": "Алтайский край",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Барнаул",
+      "okved_category": "Общепит, кафе и HoReCa",
+      "phones": [
+        "+7 (385) 250-04-45",
+        "+7 (385) 259-52-58"
+      ],
+      "emails": [
+        "info@asm-agro.ru"
+      ],
+      "websites": [
+        "https://asm-agro.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Сб-Вс: 9:00-18:00; Пн, Вт, Ср, Чт, Пт: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:40Z"
+    },
+    {
+      "id": "orgpage-6207963",
+      "entity_type": "ООО",
+      "name": "ООО \"Координаты 22\"",
+      "full_name": "ООО \"Координаты 22\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "22",
+      "region_name": "Алтайский край",
+      "address": "Алтайский край",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Барнаул",
+      "okved_category": "Общепит, кафе и HoReCa",
+      "phones": [
+        "+7 (385) 236-43-65"
+      ],
+      "emails": [],
+      "websites": [
+        "https://coordinates22.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/coordinates_coffee"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Ежедневно с 10:00-23:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:40Z"
+    },
+    {
+      "id": "orgpage-6207924",
+      "entity_type": "ООО",
+      "name": "ООО \"Автобус22\"",
+      "full_name": "ООО \"Автобус22\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "22",
+      "region_name": "Алтайский край",
+      "address": "Алтайский край",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Барнаул",
+      "okved_category": "Общепит, кафе и HoReCa",
+      "phones": [
+        "+7 (385) 255-52-89",
+        "+7 (385) 222-66-66",
+        "+7 (385) 225-01-50"
+      ],
+      "emails": [
+        "manager@avtobus22.ru"
+      ],
+      "websites": [
+        "https://avtobus22.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:40Z"
+    },
+    {
+      "id": "orgpage-6207550",
+      "entity_type": "ООО",
+      "name": "ООО \"ТПЛ-Сервис\"",
+      "full_name": "ООО \"ТПЛ-Сервис\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "22",
+      "region_name": "Алтайский край",
+      "address": "Алтайский край",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Барнаул",
+      "okved_category": "Общепит, кафе и HoReCa",
+      "phones": [
+        "+7 (804) 333-70-94",
+        "+7 (385) 220-44-20",
+        "+7 (385) 266-12-37"
+      ],
+      "emails": [
+        "pr@teploobmennic.ru"
+      ],
+      "websites": [
+        "https://teploobmennic.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:40Z"
+    },
+    {
+      "id": "orgpage-6148970",
+      "entity_type": "ООО",
+      "name": "ООО \"Персонал+\"",
+      "full_name": "ООО \"Персонал+\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Самарская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Тольятти",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (924) 003-57-32",
+        "+7 (848) 252-98-83",
+        "+7 (848) 278-41-03"
+      ],
+      "emails": [
+        "info@personal-dv.ru"
+      ],
+      "websites": [
+        "https://personal-dv.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:39Z"
+    },
+    {
+      "id": "orgpage-6204365",
+      "entity_type": "ИП",
+      "name": "ИП — RBT",
+      "full_name": "ИП — RBT",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Самарская область",
+      "person_name": "",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Тольятти",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (848) 224-41-11",
+        "+7 (848) 226-50-54",
+        "+7 (848) 274-14-71"
+      ],
+      "emails": [
+        "rbttolyatti@gmail.com"
+      ],
+      "websites": [
+        "https://rbt-tolyatti.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:39Z"
+    },
+    {
+      "id": "inn-6321461580",
+      "entity_type": "ООО",
+      "name": "ООО \"Партнер-Авто\"",
+      "full_name": "ООО \"Партнер-Авто\"",
+      "inn": "6321461580",
+      "ogrn": "1196313093338",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Самарская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Тольятти",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (937) 189-44-66",
+        "+7 (939) 700-55-04",
+        "+7 (927) 770-31-26"
+      ],
+      "emails": [
+        "zakazmontana@yandex.ru"
+      ],
+      "websites": [
+        "https://avtomontana.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/avtomontana"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79371894466",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:39Z"
+    },
+    {
+      "id": "orgpage-6171309",
+      "entity_type": "ООО",
+      "name": "ООО \"Персонал+\"",
+      "full_name": "ООО \"Персонал+\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Удмуртская Республика",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ижевск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (924) 003-57-32",
+        "+7 (912) 746-34-35",
+        "+7 (341) 277-20-08"
+      ],
+      "emails": [
+        "info@personal-dv.ru"
+      ],
+      "websites": [
+        "https://personal-dv.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79240035732",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:39Z"
+    },
+    {
+      "id": "orgpage-6207403",
+      "entity_type": "ООО",
+      "name": "ООО \"Цветущая Планета\"",
+      "full_name": "ООО \"Цветущая Планета\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Удмуртская Республика",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ижевск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (341) 264-29-22",
+        "+7 (341) 256-37-21",
+        "+7 (341) 290-74-77",
+        "+7 (341) 256-18-95"
+      ],
+      "emails": [
+        "akimova7@inbox.ru"
+      ],
+      "websites": [
+        "https://cvetplanet18.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-20:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:39Z"
+    },
+    {
+      "id": "orgpage-6148345",
+      "entity_type": "ИП",
+      "name": "ИП — В кадре",
+      "full_name": "ИП — В кадре",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "22",
+      "region_name": "Алтайский край",
+      "address": "Алтайский край",
+      "person_name": "",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Барнаул",
+      "okved_category": "Общепит, кафе и HoReCa",
+      "phones": [
+        "+7 (800) 770-75-24",
+        "+7 (385) 236-08-51",
+        "+7 (385) 269-39-99"
+      ],
+      "emails": [
+        "info@vcadre.ru"
+      ],
+      "websites": [
+        "https://barnaul.vcadre.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/varvaravcadre"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-21:00",
+      "telegram": "@varvaravcadre",
+      "telegram_status": "verified",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:39Z"
+    },
+    {
+      "id": "orgpage-5354547",
+      "entity_type": "ООО",
+      "name": "ООО \"Веб - Про\"",
+      "full_name": "ООО \"Веб - Про\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "пр - т Созидателей, д. 13",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Продвижение и создание сайтов в Ульяновске – прирост новых клиентов.",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 259-13-30"
+      ],
+      "emails": [
+        "dimanav81@mail.ru"
+      ],
+      "websites": [
+        "https://webpro73.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:38Z"
+    },
+    {
+      "id": "orgpage-6206472",
+      "entity_type": "ООО",
+      "name": "ООО \"Новый Стандарт\"",
+      "full_name": "ООО \"Новый Стандарт\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Ульяновская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ульяновск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (800) 222-22-69",
+        "+7 (842) 296-99-65",
+        "+7 (903) 320-84-00"
+      ],
+      "emails": [
+        "ns@n-standart.ru"
+      ],
+      "websites": [],
+      "socials": {
+        "vk": "https://vk.com/newstandart73"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79033208400",
+      "sources": [
+        "Открытый каталог РФ"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:38Z"
+    },
+    {
+      "id": "orgpage-929748",
+      "entity_type": "ООО",
+      "name": "ООО \"Нон-Стоп\"",
+      "full_name": "ООО \"Нон-Стоп\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "ул. Красноармейская, д. 13, корп. 2",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Рекламное агентство",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 267-47-18"
+      ],
+      "emails": [
+        "ans@a-nonstop.ru"
+      ],
+      "websites": [
+        "https://agentstvo-non-stop.tiu.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/nonstop_ulyanovsk"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:37Z"
+    },
+    {
+      "id": "orgpage-6207494",
+      "entity_type": "ООО",
+      "name": "ООО \"ОБК18\"",
+      "full_name": "ООО \"ОБК18\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Удмуртская Республика",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ижевск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (919) 916-81-84",
+        "+7 (341) 255-67-66",
+        "+7 (341) 264-01-40",
+        "+7 (341) 232-10-10"
+      ],
+      "emails": [
+        "obk18@mail.ru"
+      ],
+      "websites": [
+        "https://obk18.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/plasticmann",
+        "vk": "https://vk.com/balkon_loggia_izhevsk"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-18:00",
+      "telegram": "@plasticmann",
+      "telegram_status": "verified",
+      "telegram_phone": "+79199168184",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:37Z"
+    },
+    {
+      "id": "orgpage-6192765",
+      "entity_type": "ИП",
+      "name": "ИП — Студия Результат",
+      "full_name": "ИП — Студия Результат",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Ульяновская область",
+      "person_name": "",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Ульяновск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (909) 360-36-13",
+        "+7 (842) 241-32-45",
+        "+7 (842) 244-46-31"
+      ],
+      "emails": [
+        "webrezult@gmail.com"
+      ],
+      "websites": [
+        "https://нетвирусам.рф"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-18:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79093603613",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:37Z"
+    },
+    {
+      "id": "orgpage-115462",
+      "entity_type": "ООО",
+      "name": "ООО \"Фабрика упаковки\"",
+      "full_name": "ООО \"Фабрика упаковки\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "ул.Федерации, 17, 3 этаж",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "изготовление и продажа современной гибкой упаковочной продукции",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 267-46-05"
+      ],
+      "emails": [
+        "fabrika.upakovki@gmail.com"
+      ],
+      "websites": [
+        "https://fabrikaupak.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:30-17:30 (пер. 12:30-13:30); Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:36Z"
+    },
+    {
+      "id": "orgpage-1478347",
+      "entity_type": "ООО",
+      "name": "ООО \"Стеклопластика\"",
+      "full_name": "ООО \"Стеклопластика\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Урицкого, 33А",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "торгово-производственная компания",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 273-28-38",
+        "+7 (905) 349-28-38"
+      ],
+      "emails": [
+        "stekloplast-x@yandex.ru",
+        "td-73@mail.ru"
+      ],
+      "websites": [
+        "https://stp73.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-17:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79053492838",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:36Z"
+    },
+    {
+      "id": "orgpage-2537815",
+      "entity_type": "ООО",
+      "name": "ООО \"RSTreklama.ru\"",
+      "full_name": "ООО \"RSTreklama.ru\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "улица Гагарина, 18/6",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Рекламно-производственная фирма",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (951) 097-46-15",
+        "+7 (842) 297-73-27"
+      ],
+      "emails": [
+        "rstreklama@gmail.com"
+      ],
+      "websites": [
+        "https://rstreklama.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/rstreklama"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79510974615",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:36Z"
+    },
+    {
+      "id": "inn-632307239609",
+      "entity_type": "ИП",
+      "name": "ИП — Maketome",
+      "full_name": "ИП — Maketome",
+      "inn": "632307239609",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Самарская область",
+      "person_name": "",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Тольятти",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (996) 747-93-96",
+        "+7 (848) 251-74-11",
+        "+7 (901) 641-69-08"
+      ],
+      "emails": [
+        "info@maketome.ru"
+      ],
+      "websites": [
+        "https://maketome.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79967479396",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:36Z"
+    },
+    {
+      "id": "orgpage-6126058",
+      "entity_type": "ООО",
+      "name": "ООО \"Future Prof\"",
+      "full_name": "ООО \"Future Prof\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Удмуртская Республика",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ижевск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (341) 233-53-03",
+        "+7 (851) 159-29-86",
+        "+7 (341) 257-55-14"
+      ],
+      "emails": [
+        "info@future-professions.ru"
+      ],
+      "websites": [
+        "https://future-professions.online"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:30-17:30; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:36Z"
+    },
+    {
+      "id": "orgpage-6130027",
+      "entity_type": "ООО",
+      "name": "ООО \"Компьютерные Кресла\"",
+      "full_name": "ООО \"Компьютерные Кресла\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Удмуртская Республика",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Ижевск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (341) 277-16-00",
+        "+7 (939) 752-42-28",
+        "+7 (950) 167-73-10"
+      ],
+      "emails": [
+        "info@kompkresla.ru"
+      ],
+      "websites": [
+        "https://kompkresla.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 7:00-19:00; Сб-Вс: 9:00-16:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79397524228",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:36Z"
+    },
+    {
+      "id": "orgpage-6206544",
+      "entity_type": "ИП",
+      "name": "ИП — Нити творчества",
+      "full_name": "ИП — Нити творчества",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Удмуртская Республика",
+      "person_name": "",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Ижевск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (965) 828-69-00",
+        "+7 (341) 277-13-67",
+        "+7 (904) 319-46-89"
+      ],
+      "emails": [
+        "nititv@yandex.ru"
+      ],
+      "websites": [],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79658286900",
+      "sources": [
+        "Открытый каталог РФ"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:36Z"
+    },
+    {
+      "id": "orgpage-933750",
+      "entity_type": "ООО",
+      "name": "ООО \"АЗ-Медиа\"",
+      "full_name": "ООО \"АЗ-Медиа\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, ул. Лахтинская д.16А, БЦ \"Астра\", 5 этаж",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Рекламное агентство полного цикла",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (812) 322-91-09"
+      ],
+      "emails": [
+        "info@az-m.ru"
+      ],
+      "websites": [
+        "https://az-m.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/az_media"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Чт: 10:00-19:00; Пт: 10:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "orgpage-2513303",
+      "entity_type": "ООО",
+      "name": "ООО \"Place3D\"",
+      "full_name": "ООО \"Place3D\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, Ст. Петровско-Разумовский проезд, дом 1/23, стр. 1",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Создание 3D виртуальных туров. Реклама в 3D турах",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (499) 686-04-84",
+        "+7 (831) 283-07-04"
+      ],
+      "emails": [
+        "place3d.ru@gmail.com"
+      ],
+      "websites": [
+        "https://place3d.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10 - 20; Сб: 10 - 19; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "orgpage-2535073",
+      "entity_type": "ООО",
+      "name": "ООО \"Про-движение\"",
+      "full_name": "ООО \"Про-движение\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "24",
+      "region_name": "Красноярский край",
+      "address": "Красноярский край, Красноярск, ул. Перенсона, 1",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Агентство Интернет-маркетинга",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (983) 269-99-11"
+      ],
+      "emails": [
+        "advertsale@yandex.ru",
+        "advert124@yandex.ru"
+      ],
+      "websites": [
+        "https://про-движение.рф"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Сб: 9:00-19:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79832699911",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "orgpage-5381883",
+      "entity_type": "ООО",
+      "name": "ООО \"Ombm - Создание сайта, продвижение, поддержка\"",
+      "full_name": "ООО \"Ombm - Создание сайта, продвижение, поддержка\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "24",
+      "region_name": "Красноярский край",
+      "address": "Красноярский край, Красноярск, Кузнецово, ул. Горная, д. 25",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Создание сайта, продвижение сайта, поддержка сайта",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (902) 012-59-85"
+      ],
+      "emails": [
+        "ombm-info@mail.ru"
+      ],
+      "websites": [
+        "https://ombm.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79020125985",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "orgpage-5413127",
+      "entity_type": "ООО",
+      "name": "ООО \"Брендлента\"",
+      "full_name": "ООО \"Брендлента\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "66",
+      "region_name": "Свердловская область",
+      "address": "Свердловская область, Екатеринбург, ул. Декабристов, д. 14, оф. 318",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Производство и продажа упаковочных клейких лент с печатью, защитных пленок...",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (800) 600-18-06"
+      ],
+      "emails": [
+        "site@brandtape.ru"
+      ],
+      "websites": [
+        "https://brandtape.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "inn-7328099924",
+      "entity_type": "ООО",
+      "name": "ООО \"Симбирск-Картон\"",
+      "full_name": "ООО \"Симбирск-Картон\"",
+      "inn": "7328099924",
+      "ogrn": "1187325016900",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Инженерный 40-й проезд, 14",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "производственная компания",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 226-34-30",
+        "+7 (842) 225-02-64",
+        "+7 (927) 807-55-50"
+      ],
+      "emails": [
+        "simbirsk_karton@mail.ru"
+      ],
+      "websites": [
+        "https://симбирск-картон.рф"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:00-17:00 (пер. 13:00-14:00); Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79278075550",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "orgpage-2570849",
+      "entity_type": "ООО",
+      "name": "ООО \"Digital agency PRO100\"",
+      "full_name": "ООО \"Digital agency PRO100\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "ул. 40 - летия Победы, д. 7",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Мы занимаемся лидогенерацией («горячие заявки») наших клиентов и предоставляем им консалтинговые услуги.",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (800) 700-91-48"
+      ],
+      "emails": [
+        "sales@pro100agency.ru"
+      ],
+      "websites": [
+        "https://pro100.agency"
+      ],
+      "socials": {
+        "vk": "https://vk.com/pro100agency"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "orgpage-6202432",
+      "entity_type": "ООО",
+      "name": "ООО \"Керама маркет\"",
+      "full_name": "ООО \"Керама маркет\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Самарская область",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "",
+      "okved_name": "Тольятти",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (905) 305-11-19",
+        "+7 (848) 262-00-72",
+        "+7 (848) 295-52-99"
+      ],
+      "emails": [
+        "kerama.market1@yandex.ru"
+      ],
+      "websites": [],
+      "socials": {
+        "vk": "https://vk.com/cerama_market"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-19:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79053051119",
+      "sources": [
+        "Открытый каталог РФ"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:35Z"
+    },
+    {
+      "id": "orgpage-2510697",
+      "entity_type": "ООО",
+      "name": "ООО \"Кондор\"",
+      "full_name": "ООО \"Кондор\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, Липовая аллея, 9, лит. \"А\"",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "69.10",
+      "okved_name": "Юридическая компания",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (952) 210-45-78"
+      ],
+      "emails": [
+        "consulting78@mail.ru"
+      ],
+      "websites": [
+        "https://consulting78.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/club69124858"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79522104578",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:34Z"
+    },
+    {
+      "id": "orgpage-6128403",
+      "entity_type": "ООО",
+      "name": "ООО \"Альте Принт\"",
+      "full_name": "ООО \"Альте Принт\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, 2-й Грайвороновский пр-д., д 48",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Изготовление сувенирной продукции и текстиля с логотипом",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (925) 507-66-47"
+      ],
+      "emails": [
+        "prezent@altegroup.ru"
+      ],
+      "websites": [
+        "https://alteprint.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Сб-Вс: 10:00-18:00; Пн, Вт, Ср, Чт, Пт: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79255076647",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:34Z"
+    },
+    {
+      "id": "orgpage-842011",
+      "entity_type": "ООО",
+      "name": "ООО \"АСТОНИА\"",
+      "full_name": "ООО \"АСТОНИА\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, Малый Полуярославский переулок, д. 3/5, стр. 1",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "АСТОНИА предлагает разработку, продвижение, сопровождение сайтов, их аудит, регистрацию в каталогах, разработку элементов фирменного стиля компании, разработку и сопровождение контекстной рекламы.",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (495) 998-25-64",
+        "+7 (909) 542-67-50"
+      ],
+      "emails": [
+        "info@cool-reklama.ru",
+        "info@astonia.ru"
+      ],
+      "websites": [
+        "https://cool-reklama.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79095426750",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:34Z"
+    },
+    {
+      "id": "orgpage-967733",
+      "entity_type": "ООО",
+      "name": "ООО \"Агентство Интернет Решений\"",
+      "full_name": "ООО \"Агентство Интернет Решений\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "54",
+      "region_name": "Новосибирская область",
+      "address": "Новосибирская область, Новосибирск, Вокзальная магистраль, 16, оф. 436",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "создание и продвижение сайтов, техническая поддержка сайтов, интернет-реклама",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (383) 227-18-74",
+        "+7 (812) 385-75-89"
+      ],
+      "emails": [
+        "airwstudio@yandex.ru",
+        "hr@airws.ru"
+      ],
+      "websites": [
+        "https://airws.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9 - 19; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:34Z"
+    },
+    {
+      "id": "orgpage-927164",
+      "entity_type": "ИП",
+      "name": "ИП — Полиграфический центр \" Print71",
+      "full_name": "ИП — Полиграфический центр \" Print71",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "71",
+      "region_name": "Тульская область",
+      "address": "Тульская область, Тула, ул. Смидович, д. 12Б",
+      "person_name": "",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "73.11",
+      "okved_name": "Любые виды полиграфических услуг",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (487) 258-11-21",
+        "+7 (495) 632-02-24",
+        "+7 (902) 846-13-17"
+      ],
+      "emails": [
+        "info@print71.biz",
+        "zakaz2@print71.biz"
+      ],
+      "websites": [
+        "https://print71.biz"
+      ],
+      "socials": {
+        "telegram": "https://t.me/print71_zakaz_bot",
+        "vk": "https://vk.com/print71biz"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Сб 9.00-18.00",
+      "telegram": "@print71_zakaz_bot",
+      "telegram_status": "verified",
+      "telegram_phone": "+79028461317",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:34Z"
+    },
+    {
+      "id": "orgpage-157877",
+      "entity_type": "ООО",
+      "name": "ООО \"Рекламное агентство Дизайн Систем\"",
+      "full_name": "ООО \"Рекламное агентство Дизайн Систем\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "ул.Бебеля 49/31",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "услуги для бизнеса.",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 242-20-42"
+      ],
+      "emails": [
+        "ivan@dsystem.ru"
+      ],
+      "websites": [
+        "https://ds.com.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Чт: 9:00-19:00; Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:34Z"
+    },
+    {
+      "id": "orgpage-886161",
+      "entity_type": "ООО",
+      "name": "ООО \"УлТрансМедиа\"",
+      "full_name": "ООО \"УлТрансМедиа\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Ул. Крымова, 67",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Реклама на подголовниках Ульяновск",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 222-60-02",
+        "+7 (917) 605-33-35",
+        "+7 (951) 096-38-44",
+        "+7 (842) 244-27-64"
+      ],
+      "emails": [
+        "ultransmedia@gmail.com"
+      ],
+      "websites": [
+        "https://ultransmedia.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9 - 20; Сб: 9 - 18; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79176053335",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:34Z"
+    },
+    {
+      "id": "orgpage-2502294",
+      "entity_type": "ООО",
+      "name": "ООО \"Коника\"",
+      "full_name": "ООО \"Коника\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, ул. Талалихина д.41, стр 26",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Офсетная типография",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (499) 112-30-20"
+      ],
+      "emails": [
+        "info@almapress.ru",
+        "order@almapress.ru"
+      ],
+      "websites": [
+        "https://almapress.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/alma_press"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:33Z"
+    },
+    {
+      "id": "orgpage-6102154",
+      "entity_type": "ООО",
+      "name": "ООО \"Дизайн-студия HONEY\"",
+      "full_name": "ООО \"Дизайн-студия HONEY\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Пер. Федерации, 5",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Дизайн-студия HONEY",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (999) 193-99-80"
+      ],
+      "emails": [
+        "pr@honey-design.ru"
+      ],
+      "websites": [
+        "https://honey-design.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79991939980",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:33Z"
+    },
+    {
+      "id": "orgpage-6115464",
+      "entity_type": "ООО",
+      "name": "ООО \"GODauto\"",
+      "full_name": "ООО \"GODauto\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "ул. Гагарина, 83/1",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Продажа новых и контрактных запчастей для иномарок",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (922) 181-79-41",
+        "+7 (800) 555-81-04"
+      ],
+      "emails": [
+        "ad_tuning@mail.ru",
+        "pro@godauto.ru"
+      ],
+      "websites": [
+        "https://ij.godauto.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/GODauto_shop",
+        "vk": "https://vk.com/godauto"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-19:00; Сб: 10:00-15:00; Вс: выходной",
+      "telegram": "@GODauto_shop",
+      "telegram_status": "verified",
+      "telegram_phone": "+79221817941",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:32Z"
+    },
+    {
+      "id": "orgpage-5382221",
+      "entity_type": "ООО",
+      "name": "ООО \"Promo Digital Group\"",
+      "full_name": "ООО \"Promo Digital Group\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, ул. Новодмитровская, д. 36",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Агентство интернет-маркетинга",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (495) 204-27-86",
+        "+7 (487) 246-71-01"
+      ],
+      "emails": [
+        "hi@promo-digital.ru",
+        "info@promo-digital.ru"
+      ],
+      "websites": [
+        "https://promo-digital.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/promo.digital.group"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:32Z"
+    },
+    {
+      "id": "orgpage-6012412",
+      "entity_type": "ООО",
+      "name": "ООО \"ULTEK\"",
+      "full_name": "ООО \"ULTEK\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "пр-т. Созидателей, 23Б",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "Рекламно-производственная компания",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (842) 249-67-67"
+      ],
+      "emails": [
+        "zakaz@ultek.ru"
+      ],
+      "websites": [
+        "https://ultek.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/ultek"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-17:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:32Z"
+    },
+    {
+      "id": "orgpage-2470381",
+      "entity_type": "ООО",
+      "name": "ООО \"ФотоВиза\"",
+      "full_name": "ООО \"ФотоВиза\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, Стрелецкий 2-й проезд, 10",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "73.11",
+      "okved_name": "фотосалон",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (965) 357-07-50",
+        "+7 (800) 200-70-85",
+        "+7 (421) 293-03-67"
+      ],
+      "emails": [],
+      "websites": [
+        "https://fotobam.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "пн 10:00 - 20:00; вт 10:00 - 20:00; ср 10:00 - 20:00; чт 10:00 - 20:00; пт 10:00 - 20:00; сб 10:00 - 20:00; вс - выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79653570750",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:31Z"
+    },
+    {
+      "id": "orgpage-5686537",
+      "entity_type": "ИП",
+      "name": "ИП Ухо О",
+      "full_name": "ИП Ухо О",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Удмуртская, 302",
+      "person_name": "Ухо О",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "45.20",
+      "okved_name": "Автомагазин",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (912) 055-11-11",
+        "+7 (800) 700-49-74"
+      ],
+      "emails": [
+        "lider@izh.com",
+        "example@mail.com"
+      ],
+      "websites": [
+        "https://ok-auto18.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/okauto18"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн - Пт 09:00 - 18:30",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79120551111",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:30Z"
+    },
+    {
+      "id": "orgpage-5358141",
+      "entity_type": "ООО",
+      "name": "ООО \"Юридическая консультация ЮКРАС\"",
+      "full_name": "ООО \"Юридическая консультация ЮКРАС\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "64",
+      "region_name": "Саратовская область",
+      "address": "Саратовская область, Энгельс, ул. Тельмана, д. 3в, оф. 16",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "69.10",
+      "okved_name": "Юридические услуги для граждан и организаций.",
+      "okved_category": "B2B и деловые услуги",
+      "phones": [
+        "+7 (937) 960-93-39"
+      ],
+      "emails": [
+        "pravo@yukras.ru"
+      ],
+      "websites": [
+        "https://yukras.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/yukras"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79379609339",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:30Z"
+    },
+    {
+      "id": "orgpage-13596",
+      "entity_type": "ООО",
+      "name": "ООО \"Автошкола «Лидер\"",
+      "full_name": "ООО \"Автошкола «Лидер\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, улица Малыгина, 3с2",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Техническое обслуживание и ремонт автотранспорта",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (904) 567-11-78"
+      ],
+      "emails": [],
+      "websites": [
+        "https://lider-avtoshkola.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-20:00; Сб-Вс: 10:00-17:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79045671178",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-1240332",
+      "entity_type": "ООО",
+      "name": "ООО \"Яуза Моторс\"",
+      "full_name": "ООО \"Яуза Моторс\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, Волоцкой пер, 7",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Сеть автотехцентров",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (495) 640-20-54"
+      ],
+      "emails": [
+        "marketing@yauza-motors.ru"
+      ],
+      "websites": [
+        "https://yauzamotors.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-21:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-5399208",
+      "entity_type": "ООО",
+      "name": "ООО \"ALEXMOTORS\"",
+      "full_name": "ООО \"ALEXMOTORS\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, Московский проспект, д. 181",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Сервисный центр BMW и Mini",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (812) 747-70-00"
+      ],
+      "emails": [
+        "alexmotors.spb@mail.ru"
+      ],
+      "websites": [
+        "https://alexmotors.spb.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-21:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-5359501",
+      "entity_type": "ООО",
+      "name": "ООО \"МОТОДЕТАЛЬ\"",
+      "full_name": "ООО \"МОТОДЕТАЛЬ\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "ул. Гагарина, д. 79",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Запчасти оптом со склада.",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (341) 277-04-33",
+        "+7 (800) 300-39-79",
+        "+7 (341) 247-04-33",
+        "+7 (341) 253-92-73"
+      ],
+      "emails": [
+        "info@moto-detal.ru"
+      ],
+      "websites": [
+        "https://moto-detal.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/motodetalru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:00-17:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-5995615",
+      "entity_type": "ООО",
+      "name": "ООО \"Автотехцентр “LR FAMILY”\"",
+      "full_name": "ООО \"Автотехцентр “LR FAMILY”\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "БЦ Метеор, Молодёжная, 111",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Ремонт автомобилей Land Rover, Jaguar, Range Rover в Ижевске",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (341) 255-66-44"
+      ],
+      "emails": [
+        "lrfamily1818@yandex.ru"
+      ],
+      "websites": [
+        "https://lrfamily18.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/mehanik_avto"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Сб: 9:00-19:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-6131925",
+      "entity_type": "ООО",
+      "name": "ООО \"HemenPro\"",
+      "full_name": "ООО \"HemenPro\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "ул. Пойма, 71, литер Б",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Интернет-магазин hemen.pro - это портал автозапчастей и другой техники.",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (800) 200-72-44"
+      ],
+      "emails": [
+        "info@hemen.pro"
+      ],
+      "websites": [
+        "https://hemen.pro"
+      ],
+      "socials": {
+        "vk": "https://vk.com/hemenpro"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 7:30-16:30; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-6181942",
+      "entity_type": "ООО",
+      "name": "ООО \"МотоИмпорт\"",
+      "full_name": "ООО \"МотоИмпорт\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Ул. 9 Января, д. 209, оф. 12",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Интернет-магазин мототехники и аксессуаров",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (800) 100-43-68",
+        "+7 (922) 687-67-10",
+        "+7 (922) 504-44-80"
+      ],
+      "emails": [
+        "motoimport@mail.ru"
+      ],
+      "websites": [
+        "https://motoimport.net"
+      ],
+      "socials": {
+        "vk": "https://vk.com/motoimport"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00; Сб: 9:00-16:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79226876710",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-6198160",
+      "entity_type": "ООО",
+      "name": "ООО \"Smart Open\"",
+      "full_name": "ООО \"Smart Open\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Ул. Технологическая, 26",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Профессиональная автохимия для детейлинга",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (341) 277-27-28"
+      ],
+      "emails": [
+        "office@pk-vortex.ru"
+      ],
+      "websites": [
+        "https://smartopen.pro"
+      ],
+      "socials": {
+        "vk": "https://vk.com/smartopen",
+        "telegram": "https://t.me/smart0pen"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "@smart0pen",
+      "telegram_status": "verified",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:29Z"
+    },
+    {
+      "id": "orgpage-583240",
+      "entity_type": "ООО",
+      "name": "ООО \"Цезарь сателлит\"",
+      "full_name": "ООО \"Цезарь сателлит\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, Орджоникидзе ул. д. 44 к.2А",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Компания",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (812) 449-14-41",
+        "+7 (495) 632-00-62"
+      ],
+      "emails": [],
+      "websites": [
+        "https://csat.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "9.00-18.00, сб, вс - вых",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:27Z"
+    },
+    {
+      "id": "orgpage-2457938",
+      "entity_type": "ООО",
+      "name": "ООО \"Автотехцентр «Алиан\"",
+      "full_name": "ООО \"Автотехцентр «Алиан\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, ул. Джамгаровская, 5с1",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Мультибрендовый автосервис в СВАО, Медведково. Качественный ремонт иномарок.",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (495) 785-56-67",
+        "+7 (499) 185-11-81",
+        "+7 (926) 545-24-22"
+      ],
+      "emails": [
+        "info@carservice.ru"
+      ],
+      "websites": [
+        "https://carservice.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/carservice_ru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-21:00; Сб-Вс: 9:00-19:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79265452422",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:27Z"
+    },
+    {
+      "id": "orgpage-2308846",
+      "entity_type": "ООО",
+      "name": "ООО \"Zet-avto\"",
+      "full_name": "ООО \"Zet-avto\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, Салова, 70 к2",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "сеть автоцентров",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (812) 456-70-50"
+      ],
+      "emails": [
+        "zetavto.it@gmail.com"
+      ],
+      "websites": [
+        "https://zet-avto.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-20:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:26Z"
+    },
+    {
+      "id": "orgpage-6076149",
+      "entity_type": "ООО",
+      "name": "ООО \"Контур Авто\"",
+      "full_name": "ООО \"Контур Авто\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "ул. Телегина, д. 30 / 853",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Кузовной ремонт",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (341) 224-11-35"
+      ],
+      "emails": [],
+      "websites": [
+        "https://ak-kontur.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:26Z"
+    },
+    {
+      "id": "orgpage-1295222",
+      "entity_type": "ООО",
+      "name": "ООО \"Русская Жемчужина\"",
+      "full_name": "ООО \"Русская Жемчужина\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Молодёжный бульвар, 8",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Региональное агентство недвижимости",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 253-33-33"
+      ],
+      "emails": [],
+      "websites": [
+        "https://rusjem.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/anrusjem"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00; Сб: 9:00-16:00; Вс: 10:00-14:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-1295712",
+      "entity_type": "ООО",
+      "name": "ООО \"Национальное достояние\"",
+      "full_name": "ООО \"Национальное достояние\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Туполева бульвар, 17а",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Межрегиональный экспертный центр финансового мониторинга",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (800) 550-21-15"
+      ],
+      "emails": [
+        "obuchenie@rfm115.ru"
+      ],
+      "websites": [
+        "https://115fz.pro"
+      ],
+      "socials": {
+        "vk": "https://vk.com/rfm115"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00 (пер. 13:00-14:00); Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-1380236",
+      "entity_type": "ООО",
+      "name": "ООО \"Авангард\"",
+      "full_name": "ООО \"Авангард\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Фрунзе, 8",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "юридическая компания",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 249-10-52"
+      ],
+      "emails": [
+        "office@avangard-uk.ru"
+      ],
+      "websites": [
+        "https://avangard-uk.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:30-19:00; Сб-Вс: 11:00-15:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "inn-442200530968",
+      "entity_type": "ИП",
+      "name": "ИП Волков Евгений Владимирович",
+      "full_name": "ИП Волков Евгений Владимирович",
+      "inn": "442200530968",
+      "ogrn": "318784700024180",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, Рижский проспект, д. 37, бокс 7",
+      "person_name": "Волков Евгений Владимирович",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "45.20",
+      "okved_name": "Мы делаем свет в авто ярче и правильней",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (812) 984-28-84",
+        "+7 (962) 684-28-84"
+      ],
+      "emails": [
+        "bm87@bk.ru"
+      ],
+      "websites": [
+        "https://ксенонцентр.рф"
+      ],
+      "socials": {
+        "vk": "https://vk.com/zumato"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Вс: 10:00-17:00; Пн, Вт, Ср, Чт, Пт, Сб: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79626842884",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "inn-7714439100",
+      "entity_type": "ООО",
+      "name": "ООО \"АВТОМАСТЕР\"",
+      "full_name": "ООО \"АВТОМАСТЕР\"",
+      "inn": "7714439100",
+      "ogrn": "1197746108812",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, Хорошевское ш., д.40А,с.2",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Автомобильный центр",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (985) 997-70-03",
+        "+7 (345) 278-22-66",
+        "+7 (495) 150-90-03"
+      ],
+      "emails": [
+        "info@afto-service.ru",
+        "afto@afto-service.ru",
+        "zakaz@afto-service.ru"
+      ],
+      "websites": [
+        "https://afto-service.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/aftoservice"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9 - 22",
+      "telegram": "@aftoservice",
+      "telegram_status": "verified",
+      "telegram_phone": "+79859977003",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-1119763",
+      "entity_type": "ООО",
+      "name": "ООО \"АЛЕО\"",
+      "full_name": "ООО \"АЛЕО\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "32",
+      "region_name": "Брянская область",
+      "address": "Брянская область, Брянск, ул. Олега Кошевого, строение 34В",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "оптовая компания",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (483) 259-55-55",
+        "+7 (495) 033-10-81",
+        "+7 (800) 700-10-81",
+        "+7 (812) 248-10-81"
+      ],
+      "emails": [
+        "info@timeweb.ru"
+      ],
+      "websites": [
+        "https://aleo.com.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/timeweb_bot",
+        "vk": "https://vk.com/timewebru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:00-18:00; Сб-Вс: выходной",
+      "telegram": "@timeweb_bot",
+      "telegram_status": "verified",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-6113260",
+      "entity_type": "ООО",
+      "name": "ООО \"Страховой дом Платинум\"",
+      "full_name": "ООО \"Страховой дом Платинум\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, ул. Сердобольская, 64К",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Страховая компания",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (812) 309-14-40"
+      ],
+      "emails": [
+        "info@ins-club.ru",
+        "shakoanna@bk.ru"
+      ],
+      "websites": [
+        "https://ins-club.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Сб-Вс: 9:00-18:00; Пн, Вт, Ср, Чт, Пт: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-5420094",
+      "entity_type": "ООО",
+      "name": "ООО \"dBSHOP\"",
+      "full_name": "ООО \"dBSHOP\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "ул. Союзная, д. 49 А",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Продажа и установка автоакустики, сигнализаций и доп оборудования на автомобили",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (341) 291-21-21"
+      ],
+      "emails": [
+        "dbshop2017@mail.ru"
+      ],
+      "websites": [],
+      "socials": {
+        "vk": "https://vk.com/dbshopru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Сб: 9:00-19:00; Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-5550358",
+      "entity_type": "ИП",
+      "name": "ИП — БАРС",
+      "full_name": "ИП — БАРС",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "Воткинское шоссе, д. 11, 2 этаж, офис 29",
+      "person_name": "",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "45.20",
+      "okved_name": "Оформление изменений в транспортных средствах",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (922) 517-18-57"
+      ],
+      "emails": [
+        "izhbars@list.ru"
+      ],
+      "websites": [],
+      "socials": {
+        "vk": "https://vk.com/izhbars"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 8:00-18:00; Сб-Вс: 10:00-14:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79225171857",
+      "sources": [
+        "Открытый каталог РФ"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-5568274",
+      "entity_type": "ООО",
+      "name": "ООО \"Jpmoto\"",
+      "full_name": "ООО \"Jpmoto\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "ул. Азина, д. 152",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Импорт автомобилей, мотоциклов, квадроциклов из США и Японии",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (341) 224-42-04"
+      ],
+      "emails": [
+        "jpmoto@jpmoto.biz"
+      ],
+      "websites": [
+        "https://jpmoto.biz"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:25Z"
+    },
+    {
+      "id": "orgpage-1291867",
+      "entity_type": "ООО",
+      "name": "ООО \"Волжский проспект\"",
+      "full_name": "ООО \"Волжский проспект\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Эльф, 40 лет Победы, 22",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Риэлторское агентство",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 277-52-00"
+      ],
+      "emails": [],
+      "websites": [
+        "https://volpro.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/volpro"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:24Z"
+    },
+    {
+      "id": "orgpage-1250178",
+      "entity_type": "ООО",
+      "name": "ООО \"Диалог\"",
+      "full_name": "ООО \"Диалог\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Приморский бульвар, 20",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Агентство недвижимости и туризма",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 231-81-62"
+      ],
+      "emails": [],
+      "websites": [
+        "https://dialogan.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:24Z"
+    },
+    {
+      "id": "orgpage-5354821",
+      "entity_type": "ООО",
+      "name": "ООО \"Автосалон \"Кармакс24\"",
+      "full_name": "ООО \"Автосалон \"Кармакс24\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Москва, ул. Голубинская, д. 16",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Продажа б/у автомобилей.",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (800) 500-46-95"
+      ],
+      "emails": [],
+      "websites": [
+        "https://carmax24.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-18:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:24Z"
+    },
+    {
+      "id": "orgpage-5352196",
+      "entity_type": "ООО",
+      "name": "ООО \"Автопрокат России\"",
+      "full_name": "ООО \"Автопрокат России\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "18",
+      "region_name": "Удмуртская Республика",
+      "address": "ул. Азина, д. 1",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Аренда и прокат легковых автомобилей в Ижевске.",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (800) 302-22-41"
+      ],
+      "emails": [
+        "info@autovprokat.com"
+      ],
+      "websites": [
+        "https://autovprokat.com"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:24Z"
+    },
+    {
+      "id": "orgpage-6053777",
+      "entity_type": "ООО",
+      "name": "ООО \"ПАРИТЕТЪ\"",
+      "full_name": "ООО \"ПАРИТЕТЪ\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "69",
+      "region_name": "Тверская область",
+      "address": "Тверская область, Тверь, ул. Трехсвятская, д.6, корп.1, офис 505 А (ТЦ ПАРАДИЗ)",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Крупное, современное и надежное агентство недвижимости Твери",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (482) 232-32-32",
+        "+7 (915) 740-32-32",
+        "+7 (482) 233-99-11"
+      ],
+      "emails": [
+        "info@paritettver.ru"
+      ],
+      "websites": [
+        "https://paritettver.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/an_paritet_tver",
+        "vk": "https://vk.com/paritet_tver"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-17:00; Сб-Вс: выходной",
+      "telegram": "@an_paritet_tver",
+      "telegram_status": "verified",
+      "telegram_phone": "+79157403232",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:23Z"
+    },
+    {
+      "id": "orgpage-5424796",
+      "entity_type": "ООО",
+      "name": "ООО \"VWPROF\"",
+      "full_name": "ООО \"VWPROF\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "78",
+      "region_name": "г. Санкт-Петербург",
+      "address": "Санкт-Петербург, ул. Салова, д. 53 / 1, лит. Б",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "45.20",
+      "okved_name": "Автосервис, СТО",
+      "okved_category": "Торговля и E-commerce",
+      "phones": [
+        "+7 (812) 922-20-11"
+      ],
+      "emails": [
+        "9222011@vwprof.ru"
+      ],
+      "websites": [
+        "https://vwprof.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-20:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:23Z"
+    },
+    {
+      "id": "orgpage-1292566",
+      "entity_type": "ООО",
+      "name": "ООО \"Магазин недвижимости\"",
+      "full_name": "ООО \"Магазин недвижимости\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Карла Маркса, 82",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Риэлторское агентство",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 270-30-90"
+      ],
+      "emails": [],
+      "websites": [
+        "https://мн63.рф"
+      ],
+      "socials": {
+        "vk": "https://vk.com/club37989337"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 10:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:22Z"
+    },
+    {
+      "id": "orgpage-5620332",
+      "entity_type": "ООО",
+      "name": "ООО \"ЖИЛЬЕ.РУ\"",
+      "full_name": "ООО \"ЖИЛЬЕ.РУ\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Ленина, 84",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Агентство недвижимости",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 239-80-01",
+        "+7 (848) 233-33-34",
+        "+7 (848) 253-33-33",
+        "+7 (848) 255-57-14"
+      ],
+      "emails": [],
+      "websites": [
+        "https://zhille.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/zhilleru"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:22Z"
+    },
+    {
+      "id": "orgpage-1248772",
+      "entity_type": "ООО",
+      "name": "ООО \"СтартТрэвел\"",
+      "full_name": "ООО \"СтартТрэвел\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Лизы Чайкиной, 43а",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "туристическое агентство",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 261-07-86"
+      ],
+      "emails": [],
+      "websites": [
+        "https://starttraveltlt.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 10:00-19:00",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:22Z"
+    },
+    {
+      "id": "orgpage-921365",
+      "entity_type": "ООО",
+      "name": "ООО \"Единый Центр Новостроек\"",
+      "full_name": "ООО \"Единый Центр Новостроек\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "77",
+      "region_name": "г. Москва",
+      "address": "Санкт-Петербург, пл. Александра Невского, д. 2, БЦ \"Москва\", офис 1105",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Продажа квартир",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (800) 500-40-78",
+        "+7 (911) 920-47-77"
+      ],
+      "emails": [
+        "78523a@mail.ru"
+      ],
+      "websites": [
+        "https://1ecn.ru"
+      ],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: 9:00-21:00",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79119204777",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:21Z"
+    },
+    {
+      "id": "orgpage-1291916",
+      "entity_type": "ООО",
+      "name": "ООО \"СТ капитал\"",
+      "full_name": "ООО \"СТ капитал\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Интер-Волна, Громовой, 2а",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Агентство недвижимости",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 241-14-53"
+      ],
+      "emails": [],
+      "websites": [
+        "https://ст-капитал.рф"
+      ],
+      "socials": {
+        "vk": "https://vk.com/public110020466"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "none",
+      "telegram_phone": "",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:21Z"
+    },
+    {
+      "id": "orgpage-1292222",
+      "entity_type": "ООО",
+      "name": "ООО \"КИТ\"",
+      "full_name": "ООО \"КИТ\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Карбышева, 12",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Агентство недвижимости",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (927) 610-26-75"
+      ],
+      "emails": [],
+      "websites": [
+        "https://volgakit.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/club31236665"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-17:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79276102675",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:21Z"
+    },
+    {
+      "id": "orgpage-2573883",
+      "entity_type": "ООО",
+      "name": "ООО \"Девичник\"",
+      "full_name": "ООО \"Девичник\"",
+      "inn": "",
+      "ogrn": "",
+      "kpp": "",
+      "reg_date": "2026-11-05",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "пр. Рябиновый, д. 15",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Свободное пространство для девушек.",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (964) 974-45-65"
+      ],
+      "emails": [
+        "devichnik.devichnik@yandex.ru"
+      ],
+      "websites": [],
+      "socials": {},
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: круглосуточно; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79649744565",
+      "sources": [
+        "Открытый каталог РФ"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:21Z"
+    },
     {
       "id": "orgpage-6193069",
       "entity_type": "ООО",
@@ -521,7 +4092,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб: 10:00-16:00; Вс: выходной",
       "telegram": "@chersonese92",
       "telegram_status": "verified",
       "telegram_phone": "+79780713171",
@@ -562,7 +4133,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Пт: 10:00-19:00; Сб-Вс: выходной",
       "telegram": "",
       "telegram_status": "none",
       "telegram_phone": "",
@@ -603,7 +4174,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Сб: 9:00-18:00; Вс: выходной",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79288840202",
@@ -686,7 +4257,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
       "telegram": "",
       "telegram_status": "none",
       "telegram_phone": "",
@@ -727,7 +4298,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Сб: 10:00-17:00; Вс: 10:00-15:00; Пн, Вт, Ср, Чт, Пт: выходной",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79255560688",
@@ -812,7 +4383,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Вс: 7:00-22:00",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79272456247",
@@ -853,7 +4424,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Пт: 8:00-16:00; Сб-Вс: 8:00-13:00",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79294757099",
@@ -895,7 +4466,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Пт: 10:00-18:00; Сб-Вс: выходной",
       "telegram": "",
       "telegram_status": "none",
       "telegram_phone": "",
@@ -936,7 +4507,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Пт: 10:00-18:00; Сб-Вс: выходной",
       "telegram": "",
       "telegram_status": "none",
       "telegram_phone": "",
@@ -977,7 +4548,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Пт: 9:00-18:00; Сб-Вс: выходной",
       "telegram": "",
       "telegram_status": "none",
       "telegram_phone": "",
@@ -1017,11 +4588,13 @@
       "websites": [
         "https://3846940.ru"
       ],
-      "socials": {},
+      "socials": {
+        "vk": "https://vk.com/public68176251"
+      },
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "пн-пятн.: 10-18 часов; в выходные - по записи",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79681827190",
@@ -1058,11 +4631,13 @@
       "websites": [
         "https://urask.ru"
       ],
-      "socials": {},
+      "socials": {
+        "vk": "https://vk.com/yurist_krasnodara"
+      },
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Сб: 10:00-20:00; Вс: выходной",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79882461006",
@@ -1146,7 +4721,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Чт: 10:00-19:00; Пт: 10:00-16:00; Вс: 14:00-18:00; Сб: выходной",
       "telegram": "",
       "telegram_status": "none",
       "telegram_phone": "",
@@ -1183,11 +4758,13 @@
       "websites": [
         "https://globaltax.ru"
       ],
-      "socials": {},
+      "socials": {
+        "vk": "https://vk.com/globaltaxru"
+      },
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Сб-Вс: 9:00-20:00; Пн, Вт, Ср, Чт, Пт: выходной",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79111099337",
@@ -1224,11 +4801,13 @@
       "websites": [
         "https://vitalex.pro"
       ],
-      "socials": {},
+      "socials": {
+        "vk": "https://vk.com/vitalexkrd"
+      },
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Чт: 9:00-19:00; Пт: 9:00-18:00; Сб-Вс: выходной",
       "telegram": "",
       "telegram_status": "by_phone",
       "telegram_phone": "+79384255550",
@@ -1267,7 +4846,7 @@
       "capital": "",
       "status": "Действующая",
       "is_active": true,
-      "work_hours": "",
+      "work_hours": "Пн-Сб: 10:00-19:00; Вс: выходной",
       "telegram": "",
       "telegram_status": "none",
       "telegram_phone": "",
@@ -11338,6 +14917,53 @@
       "parsed_at": "2026-11-01T08:05:20Z"
     },
     {
+      "id": "inn-6382106529",
+      "entity_type": "ООО",
+      "name": "ООО \"Домушка-Недвижимость\"",
+      "full_name": "ООО \"Домушка-Недвижимость\"",
+      "inn": "6382106529",
+      "ogrn": "1256300014904",
+      "kpp": "",
+      "reg_date": "2025-06-15",
+      "region_code": "63",
+      "region_name": "Самарская область",
+      "address": "Степана Разина проспект, 50",
+      "person_name": "",
+      "person_role": "Генеральный директор",
+      "okved_code": "68.31",
+      "okved_name": "Агентство недвижимости",
+      "okved_category": "Недвижимость и аренда",
+      "phones": [
+        "+7 (848) 251-08-88",
+        "+7 (865) 264-00-17",
+        "+7 (927) 892-18-88"
+      ],
+      "emails": [
+        "info@an26.ru",
+        "ivanov@mail.ru",
+        "dom621888@yandex.ru"
+      ],
+      "websites": [
+        "https://domushca.ru"
+      ],
+      "socials": {
+        "vk": "https://vk.com/club62246894"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Пт: 9:00-19:00; Сб-Вс: выходной",
+      "telegram": "",
+      "telegram_status": "by_phone",
+      "telegram_phone": "+79278921888",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:23Z"
+    },
+    {
       "id": "inn-5256214392",
       "entity_type": "ООО",
       "name": "ООО \"ПК СОТ\"",
@@ -11432,6 +15058,52 @@
       ],
       "has_phone": true,
       "parsed_at": "2026-11-01T08:11:08Z"
+    },
+    {
+      "id": "inn-732609928157",
+      "entity_type": "ИП",
+      "name": "ИП Павленко Д",
+      "full_name": "ИП Павленко Д",
+      "inn": "732609928157",
+      "ogrn": "323730000040136",
+      "kpp": "",
+      "reg_date": "2023-06-15",
+      "region_code": "73",
+      "region_name": "Ульяновская область",
+      "address": "Ульяновская область",
+      "person_name": "Павленко Д",
+      "person_role": "Индивидуальный предприниматель",
+      "okved_code": "",
+      "okved_name": "Ульяновск",
+      "okved_category": "Прочие виды деятельности",
+      "phones": [
+        "+7 (996) 221-14-46",
+        "+7 (842) 237-23-23",
+        "+7 (937) 882-00-08",
+        "+7 (995) 939-22-93"
+      ],
+      "emails": [
+        "info@personal-market.ru"
+      ],
+      "websites": [
+        "https://ulyanovsk.personal-market.ru"
+      ],
+      "socials": {
+        "telegram": "https://t.me/Personal_Market24"
+      },
+      "capital": "",
+      "status": "Действующая",
+      "is_active": true,
+      "work_hours": "Пн-Вс: круглосуточно",
+      "telegram": "@Personal_Market24",
+      "telegram_status": "verified",
+      "telegram_phone": "+79962211446",
+      "sources": [
+        "Открытый каталог РФ",
+        "Сайт компании"
+      ],
+      "has_phone": true,
+      "parsed_at": "2026-11-05T12:24:41Z"
     },
     {
       "id": "inn-6686154228",

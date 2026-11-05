@@ -26,18 +26,23 @@ class FindOrgFrontierCollector:
     def __init__(self, year_2d: str | None = None) -> None:
         now_year = datetime.now(timezone.utc).strftime("%y")
         self.year_2d = year_2d or now_year
+        self._blocked = False
 
     def _fetch_prefix_items(self, prefix: str) -> list[tuple[str, str, str, str]]:
         """Возвращает список (card_path, name, ogrn, inn) по префиксу ОГРН."""
+        if self._blocked:
+            return []
         url = f"{self.BASE_URL}/search/ogrn/?val={prefix}"
         try:
-            _, html = http_get_text(url, timeout=8.0)
+            _, html = http_get_text(url, timeout=3.5)
         except Exception as exc:
             logger.debug("Ошибка запроса префикса %s: %s", prefix, exc)
+            self._blocked = True
             return []
 
         if "Проверка, что Вы не робот" in html:
-            logger.info("find-org запросил паузу защиты от ботов — вежливый откат до следующего цикла")
+            logger.info("find-org запросил паузу защиты от ботов — мгновенный пропуск до следующего цикла")
+            self._blocked = True
             return []
 
         results: list[tuple[str, str, str, str]] = []
@@ -238,6 +243,8 @@ class FindOrgFrontierCollector:
 
         collected: list[Lead] = []
         for rc in selected_regions:
+            if self._blocked:
+                break
             hint = str(frontiers.get(rc, ""))
             items = self.find_latest_block(rc, cached_hint=hint)
             if not items:
@@ -282,7 +289,7 @@ class FnsDirectCollector:
 
         # Быстрая проверка доступности egrul.nalog.ru с текущего IP / прокси
         try:
-            http_get_text(f"{self.BASE_URL}/", timeout=4.0, max_bytes=4096, use_ru_proxy=True)
+            http_get_text(f"{self.BASE_URL}/", timeout=2.2, max_bytes=4096, use_ru_proxy=True)
         except Exception:
             logger.info("egrul.nalog.ru недоступен с зарубежного IP без RU_PROXY_URL — пропуск прямого опроса ФНС")
             return []

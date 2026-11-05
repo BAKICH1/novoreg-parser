@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import concurrent.futures
 import logging
+import os
 import re
 from typing import Any
 
@@ -75,15 +76,58 @@ ORGPAGE_CITY_FEEDS = [
 ]
 
 ORGPAGE_CATEGORIES = [
-    ("https://www.orgpage.ru/rossiya/ремонт/", "43.39", "Строительно-отделочные и ремонтные работы"),
-    ("https://www.orgpage.ru/rossiya/yuridicheskie-uslugi/", "69.10", "Деятельность в области права и консалтинга"),
+    ("https://www.orgpage.ru/rossiya/строительство/", "41.20", "Строительство жилых и нежилых зданий"),
+    ("https://www.orgpage.ru/rossiya/бизнес/", "70.22", "Консультирование по вопросам коммерческой деятельности"),
+    ("https://www.orgpage.ru/rossiya/услуги/", "96.09", "Предоставление прочих персональных и деловых услуг"),
+    ("https://www.orgpage.ru/rossiya/промышленность/", "25.11", "Производство промышленной продукции"),
+    ("https://www.orgpage.ru/rossiya/розничная_торговля/", "47.19", "Торговля розничная и электронная коммерция"),
+    ("https://www.orgpage.ru/rossiya/транспорт/", "49.41", "Деятельность автомобильного грузового транспорта"),
+    ("https://www.orgpage.ru/rossiya/informatsionnye-tekhnologii/", "62.01", "Разработка компьютерного ПО и ИТ-интеграция"),
     ("https://www.orgpage.ru/rossiya/nedvizhimost/", "68.31", "Деятельность агентств недвижимости"),
-    ("https://www.orgpage.ru/rossiya/туризм_и_отдых/", "79.11", "Деятельность туристических агентств"),
-    ("https://www.orgpage.ru/rossiya/restorany-kafe/", "56.10", "Деятельность ресторанов и доставка продуктов питания"),
+    ("https://www.orgpage.ru/rossiya/avto-i-moto/", "45.20", "Техническое обслуживание и ремонт автотранспорта"),
+    ("https://www.orgpage.ru/rossiya/yuridicheskie-uslugi/", "69.10", "Деятельность в области права и консалтинга"),
+    ("https://www.orgpage.ru/rossiya/reklama-i-poligrafiya/", "73.11", "Деятельность рекламных агентств и полиграфии"),
+    ("https://www.orgpage.ru/rossiya/dom-i-interer/", "43.39", "Производство мебели и обустройство интерьеров"),
+    ("https://www.orgpage.ru/rossiya/otdelochnye-raboty/", "43.39", "Отделочные и строительно-монтажные работы"),
+    ("https://www.orgpage.ru/rossiya/ремонт/", "43.39", "Строительно-отделочные и ремонтные работы"),
+    ("https://www.orgpage.ru/rossiya/odezhda-i-obuv/", "47.71", "Торговля одеждой, обувью и текстилем"),
+    ("https://www.orgpage.ru/rossiya/krasota-i-zdorove/", "96.02", "Индустрия красоты и оздоровительные центры"),
+    ("https://www.orgpage.ru/rossiya/restorany-kafe/", "56.10", "Деятельность ресторанов и доставка питания"),
+    ("https://www.orgpage.ru/rossiya/oteli-i-gostinitsy/", "55.10", "Деятельность гостиниц и мест размещения"),
+    ("https://www.orgpage.ru/rossiya/медицина/", "86.21", "Медицинская и стоматологическая практика"),
+    ("https://www.orgpage.ru/rossiya/kompyuternyy-remont/", "95.11", "Ремонт компьютеров и коммуникационного оборудования"),
+    ("https://www.orgpage.ru/rossiya/remont-elektriki/", "43.21", "Производство электромонтажных работ"),
+    ("https://www.orgpage.ru/rossiya/remont-instrumentov/", "33.12", "Ремонт машин и промышленного оборудования"),
+    ("https://www.orgpage.ru/rossiya/dorozhnyy-remont/", "42.11", "Строительство автомобильных дорог и благоустройство"),
+    ("https://www.orgpage.ru/rossiya/жкх_и_благоустройство/", "81.21", "Обслуживание зданий и территорий"),
+    ("https://www.orgpage.ru/rossiya/образование/", "85.42", "Образование дополнительное детей и взрослых"),
     ("https://www.orgpage.ru/rossiya/sport/", "93.13", "Деятельность фитнес-центров и спортивных студий"),
+    ("https://www.orgpage.ru/rossiya/туризм_и_отдых/", "79.11", "Деятельность туристических агентств"),
     ("https://www.orgpage.ru/rossiya/досуг/", "93.29", "Организация отдыха и развлечений"),
-    ("https://www.orgpage.ru/rossiya/kafe/", "56.10", "Деятельность кафе, пекарен и кофеен"),
 ]
+
+EXCLUDED_OPF_SET = {
+    "ЗАО", "ОАО", "ПАО", "НАО", "АО", "ГБУ", "ГБУЗ", "ГБОУ",
+    "МБУ", "МБОУ", "МУП", "ГУП", "ФГУП", "ФГБУ", "АНО", "ТСЖ", "ТСН", "СНТ",
+}
+
+
+def _fetch_orgpage_fast(url: str, timeout: float = 5.5, max_bytes: int = 240_000) -> tuple[int, str]:
+    """
+    Быстрое чтение карточек и рубрик Orgpage с использованием Cloudflare Edge-маршрута
+    (отвечает за ~0.35 сек с любых зарубежных IP, включая GitHub Actions) и прямым резервом.
+    """
+    slug = os.getenv("HERENOW_SLUG", "vivid-quill-yz5r").strip()
+    if slug and url.startswith("https://www.orgpage.ru/"):
+        rel_path = url[len("https://www.orgpage.ru"):]
+        edge_url = f"https://{slug}.here.now/api/orgpage{rel_path}"
+        try:
+            code, html = http_get_text(edge_url, timeout=timeout, max_bytes=max_bytes)
+            if code == 200 and html:
+                return code, html
+        except Exception:
+            pass
+    return http_get_text(url, timeout=timeout, max_bytes=max_bytes)
 
 
 def _extract_socials(html: str) -> dict[str, str]:
@@ -210,20 +254,53 @@ class OpenContactsCollector:
         state["orgpage_cat_page"] = cat_page
 
         raw_cards: list[dict[str, Any]] = []
-        for base_cat_url, okved_code, okved_name in chosen:
-            cat_url = base_cat_url if cat_page <= 1 else f"{base_cat_url.rstrip('/')}/{cat_page}/"
-            try:
-                _, html = http_get_text(cat_url, timeout=8.0)
-            except Exception as exc:
-                logger.debug("Ошибка чтения каталога %s: %s", cat_url, exc)
-                continue
+        seen_cids: set[str] = set()
 
+        # Формируем параллельный пакет лент: федеральные рубрики + регионально-отраслевые ленты
+        city_cursor = int(state.get("orgpage_city_cursor", 0))
+        chosen_cities = [
+            ORGPAGE_CITY_FEEDS[(city_cursor + i) % len(ORGPAGE_CITY_FEEDS)]
+            for i in range(6)
+        ]
+        state["orgpage_city_cursor"] = (city_cursor + 6) % len(ORGPAGE_CITY_FEEDS)
+
+        listing_tasks: list[tuple[str, str, str, str, str]] = []
+        for idx_c, (base_cat_url, okved_code, okved_name) in enumerate(chosen):
+            cat_url = base_cat_url if cat_page <= 1 else f"{base_cat_url.rstrip('/')}/{cat_page}/"
+            listing_tasks.append((cat_url, okved_code, okved_name, "", ""))
+            # Плюс региональный срез той же рубрики для глубокого охвата городов РФ
+            c_slug, r_code, r_name = chosen_cities[idx_c % len(chosen_cities)]
+            rub_slug = base_cat_url.rstrip("/").rsplit("/", 1)[-1]
+            city_rub_url = (
+                f"https://www.orgpage.ru/{c_slug}/{rub_slug}/"
+                if cat_page <= 1
+                else f"https://www.orgpage.ru/{c_slug}/{rub_slug}/{cat_page}/"
+            )
+            listing_tasks.append((city_rub_url, okved_code, okved_name, r_code, r_name))
+
+        def fetch_listing_task(t: tuple[str, str, str, str, str]) -> tuple[tuple[str, str, str, str, str], str]:
+            u = t[0]
+            try:
+                _, h = _fetch_orgpage_fast(u, timeout=6.0)
+                return t, h
+            except Exception as exc:
+                logger.debug("Ошибка чтения каталога %s: %s", u, exc)
+                return t, ""
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as lpool:
+            listing_results = list(lpool.map(fetch_listing_task, listing_tasks))
+
+        for (_, okved_code, okved_name, f_rcode, f_rname), html in listing_results:
+            if not html:
+                continue
             blocks = re.findall(
                 r'<div class="object-item[^"]*"\s+data-companyid="(\d+)">(.*?)<div class="similar-item__opened',
                 html,
                 re.S,
             )
             for cid, block in blocks[:items_per_category]:
+                if cid in seen_cids:
+                    continue
                 m_title = re.search(
                     r'similar-item__title">.*?<a[^>]+href="([^"]+)"[^>]*>(.*?)</a>',
                     block,
@@ -258,6 +335,7 @@ class OpenContactsCollector:
                 if m_desc:
                     desc = clean_text(m_desc.group(1))
 
+                seen_cids.add(cid)
                 raw_cards.append({
                     "cid": cid,
                     "card_url": card_url,
@@ -267,50 +345,53 @@ class OpenContactsCollector:
                     "address": address,
                     "okved_code": okved_code,
                     "okved_name": desc or okved_name,
+                    "region_code": f_rcode,
+                    "region_name": f_rname,
                 })
-            polite_sleep(0.25)
 
-        # Дополнительно собираем ленту самых свежих карточек (ID 61xxxxx/62xxxxx) с городских витрин РФ
-        city_cursor = int(state.get("orgpage_city_cursor", 0))
-        chosen_cities = [
-            ORGPAGE_CITY_FEEDS[(city_cursor + i) % len(ORGPAGE_CITY_FEEDS)]
-            for i in range(4)
-        ]
-        state["orgpage_city_cursor"] = (city_cursor + 4) % len(ORGPAGE_CITY_FEEDS)
-
-        for city_slug, rcode, rname in chosen_cities:
+        # Параллельно собираем ленту самых свежих карточек (ID 61xxxxx/62xxxxx) и ИП с городских витрин РФ
+        def fetch_city_home(city_tuple: tuple[str, str, str]) -> tuple[tuple[str, str, str], str]:
             try:
-                _, chtml = http_get_text(f"https://www.orgpage.ru/{city_slug}/", timeout=7.0)
-                # Сначала собираем карточки явных ИП в городе, затем самые свежие регистрации 61xxxxx/62xxxxx
-                ip_matches = list(re.finditer(
-                    rf"(https://www\.orgpage\.ru/{city_slug}/[a-z0-9\-]*ip-[a-z0-9\-]+-(\d+)\.html)",
-                    chtml,
-                ))
-                fresh_matches = list(re.finditer(
-                    rf"(https://www\.orgpage\.ru/{city_slug}/[a-z0-9\-]+-(6[12]\d{{5}})\.html)",
-                    chtml,
-                ))
-                for m_url in (ip_matches + fresh_matches):
-                    full_u, cid = m_url.group(1), m_url.group(2)
-                    if any(x["cid"] == cid for x in raw_cards):
-                        continue
-                    raw_cards.append({
-                        "cid": cid,
-                        "card_url": full_u,
-                        "brand": "",
-                        "phones": [],
-                        "site_url": "",
-                        "address": rname,
-                        "okved_code": "",
-                        "okved_name": "Новые компании города",
-                        "region_code": rcode,
-                        "region_name": rname,
-                    })
-                    if len([x for x in raw_cards if x.get("region_code") == rcode]) >= 6:
-                        break
-            except Exception as exc:
-                logger.debug("Ошибка чтения городской ленты %s: %s", city_slug, exc)
-            polite_sleep(0.18)
+                _, ch = _fetch_orgpage_fast(f"https://www.orgpage.ru/{city_tuple[0]}/", timeout=5.5)
+                return city_tuple, ch
+            except Exception:
+                return city_tuple, ""
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as cpool:
+            city_homes = list(cpool.map(fetch_city_home, chosen_cities[:4]))
+
+        for (city_slug, rcode, rname), chtml in city_homes:
+            if not chtml:
+                continue
+            ip_matches = list(re.finditer(
+                rf"(https://www\.orgpage\.ru/{city_slug}/[a-z0-9\-]*ip-[a-z0-9\-]+-(\d+)\.html)",
+                chtml,
+            ))
+            fresh_matches = list(re.finditer(
+                rf"(https://www\.orgpage\.ru/{city_slug}/[a-z0-9\-]+-(6[12]\d{{5}})\.html)",
+                chtml,
+            ))
+            added_city = 0
+            for m_url in (ip_matches + fresh_matches):
+                full_u, cid = m_url.group(1), m_url.group(2)
+                if cid in seen_cids:
+                    continue
+                seen_cids.add(cid)
+                raw_cards.append({
+                    "cid": cid,
+                    "card_url": full_u,
+                    "brand": "",
+                    "phones": [],
+                    "site_url": "",
+                    "address": rname,
+                    "okved_code": "",
+                    "okved_name": "Новые компании города",
+                    "region_code": rcode,
+                    "region_name": rname,
+                })
+                added_city += 1
+                if added_city >= 6:
+                    break
 
         # Параллельно и быстро проверяем детальные карточки / сайты для извлечения ИП/ООО, ИНН, Email
         leads: list[Lead] = []
@@ -335,7 +416,14 @@ class OpenContactsCollector:
 
             # 1) Быстрая проверка карточки на Orgpage для телефонов, часов работы, статуса, сайта, email и юрлица
             try:
-                _, detail_html = http_get_text(item["card_url"], timeout=4.5, max_bytes=180_000)
+                _, detail_html = _fetch_orgpage_fast(item["card_url"], timeout=4.5, max_bytes=180_000)
+                m_any_opf = re.search(r'"opf"\s*:\s*"([^"]*)"', detail_html)
+                if m_any_opf:
+                    raw_opf = m_any_opf.group(1).strip().upper()
+                    if raw_opf in EXCLUDED_OPF_SET:
+                        return None
+                    if raw_opf in ("ИП", "ООО"):
+                        etype = raw_opf
                 if not phones:
                     phones.extend(extract_phones(detail_html)[:3])
                 emails.extend(extract_emails(detail_html)[:2])
@@ -343,9 +431,6 @@ class OpenContactsCollector:
                 telegram = extract_telegram(detail_html) or telegram
                 work_hours = extract_work_hours_from_html(detail_html) or work_hours
                 is_active, org_status = detect_org_status_from_html(detail_html, work_hours)
-                m_opf = re.search(r'"opf"\s*:\s*"(ИП|ООО)"', detail_html)
-                if m_opf:
-                    etype = m_opf.group(1)
                 m_cname = re.search(r'"name"\s*:\s*"([^"]{2,90})"', detail_html)
                 if not brand and m_cname:
                     brand = clean_text(m_cname.group(1)).strip(' "«»')
@@ -472,11 +557,11 @@ class OpenContactsCollector:
                 sources=sources,
             ).finalize()
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=16) as pool:
             futures = [pool.submit(enrich_one, c) for c in raw_cards]
             for fut in futures:
                 try:
-                    lead = fut.result(timeout=7.5)
+                    lead = fut.result(timeout=8.5)
                     if lead and lead.has_phone:
                         leads.append(lead)
                 except Exception as exc:
@@ -508,7 +593,7 @@ class OpenContactsCollector:
             return 0
 
         enriched_count = 0
-        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
             future_map = {pool.submit(_probe_company_site, url): (lead, url) for lead, url in targets}
             for fut in future_map:
                 lead, url = future_map[fut]

@@ -1,12 +1,22 @@
 {
-  "region_rotation_idx": 14,
+  "region_rotation_idx": 16,
   "ogrn_frontiers": {
     "77": "0035",
     "78": "0000"
   },
-  "orgpage_cursor": 7,
-  "runs_count": 8,
+  "orgpage_cursor": 11,
+  "runs_count": 9,
   "run_history": [
+    {
+      "timestamp": "2026-11-05T12:24:55Z",
+      "fetched": 105,
+      "added_new": 86,
+      "updated": 19,
+      "duration_sec": 49.4,
+      "sources": [
+        "Открытые каталоги + Сайты (105)"
+      ]
+    },
     {
       "timestamp": "2026-11-03T07:32:45Z",
       "fetched": 80,
@@ -185,6 +195,6 @@
     "orgpage-6207317",
     "orgpage-6207803"
   ],
-  "orgpage_city_cursor": 17,
+  "orgpage_city_cursor": 23,
   "orgpage_cat_page": 2
 }
