@@ -4,3 +4,7 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Optional browser regression tests
+node_modules/
+.test-artifacts/

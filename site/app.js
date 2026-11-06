@@ -7,6 +7,9 @@
   const LS_EDGE_LEADS_KEY = "novoreg_edge_leads_v1";
   const LS_KEYS_KEY = "novoreg_api_keys_v1";
   const LS_THEME_KEY = "novoreg_theme_v1";
+  const LS_WORK_VIEW_KEY = "novoreg_work_view_v1";
+  const LS_WORK_SNAPSHOT_KEY = "novoreg_work_snapshot_v1";
+  const SS_WORKSPACE_ID = "novoreg_workspace_id_v1";
 
   const state = {
     serverLeads: [],
@@ -15,6 +18,21 @@
     liveLeads: [],
     mergedLeads: [],
     filteredLeads: [],
+    workingLeads: [],
+    worklistReady: false,
+    workById: new Map(),
+    workByKey: new Map(),
+    workFingerprints: new Map(),
+    pendingNewCount: 0,
+    pendingChangedCount: 0,
+    recentViews: [],
+    activeTab: "tab-leads",
+    drawerLeadId: "",
+    workspaceId: "",
+    savedSnapshotKey: "",
+    restoringWorkView: false,
+    restoredWorkView: null,
+    snapshotSavePromise: null,
     stats: null,
     serverLoadPromise: null,
     lastSyncError: "",
@@ -145,6 +163,328 @@
     return `${m[3]}.${m[2]}.${m[1]}`;
   }
 
+  // Рабочий снимок отделён от общей пополняемой базы. Сетевой опрос никогда
+  // не заменяет tbody, не пересортировывает строки и не трогает открытое досье.
+  function leadIdentity(lead) {
+    return lead.inn ? `inn-${lead.inn}` : lead.ogrn ? `ogrn-${lead.ogrn}` : String(lead.id || "");
+  }
+
+  function cloneLead(lead) {
+    return JSON.parse(JSON.stringify(lead));
+  }
+
+  function leadFingerprint(lead) {
+    const keys = ["name", "full_name", "entity_type", "inn", "ogrn", "reg_date", "region_code", "region_name", "address", "person_name", "person_role", "okved_code", "okved_name", "okved_category", "status", "is_active", "work_hours", "telegram", "telegram_phone"];
+    return JSON.stringify([
+      ...keys.map((key) => lead[key] ?? ""),
+      ...["phones", "emails", "websites", "sources"].map((key) => [...(lead[key] || [])].sort()),
+    ]);
+  }
+
+  function rebuildWorkIndex() {
+    state.workById = new Map(state.workingLeads.map((lead) => [String(lead.id), lead]));
+    state.workByKey = new Map(state.workingLeads.map((lead) => [leadIdentity(lead), lead]));
+    state.workFingerprints = new Map(state.workingLeads.map((lead) => [String(lead.id), leadFingerprint(lead)]));
+  }
+
+  function findWorkLead(id, key) {
+    return state.workById.get(String(id || "")) || state.workByKey.get(key || id) || null;
+  }
+
+  function updatePendingWorklist() {
+    let added = 0;
+    let changed = 0;
+    if (state.worklistReady) {
+      for (const lead of state.mergedLeads) {
+        const old = state.workByKey.get(leadIdentity(lead)) || state.workById.get(String(lead.id));
+        if (!old) added++;
+        else if (leadFingerprint(lead) !== state.workFingerprints.get(String(old.id))) changed++;
+      }
+    }
+    state.pendingNewCount = added;
+    state.pendingChangedCount = changed;
+    const count = document.getElementById("worklist-count");
+    const incoming = document.getElementById("worklist-incoming");
+    const button = document.getElementById("btn-apply-updates");
+    if (count) count.textContent = state.worklistReady ? `В рабочем списке: ${state.workingLeads.length}` : "Готовим рабочий список…";
+    if (incoming) incoming.textContent = added || changed ? `Новых: +${added} · Изменено: ${changed}` : "Новых поступлений пока нет";
+    if (button) {
+      button.disabled = !state.worklistReady || (!added && !changed);
+      button.textContent = added ? `Показать новые (+${added})` : changed ? `Обновить карточки (${changed})` : "Показать новые";
+    }
+    const toolbar = document.getElementById("worklist-toolbar");
+    if (toolbar) toolbar.classList.toggle("has-pending", Boolean(added || changed));
+  }
+
+  function syncFilterControls() {
+    const bindings = { q: "f-search", region: "f-region", category: "f-category", orgStatus: "f-org-status", crm: "f-crm", sort: "f-sort" };
+    Object.entries(bindings).forEach(([key, id]) => {
+      const element = document.getElementById(id);
+      if (element) element.value = state.filters[key];
+    });
+    [["seg-type", "entityType"], ["seg-contact", "contactMode"]].forEach(([id, key]) => {
+      document.querySelectorAll(`#${id} .seg-btn`).forEach((button) => button.classList.toggle("active", (button.dataset.val || "") === state.filters[key]));
+    });
+  }
+
+  function setActiveTab(id) {
+    const target = document.getElementById(id);
+    if (!target || !target.classList.contains("tab-panel")) return;
+    state.activeTab = id;
+    document.querySelectorAll(".nav-tab").forEach((button) => button.classList.toggle("active", button.dataset.tab === id));
+    document.querySelectorAll(".tab-panel").forEach((panel) => panel.classList.toggle("active", panel.id === id));
+  }
+
+  let workDbPromise = null;
+  function openWorkDb() {
+    if (!workDbPromise) {
+      workDbPromise = new Promise((resolve, reject) => {
+        const request = indexedDB.open("novoreg_workspaces_v1", 1);
+        request.onupgradeneeded = () => {
+          const store = request.result.createObjectStore("snapshots", { keyPath: "key" });
+          store.createIndex("savedAt", "savedAt");
+        };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+        request.onblocked = () => reject(new Error("Workspace storage is blocked"));
+      });
+    }
+    return workDbPromise;
+  }
+
+  async function readWorkSnapshot(key) {
+    if (!key) return null;
+    try {
+      const db = await openWorkDb();
+      return await new Promise((resolve, reject) => {
+        const request = db.transaction("snapshots", "readonly").objectStore("snapshots").get(key);
+        request.onsuccess = () => resolve(request.result || null);
+        request.onerror = () => reject(request.error);
+      });
+    } catch (_) {
+      try {
+        const saved = JSON.parse(localStorage.getItem(LS_WORK_SNAPSHOT_KEY) || "null");
+        return saved && saved.key === key ? saved : null;
+      } catch (_) { return null; }
+    }
+  }
+
+  function persistWorkSnapshot() {
+    const snapshot = { key: state.workspaceId, savedAt: Date.now(), leads: state.workingLeads.map(cloneLead) };
+    // Последовательные транзакции: более старый снимок не может перезаписать новый.
+    state.snapshotSavePromise = (state.snapshotSavePromise || Promise.resolve()).catch(() => {}).then(async () => {
+      try {
+        const db = await openWorkDb();
+        await new Promise((resolve, reject) => {
+          const tx = db.transaction("snapshots", "readwrite");
+          const store = tx.objectStore("snapshots");
+          store.put(snapshot);
+          let count = 0;
+          const cursor = store.index("savedAt").openCursor(null, "prev");
+          cursor.onsuccess = () => {
+            const current = cursor.result;
+            if (!current) return;
+            count++;
+            if (count > 10 && current.primaryKey !== snapshot.key) current.delete();
+            current.continue();
+          };
+          tx.oncomplete = resolve;
+          tx.onerror = () => reject(tx.error);
+          tx.onabort = () => reject(tx.error);
+        });
+      } catch (_) {
+        try { localStorage.setItem(LS_WORK_SNAPSHOT_KEY, JSON.stringify(snapshot)); }
+        catch (_) {
+          state.workStorageWarning = true;
+          const hint = document.getElementById("worklist-storage-hint");
+          if (hint) hint.textContent = "Хранилище браузера недоступно: список закреплён до закрытия вкладки.";
+          return;
+        }
+      }
+      state.savedSnapshotKey = snapshot.key;
+      persistWorkView();
+    });
+    return state.snapshotSavePromise;
+  }
+
+  function persistWorkView() {
+    if (!state.worklistReady || state.restoringWorkView) return;
+    const note = document.getElementById("drawer-crm-note");
+    const stage = document.getElementById("drawer-crm-stage");
+    const view = {
+      version: 1,
+      snapshotKey: state.savedSnapshotKey || state.workspaceId,
+      filters: { ...state.filters },
+      page: state.page,
+      scrollY: window.scrollY,
+      scrollX: window.scrollX,
+      tableScrollX: document.querySelector(".table-wrap")?.scrollLeft || 0,
+      activeTab: state.activeTab,
+      drawerLeadId: state.drawerLeadId,
+      drawerDraft: state.drawerLeadId && note ? { leadId: state.drawerLeadId, note: note.value, stage: stage?.value || "new" } : null,
+      recentViews: state.recentViews.slice(0, 30),
+      savedAt: Date.now(),
+    };
+    try { sessionStorage.setItem(LS_WORK_VIEW_KEY, JSON.stringify(view)); } catch (_) {}
+    try { localStorage.setItem(LS_WORK_VIEW_KEY, JSON.stringify(view)); } catch (_) {}
+  }
+
+  let workViewSaveTimer = null;
+  function scheduleWorkViewSave() {
+    clearTimeout(workViewSaveTimer);
+    workViewSaveTimer = setTimeout(persistWorkView, 180);
+  }
+
+  function restoreWorkPreferences() {
+    let view = null;
+    try { view = JSON.parse(sessionStorage.getItem(LS_WORK_VIEW_KEY) || localStorage.getItem(LS_WORK_VIEW_KEY) || "null"); } catch (_) {}
+    try {
+      state.workspaceId = sessionStorage.getItem(SS_WORKSPACE_ID) || `work-${crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2)}`;
+      sessionStorage.setItem(SS_WORKSPACE_ID, state.workspaceId);
+    } catch (_) { state.workspaceId = `work-${Date.now()}`; }
+    if (view && view.version === 1) {
+      for (const key of Object.keys(state.filters)) {
+        if (typeof view.filters?.[key] === "string") state.filters[key] = view.filters[key];
+      }
+      state.page = Math.max(1, Math.floor(Number(view.page) || 1));
+      state.activeTab = ["tab-leads", "tab-live", "tab-analytics", "tab-setup"].includes(view.activeTab) ? view.activeTab : "tab-leads";
+      state.recentViews = Array.isArray(view.recentViews) ? view.recentViews.filter((entry) => entry && entry.id && entry.name).slice(0, 30) : [];
+      state.savedSnapshotKey = view.snapshotKey || "";
+      state.restoredWorkView = view;
+    }
+    state.restoringWorkView = true;
+    syncFilterControls();
+    setActiveTab(state.activeTab);
+    renderRecentViews();
+  }
+
+  async function restoreWorkScroll() {
+    const view = state.restoredWorkView;
+    if (view) {
+      if (view.drawerLeadId && findWorkLead(view.drawerLeadId)) {
+        openLeadDrawer(view.drawerLeadId, false);
+        if (view.drawerDraft?.leadId === view.drawerLeadId) {
+          const note = document.getElementById("drawer-crm-note");
+          const stage = document.getElementById("drawer-crm-stage");
+          if (note) note.value = view.drawerDraft.note || "";
+          if (stage) stage.value = view.drawerDraft.stage || "new";
+        }
+      }
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      const table = document.querySelector(".table-wrap");
+      if (table) table.scrollLeft = Math.max(0, Number(view.tableScrollX) || 0);
+      window.scrollTo({ left: Math.max(0, Number(view.scrollX) || 0), top: Math.max(0, Number(view.scrollY) || 0), behavior: "instant" });
+    }
+    state.restoringWorkView = false;
+    persistWorkView();
+  }
+
+  function acceptIncomingWorklist(initial = false) {
+    if (!initial && !state.pendingNewCount && !state.pendingChangedCount) return;
+    // Старые просмотренные строки не пропадают даже при ротации серверной базы.
+    const next = state.workingLeads.map(cloneLead);
+    const positions = new Map(next.map((lead, index) => [leadIdentity(lead), index]));
+    const idPositions = new Map(next.map((lead, index) => [String(lead.id), index]));
+    const added = state.pendingNewCount;
+    for (const incoming of state.mergedLeads) {
+      const key = leadIdentity(incoming);
+      const index = positions.has(key) ? positions.get(key) : idPositions.get(String(incoming.id));
+      if (index !== undefined) next[index] = { ...cloneLead(incoming), id: next[index].id };
+      else {
+        positions.set(key, next.length);
+        idPositions.set(String(incoming.id), next.length);
+        next.push(cloneLead(incoming));
+      }
+    }
+    state.workingLeads = next;
+    state.worklistReady = true;
+    rebuildWorkIndex();
+    populateDynamicSelects();
+    syncFilterControls();
+    applyFiltersAndRender(!initial);
+    updatePendingWorklist();
+    persistWorkSnapshot();
+    if (!initial) {
+      document.querySelector(".filter-panel")?.scrollIntoView({ block: "start", behavior: "instant" });
+      showToast(added ? `Новые карточки добавлены в рабочий список: +${added}. Фильтры сохранены.` : "Данные рабочего списка обновлены");
+      persistWorkView();
+    }
+  }
+
+  function renderVisitedMarkers() {
+    const last = state.recentViews[0];
+    const visited = new Set(state.recentViews.map((entry) => String(entry.id)));
+    document.querySelectorAll("#leads-tbody .js-lead-row").forEach((row) => {
+      row.classList.toggle("is-last-viewed", Boolean(last && String(last.id) === row.dataset.id));
+      row.classList.toggle("is-visited", visited.has(row.dataset.id));
+      const marker = row.querySelector(".visited-marker");
+      if (marker) {
+        marker.textContent = last && String(last.id) === row.dataset.id ? "Последняя открытая" : visited.has(row.dataset.id) ? "Просмотрено" : "";
+      }
+    });
+  }
+
+  function renderRecentViews() {
+    const container = document.getElementById("recent-views-list");
+    const count = document.getElementById("recent-views-count");
+    const back = document.getElementById("btn-return-last");
+    if (count) count.textContent = String(state.recentViews.length);
+    if (back) {
+      back.disabled = !state.recentViews.length;
+      back.title = state.recentViews[0] ? `Вернуться к ${state.recentViews[0].name}` : "Откройте карточку или ссылку компании — её место будет сохранено";
+    }
+    if (container) container.innerHTML = state.recentViews.length
+      ? state.recentViews.map((entry, index) => `<button type="button" class="recent-view-item" data-recent-index="${index}" title="${esc(entry.name)}"><span>${esc(entry.name)}</span><small>${index === 0 ? "Последняя открытая" : "Вернуться к строке"}</small></button>`).join("")
+      : '<p class="recent-views-empty">Открытые карточки и переходы на сайты компаний появятся здесь.</p>';
+  }
+
+  function rememberLead(leadId) {
+    const lead = findWorkLead(leadId) || state.mergedLeads.find((item) => String(item.id) === String(leadId));
+    if (!lead) return;
+    const entry = { id: String(lead.id), key: leadIdentity(lead), name: lead.name, filters: { ...state.filters }, page: state.page, visitedAt: Date.now() };
+    state.recentViews = [entry, ...state.recentViews.filter((old) => old.id !== entry.id && old.key !== entry.key)].slice(0, 30);
+    renderVisitedMarkers();
+    renderRecentViews();
+    persistWorkView();
+  }
+
+  function returnToVisited(index = 0) {
+    const entry = state.recentViews[index];
+    if (!entry) return;
+    const lead = findWorkLead(entry.id, entry.key);
+    if (!lead) { showToast("Карточки нет в сохранённом списке. Попробуйте поиск по названию."); return; }
+    closeDrawer();
+    if (entry.filters) state.filters = { ...state.filters, ...entry.filters };
+    populateDynamicSelects();
+    syncFilterControls();
+    setActiveTab("tab-leads");
+    applyFiltersAndRender(false);
+    let position = state.filteredLeads.findIndex((item) => String(item.id) === String(lead.id));
+    if (position < 0) {
+      // CRM-этап мог измениться. Сбрасываем препятствующие фильтры только по явной команде «Вернуться».
+      state.filters = { q: lead.name, entityType: "", contactMode: "", region: "", category: "", orgStatus: "", crm: "", sort: "smart" };
+      syncFilterControls();
+      applyFiltersAndRender(true);
+      position = state.filteredLeads.findIndex((item) => String(item.id) === String(lead.id));
+    }
+    state.page = Math.max(1, Math.floor(Math.max(0, position) / PAGE_SIZE) + 1);
+    renderTable();
+    const menu = document.getElementById("recent-views");
+    if (menu) menu.open = false;
+    rememberLead(lead.id);
+    requestAnimationFrame(() => {
+      const row = Array.from(document.querySelectorAll("#leads-tbody .js-lead-row")).find((item) => item.dataset.id === String(lead.id));
+      row?.scrollIntoView({ block: "center", behavior: "instant" });
+      persistWorkView();
+    });
+  }
+
+  // Единственная точка для пассивных поступлений: только счётчики, никаких изменений таблицы.
+  function renderIncomingData() {
+    renderKPIsAndAnalytics();
+    updatePendingWorklist();
+  }
+
   function loadLocalStorageState() {
     try {
       state.crmMap = JSON.parse(localStorage.getItem(LS_CRM_KEY) || "{}") || {};
@@ -167,7 +507,8 @@
       if (keys.twogis) document.getElementById("live-twogis-key").value = keys.twogis;
     } catch (_) {}
 
-    const savedTheme = localStorage.getItem(LS_THEME_KEY) || "dark";
+    let savedTheme = "dark";
+    try { savedTheme = localStorage.getItem(LS_THEME_KEY) || "dark"; } catch (_) {}
     document.documentElement.setAttribute("data-theme", savedTheme);
   }
 
@@ -180,6 +521,8 @@
     try {
       localStorage.setItem(LS_CRM_KEY, JSON.stringify(state.crmMap));
     } catch (_) {}
+
+    applyFiltersAndRender(false);
 
     // Синхронизация со встроенной облачной БД here.now Site Data (если сайт закреплён за аккаунтом)
     try {
@@ -212,7 +555,6 @@
       }
     } catch (_) {}
 
-    applyFiltersAndRender(false);
   }
 
   const EDGE_CITY_FEEDS = [
@@ -599,7 +941,7 @@
         const batch = lj.records || [];
         fetchedRecords.push(...batch);
 
-        // Мгновенное прогрессивное отображение первой сотни облачных лидов без ожидания хвоста пагинации
+        // Прогрессивно обновляем общую базу и счётчик поступлений, не меняя рабочие строки
         if (pageIdx === 0 && batch.length && !isIncremental) {
           const firstMapped = batch.map(mapCloudRecordToLead).filter((x) => x.name);
           if (firstMapped.length) {
@@ -607,9 +949,7 @@
             firstMapped.forEach((x) => byId.set(x.id, x));
             state.siteDataLeads = Array.from(byId.values());
             mergeAllLeads();
-            populateDynamicSelects();
-            renderKPIsAndAnalytics();
-            applyFiltersAndRender(false);
+            renderIncomingData();
           }
         }
 
@@ -1114,7 +1454,7 @@
           }
         }
 
-        // Живой стриминг: сразу отрисовываем каждую волну в таблице и KPI без ожидания конца пакета!
+        // Сохраняем очередную волну и обновляем счётчики; рабочий снимок остаётся неизменным.
         if (waveAdded.length > 0) {
           state.siteDataLeads = [...waveAdded, ...state.siteDataLeads];
           state.edgeLocalLeads = [...waveAdded, ...state.edgeLocalLeads].slice(0, 1500);
@@ -1126,9 +1466,7 @@
             btn.textContent = `Сбор: +${newlyDiscovered.length}…`;
           }
           mergeAllLeads();
-          populateDynamicSelects();
-          renderKPIsAndAnalytics();
-          applyFiltersAndRender(false);
+          renderIncomingData();
 
           // Параллельная запись волны в облачную БД без блокировки следующей сетевой волны
           pendingCloudWrites.push(persistLeadsBatch(waveAdded));
@@ -1154,8 +1492,8 @@
       if (newlyDiscovered.length > 0) {
         const ipCnt = newlyDiscovered.filter((x) => x.entity_type === "ИП").length;
         const oooCnt = newlyDiscovered.length - ipCnt;
-        if (isManual || !state.turboActive) {
-          showToast(`Добавлено +${newlyDiscovered.length} (ООО: ${oooCnt}, ИП: ${ipCnt})`);
+        if (isManual) {
+          showToast(`Найдено +${newlyDiscovered.length} (ООО: ${oooCnt}, ИП: ${ipCnt}). Нажмите «Показать новые», когда будет удобно.`);
         }
       } else if (isManual) {
         showToast("Лента прокручена вперёд — нажмите ещё раз");
@@ -1270,28 +1608,21 @@
       : "";
     if (results[0].status === "fulfilled") {
       const st = results[0].value;
-      const prevIso = state.lastUpdatedIso;
       state.stats = st;
       state.lastUpdatedIso = st.updated_at || "";
-      if (isSilentPoll && prevIso && state.lastUpdatedIso && prevIso !== state.lastUpdatedIso) {
-        showToast("Получены свежие данные от серверного парсера");
-      }
     }
     if (results[1].status === "fulfilled") {
       const ld = results[1].value;
       state.serverLeads = Array.isArray(ld.leads) ? ld.leads : Array.isArray(ld) ? ld : [];
     }
 
-    // Серверные изменения видны сразу, даже если Site Data отвечает медленно.
+    // Фоновая база пополняется; рабочая таблица при этом неизменна.
     mergeAllLeads();
-    populateDynamicSelects();
-    renderKPIsAndAnalytics();
-    applyFiltersAndRender(false);
+    renderIncomingData();
     await fetchCloudSiteData(Boolean(isSilentPoll));
     mergeAllLeads();
-    populateDynamicSelects();
-    renderKPIsAndAnalytics();
-    applyFiltersAndRender(false);
+    renderIncomingData();
+    if (!state.worklistReady && state.mergedLeads.length) acceptIncomingWorklist(true);
   }
 
   function renderAutomationHealth() {
@@ -1346,12 +1677,12 @@
   function populateDynamicSelects() {
     const regSelect = document.getElementById("f-region");
     const catSelect = document.getElementById("f-category");
-    const curReg = regSelect.value;
-    const curCat = catSelect.value;
+    const curReg = state.filters.region;
+    const curCat = state.filters.category;
 
     const regCounts = {};
     const catCounts = {};
-    for (const l of state.mergedLeads) {
+    for (const l of state.workingLeads) {
       if (l.region_code && l.region_name) {
         const k = `${l.region_code}|${l.region_name}`;
         regCounts[k] = (regCounts[k] || 0) + 1;
@@ -1531,7 +1862,7 @@
     const q = f.q.trim().toLowerCase();
     const qDigits = q.replace(/\D/g, "");
 
-    let list = state.mergedLeads.filter((l) => {
+    let list = state.workingLeads.filter((l) => {
       if (f.entityType && l.entity_type !== f.entityType) return false;
       if (f.region && l.region_code !== f.region) return false;
       if (f.category && l.okved_category !== f.category) return false;
@@ -1617,7 +1948,7 @@
 
     const phonesInFilter = state.filteredLeads.filter((x) => x.phones && x.phones.length).length;
     document.getElementById("results-summary").textContent =
-      `Найдено ${total} контрагентов (из них с телефоном: ${phonesInFilter}) • Показаны ${total ? start + 1 : 0}–${start + slice.length}`;
+      `В рабочем списке найдено ${total} (с телефоном: ${phonesInFilter}) · Показаны ${total ? start + 1 : 0}–${start + slice.length}`;
     document.getElementById("page-info").textContent = `Страница ${state.page} из ${totalPages}`;
     document.getElementById("btn-prev-page").disabled = state.page <= 1;
     document.getElementById("btn-next-page").disabled = state.page >= totalPages;
@@ -1630,6 +1961,7 @@
           </td>
         </tr>
       `;
+      persistWorkView();
       return;
     }
 
@@ -1724,6 +2056,7 @@
                 <span>${esc(l.name)}</span>
               </div>
               <div class="lead-codes">${codesHtml}</div>
+              <span class="visited-marker" aria-live="off"></span>
             </td>
             <td style="white-space: nowrap; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums;">
               ${esc(formatDateRu(l.reg_date))}
@@ -1764,11 +2097,15 @@
         `;
       })
       .join("");
+    renderVisitedMarkers();
+    persistWorkView();
   }
 
-  function openLeadDrawer(leadId) {
-    const lead = state.mergedLeads.find((x) => x.id === leadId);
+  function openLeadDrawer(leadId, remember = true) {
+    const lead = findWorkLead(leadId) || state.mergedLeads.find((x) => x.id === leadId);
     if (!lead) return;
+    if (remember) rememberLead(leadId);
+    state.drawerLeadId = String(lead.id);
 
     const crm = getCrm(lead.id);
     const isIp = lead.entity_type === "ИП";
@@ -1911,11 +2248,14 @@
 
     document.getElementById("drawer-backdrop").classList.add("open");
     document.getElementById("lead-drawer").classList.add("open");
+    persistWorkView();
   }
 
   function closeDrawer() {
     document.getElementById("drawer-backdrop").classList.remove("open");
     document.getElementById("lead-drawer").classList.remove("open");
+    state.drawerLeadId = "";
+    persistWorkView();
   }
 
   // ЭКСПОРТ В CSV И EXCEL (.XLS XML SpreadsheetML)
@@ -2264,23 +2604,19 @@
     } catch (_) {}
 
     mergeAllLeads();
-    populateDynamicSelects();
-    renderKPIsAndAnalytics();
-    applyFiltersAndRender(true);
+    renderIncomingData();
+    if (!state.worklistReady) acceptIncomingWorklist(true);
 
-    logEl.textContent += `\n[DONE] Добавлено в таблицу: ${discovered.length} свежих записей. Перейдите во вкладку «Реестр» для фильтрации и выгрузки в Excel.`;
-    showToast(`Добавлено новорегов: ${discovered.length}`);
+    logEl.textContent += `\n[DONE] Найдено: ${discovered.length} записей. В «Реестре» нажмите «Показать новые», чтобы добавить их в рабочий список.`;
+    showToast(`Найдено ${discovered.length}. Результаты ждут кнопки «Показать новые».`);
   }
 
   function bindEvents() {
     // Вкладки
     document.querySelectorAll(".nav-tab").forEach((btn) => {
       btn.addEventListener("click", () => {
-        document.querySelectorAll(".nav-tab").forEach((b) => b.classList.remove("active"));
-        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
-        btn.classList.add("active");
-        const target = document.getElementById(btn.dataset.tab);
-        if (target) target.classList.add("active");
+        setActiveTab(btn.dataset.tab);
+        persistWorkView();
       });
     });
 
@@ -2307,10 +2643,42 @@
     }
 
     document.getElementById("btn-refresh").addEventListener("click", async () => {
-      showToast("Синхронизация с облаком…");
+      showToast("Проверяем поступления — рабочий список останется на месте");
       await loadServerData(false);
-      runEdgeAutoHarvest(true);
+      updatePendingWorklist();
+      showToast(state.pendingNewCount || state.pendingChangedCount
+        ? "Обновления готовы. Нажмите «Показать новые» / «Обновить карточки», когда закончите работу."
+        : "Новых поступлений нет. Позиция в списке сохранена.");
     });
+
+    document.getElementById("btn-apply-updates").addEventListener("click", () => acceptIncomingWorklist(false));
+    document.getElementById("btn-return-last").addEventListener("click", () => returnToVisited(0));
+    document.getElementById("recent-views-list").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-recent-index]");
+      if (button) returnToVisited(Number(button.dataset.recentIndex));
+    });
+    const rememberExternalLink = (event) => {
+      if (!event.target.closest("a")) return;
+      const row = event.target.closest(".js-lead-row");
+      if (row) rememberLead(row.dataset.id);
+      else if (event.target.closest("#lead-drawer") && state.drawerLeadId) rememberLead(state.drawerLeadId);
+      persistWorkView();
+    };
+    document.addEventListener("click", rememberExternalLink, true);
+    document.addEventListener("auxclick", rememberExternalLink, true);
+    document.addEventListener("click", (event) => {
+      const menu = document.getElementById("recent-views");
+      if (menu?.open && !event.target.closest("#recent-views")) menu.open = false;
+    });
+    document.addEventListener("input", (event) => {
+      if (event.target.closest("#drawer-crm-note")) scheduleWorkViewSave();
+    });
+    document.addEventListener("change", (event) => {
+      if (event.target.closest("#drawer-crm-stage")) scheduleWorkViewSave();
+    });
+    window.addEventListener("scroll", scheduleWorkViewSave, { passive: true });
+    document.querySelector(".table-wrap").addEventListener("scroll", scheduleWorkViewSave, { passive: true });
+    window.addEventListener("pagehide", persistWorkView);
 
     // Поиск и селекты
     document.getElementById("f-search").addEventListener("input", (e) => {
@@ -2419,15 +2787,22 @@
             showToast("Не удалось получить ответ прокси Saby");
             return;
           }
-          const target = state.mergedLeads.find((x) => x.id === lid);
+          const target = findWorkLead(lid) || state.mergedLeads.find((x) => x.id === lid);
           if (target) {
-            target.is_active = res.isActive;
-            target.status = res.status;
-            if (res.personName && !target.person_name) target.person_name = res.personName;
-            if (res.ogrn && !target.ogrn) target.ogrn = res.ogrn;
+            const matching = [target, ...state.serverLeads, ...state.siteDataLeads, ...state.edgeLocalLeads, ...state.liveLeads]
+              .filter((item) => item === target || item.id === lid || leadIdentity(item) === leadIdentity(target));
+            matching.forEach((item) => {
+              item.is_active = res.isActive;
+              item.status = res.status;
+              if (res.personName && !item.person_name) item.person_name = res.personName;
+              if (res.ogrn && !item.ogrn) item.ogrn = res.ogrn;
+            });
+            rebuildWorkIndex();
+            mergeAllLeads();
             openLeadDrawer(lid);
-            renderKPIsAndAnalytics();
+            renderIncomingData();
             applyFiltersAndRender(false);
+            persistWorkSnapshot();
           }
           showToast(`ФНС/Saby: ${res.status}`);
         });
@@ -2499,45 +2874,59 @@
       state.liveLeads = [];
       localStorage.removeItem(LS_LIVE_LEADS_KEY);
       mergeAllLeads();
-      populateDynamicSelects();
-      renderKPIsAndAnalytics();
-      applyFiltersAndRender(true);
-      showToast("Локальный кэш Live-поиска очищен");
+      renderIncomingData();
+      showToast("Кэш Live-поиска очищен. Ваш рабочий список сохранён.");
     });
   }
 
-  // Инициализация
-  loadLocalStorageState();
-  bindEvents();
-  loadServerData(false).then(() => {
-    const todayIso = getTodayIsoDate();
+  // Инициализация: сначала восстанавливаем рабочий снимок и место, потом читаем сеть.
+  async function initializeWorkspace() {
+    loadLocalStorageState();
+    restoreWorkPreferences();
+    bindEvents();
+    try { history.scrollRestoration = "manual"; } catch (_) {}
+    const saved = await Promise.race([
+      readWorkSnapshot(state.savedSnapshotKey),
+      new Promise((resolve) => setTimeout(() => resolve(null), 2000)),
+    ]);
+    if (saved && Array.isArray(saved.leads) && saved.leads.length) {
+      state.workingLeads = saved.leads.filter((lead) => lead && lead.id && lead.name);
+      state.worklistReady = true;
+      rebuildWorkIndex();
+      state.mergedLeads = state.workingLeads.map(cloneLead);
+      populateDynamicSelects();
+      syncFilterControls();
+      renderIncomingData();
+      applyFiltersAndRender(false);
+      await restoreWorkScroll();
+      persistWorkSnapshot();
+    }
+    await loadServerData(false);
+    if (state.restoringWorkView) await restoreWorkScroll();
     const lastIso = state.harvestCursor.last_harvest_iso || state.lastUpdatedIso || "";
     const lastMs = lastIso ? Date.parse(lastIso) : 0;
-    const isStaleDay = !lastIso.startsWith(todayIso);
-    const isOlderThan2m = !lastMs || Date.now() - lastMs > 2 * 60 * 1000;
-    if (isStaleDay || isOlderThan2m) {
+    if (!lastMs || Date.now() - lastMs > 2 * 60 * 1000) {
       setTimeout(() => runEdgeAutoHarvest(false, false), 450);
     }
-  });
+  }
+  initializeWorkspace();
 
-  // Возвращение из спящей вкладки / восстановление сети: не ждём следующего таймера.
+  // Возврат из другой вкладки только пополняет очередь — таблица и досье не трогаются.
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) loadServerData(true);
+    if (document.hidden) persistWorkView();
+    else if (state.worklistReady) loadServerData(true);
   });
-  window.addEventListener("online", () => loadServerData(true));
+  window.addEventListener("online", () => {
+    if (state.workspaceId) loadServerData(true);
+  });
   window.addEventListener("pageshow", (event) => {
-    if (event.persisted) loadServerData(true);
+    if (event.persisted && state.worklistReady) loadServerData(true);
   });
 
-  // Ускоренный авто-пуллинг свежих данных из облака Site Data каждые 30 секунд
   setInterval(() => {
-    loadServerData(true);
+    if (state.workspaceId) loadServerData(true);
   }, 30000);
-
-  // Ускоренный автономный фоновый сбор свежих ИП/ООО через Edge-прокси каждые 35 секунд
   setInterval(() => {
-    if (!state.turboActive) {
-      runEdgeAutoHarvest(false, false);
-    }
+    if (state.worklistReady && !state.turboActive) runEdgeAutoHarvest(false, false);
   }, 35000);
 })();
